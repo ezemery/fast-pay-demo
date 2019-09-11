@@ -17,22 +17,39 @@
         font-display: swap;
         src: url("./assets/fonts/TTNorms-Light.otf");
      }
+
+     .fast-pay{
+         width:600px;
+         margin: 20px auto;
+         border: 1px solid #88D20F;
+         padding: 15px;
+     }
+    .form-control{
+        font-family: TTNorms;
+    }
      .form-control:focus{
         background:#fff;
         box-shadow:none !important;
         border: 1px solid #88D20F !important;
+    }
+    .mt-10{
+        margin-top: 10px;
+    }
 
+    .suggest-p{
+        color: #969696;
+    }
+    .suggest-span{
+        color: #88D20F;
     }
     .invalid-feedback{
         display:none;
     }
-    .input-group-prepend{
-        background:#FAFAFA !important;
-        border: 0.5px solid #DADADA;
-        background: #fff;
-        padding: 3px 8px 3px 14px; 
-        border-radius: 5px 0px 0px 5px;
-        border-right: none !important;
+    .input-group-text{
+        background:#fff !important;
+    }
+    .checkbox{
+        padding: 10px 0px;
     }
     .custom-checkbox{
         margin:10px 0px;
@@ -47,17 +64,48 @@
         background-color: #88D20F;
       
     }
-    .input-group-text{
+    .fast-pay-title{
+        font-family: TTNorms;
+        text-transform: uppercase;
+        color: #2B4403;
+        font-size: 14px;
+        line-height: 15px;
+        letter-spacing: 0.04em;
+        margin-top: 50px;
+    }
+    .input-group-text.prepend{
         width: auto;
         height: calc(1.5em + .75rem + 2px);
         border-radius: 0;
         border-right: 0px;
+        padding: .37rem .3rem;
+    }
+    .input-group-text.prepend.phone{
+       border:none;
+       padding-left:0px;
+    }
+
+    .input-group-text.append{
+        width: auto;
+        height: calc(1.5em + .75rem + 2px);
+        border-radius: 0;
+        border-left: 0px;
+        padding: .37rem .3rem;
     }
 
     .card-icon{
-        width: auto;
+        width: 15px;
         height: calc(1.5em + .75rem + 2px);
     }
+
+    .secure-text{
+            text-align: center;
+    }
+    .secure-img{
+            display: inline-block;
+            width: 25px;
+    }
+
     .btn.btn-green{
         text-transform: uppercase;
         font-family: Muli;
@@ -65,7 +113,7 @@
         font-weight: bold;
         font-size: 18px;
         width: 100%;
-        background: #88D20F;
+        background: #19381F;
         border: none;
         border-radius: 4px;
         padding: 20px;
@@ -80,7 +128,6 @@
         .secure-img{
             display: block;
             width: 50px;
-            margin: auto;
         }
         .secure-text{
             text-align: center;
@@ -90,57 +137,174 @@
     <title>Fast Pay</title>
 </head>
 <body>
-    <div class="fast_pay--button">  
-        <form class="form">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="input-group">
-                            <div class="prepend-input-group">
-                                <div class="input-group-text"> <img id="ci" class="card-icon" src="./assets/img/credit-card.png"/></div>
+    <div class="fast-pay">
+        <form class="form" id="payment-form">
+            <div class="fast_personal-details">
+                <p class="fast-pay-title">Personal Info</p>
+                <div class="row mt-10">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/email.svg"/></div>
+                                    </div>
+                                    <input id="email" type="email" name="email" placeholder="email@email.com" class="form-control is-invalid" title="enter your email address" required>
+                                    <div class="invalid-feedback">
+                                            Please enter the correct email
+                                    </div>
+                            </div>
+
+                            <p class="suggest-p">suggestions: <span class="suggest-span">@gmail.com  @hotmail.com  @live.com</span></p> 
+                        </div>  
+                    </div>
+
+                    <div class="row mt-10">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/person.svg"/></div>
+                                    </div>
+                                    <input id="first_name" type="text" name="first_name" placeholder="First Name" class="form-control is-invalid" title="enter your first name" required>
+                                    <div class="invalid-feedback">
+                                            Please enter your first name
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/person.svg"/></div>
+                                        </div>
+                                        <input id="last_name" type="text" name="last_name" placeholder="Last Name" class="form-control is-invalid" title="enter your last name" required>
+                                        <div class="invalid-feedback">
+                                                Please enter your Last name
+                                        </div>
                                 </div>
-                            <input id="ccnumber" type="tel" name="ccnumber" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked is-invalid" title="16-digit number" required>
-                            <div class="invalid-feedback">
-                                    Please enter the correct number
                             </div>
                     </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <input id="expiration" type="tel" placeholder="MM/YY" class="form-control masked is-invalid" pattern="(1[0-2]|0[1-9])\/\d\d" data-valid-example="11/18" title="2-digit month and 2-digit year" required>
-                        <div class="invalid-feedback">
-                                Please enter the correct expiry month
+                    <div class="row mt-10">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text prepend phone"> 
+                                                <select id="country_code" id="country_code" class="form-control is-invalid" required>
+                                                        <option value="usa">USA</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                            Please select the country phone
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                        <input id="mobile_no" type="tel" name="mobile_no" placeholder="Mobile Number" class="form-control is-invalid" title="enter your mobile number" required>
+                                        <div class="invalid-feedback">
+                                                Please enter your mobile number
+                                        </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked is-invalid" pattern="\d{4}" title="4-digit-number" required>
-                        <div class="invalid-feedback">
-                                Please enter the correct cvv
-                        </div>
-                    </div>
-            </div>
-           <div class="row">
-                <div class="col-md-12 col-sm-12">
-                        <div class="checkbox">
-                            <label for="agree-check"></label>
-                                <input id="agree-check" type="checkbox" class="custom-checkbox" />
-                                I agree to the Terms and conditions
-                        </div>
-                        <button class="btn btn-green">Pay $120 Now</button>
+
                 </div>
-           </div>
-           <div class="row">
-                <div class="col-md-3 col-sm-12">
-                        <span className="security"> 
-                                <img class="secure-img" src="./assets/img/card-lock.svg"/>
-                        </span>
+                <div class="fast_shipping-details">
+                    <p class="fast-pay-title">Shipping Details</p>
+                    <div class="row mt-10">
+                            <div class="col-md-7 col-sm-12">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/map.svg"/></div>
+                                        </div>
+                                        <input id="street_address" type="text" name="street_address" placeholder="Street Address" class="form-control is-invalid" title="enter your street address" required>
+                                        <div class="invalid-feedback">
+                                                Please enter your street address
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                   
+                                    <input id="unit" type="text" name="unit" placeholder="Unit/Suite/Company" class="form-control is-invalid" title="enter your unit/suite/company" required>
+                                    <div class="invalid-feedback">
+                                            Please enter your Unit/Suite/Company
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                        <div class="row mt-10">
+                                <div class="col-md-5 col-sm-12">
+                                      
+                                    <select id="country_code" id="country_code" class="form-control is-invalid" required>
+                                            <option value="usa">USA</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                                Please select the country phone
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="col-md-7 col-sm-12">
+                                            <div class="input-group">
+                                                    <input id="zip" type="tel" name="zip" placeholder="Search Zip, or City" class="form-control is-invalid" title="enter your Search Zip, or City" required>
+                                                    <div class="input-group-append">
+                                                            <div class="input-group-text append"> <img id="icon" class="card-icon" src="./assets/img/search.svg"/></div>
+                                                        </div>
+                                                    <div class="invalid-feedback">
+                                                            Please select country zip
+                                                    </div>
+                                            </div>
+                                        </div>
+                            </div>
+                    
                 </div>
-                <div class="col-md-8 col-sm-12">
-                        <p class="secure-text">Another easy & secure payment by <img src="./assets/img/Fast-logo-pay.svg"/></p>
-                </div>   
-           </div>
-                
-            </div>
+                <div class="fast_pay--button">  
+                    
+                        <p class="fast-pay-title">Card Details</p>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text prepend"> <img id="ci" class="card-icon" src="./assets/img/cc.svg"/></div>
+                                            </div>
+                                        <input id="ccnumber" type="tel" name="ccnumber" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked is-invalid" title="16-digit number" required>
+                                        <div class="invalid-feedback">
+                                                Please enter the correct number
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input id="expiration" type="tel" placeholder="MM/YY" class="form-control masked is-invalid" pattern="(1[0-2]|0[1-9])\/\d\d" data-valid-example="11/18" title="2-digit month and 2-digit year" required>
+                                    <div class="invalid-feedback">
+                                            Please enter the correct expiry month
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked is-invalid" pattern="(\d{3})|(\d{4})" title="4-digit-number" required>
+                                    <div class="invalid-feedback">
+                                            Please enter the correct cvv
+                                    </div>
+                                </div>
+                        </div>
+                       <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                    <div class="checkbox">
+                                        <label for="agree-check"></label>
+                                            <input id="agree-check" type="checkbox" class="custom-checkbox" />
+                                            I agree to the Terms and conditions
+                                    </div>
+                                    <button type="submit" class="btn btn-green">Pay $120 Now</button>
+                            </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                   
+                                    <p class="secure-text">
+                                         <img class="secure-img" src="./assets/img/card-lock.svg"/> Another easy & secure payment by <img src="./assets/img/Fast-logo-pay.svg"/>
+                                    </p>
+                            </div>   
+                       </div>
+                            
+                        </div>
+                    
+                </div>
         </form>
     </div>
+   
     <script>
          var masking = {
 
@@ -155,6 +319,7 @@
             masking.setUpMasks(masking.maskedInputs);
             masking.maskedInputs = document.querySelectorAll('.masked'); // Repopulating. Needed b/c static node list was created above.
             masking.activateMasking(masking.maskedInputs);
+            masking.submitForm();
             },
 
             setUpMasks: function (inputs) {
@@ -229,7 +394,6 @@
                 matchesLetter = masking.maskedLetter.indexOf(placeholder[i]) >= 0;
 
                 if ((matchesNumber && isInt) || (isCharsetPresent && matchesLetter && isLetter)) {
-
                         newValue += strippedValue[j++];
                         card = masking.ValidateCreditCardNumber();
                         card === "Visa" ?  icon.src = "./assets/img/visa.svg": 
@@ -238,7 +402,7 @@
                         card === "AMEX" ? icon.src = "./assets/img/amex.svg":
                         card === "Discover" ? icon.src = "./assets/img/discover.svg":
                         card === "Diners" ? icon.src = "./assets/img/diners.svg":
-                        icon.src = "./assets/img/credit-card.png";                         
+                        icon.src = "./assets/img/cc.svg";                         
 
                     } else if ((!isCharsetPresent && !isInt && matchesNumber) || (isCharsetPresent && ((matchesLetter && !isLetter) || (matchesNumber && !isInt)))) {
                         // masking.errorOnKeyEntry(); // write your own error handling function
@@ -329,6 +493,28 @@
 
             return value;
             },
+
+            submitForm: function(){
+                
+                var form = document.getElementById("payment-form");
+                if(form.addEventListener){
+                    //Modern browsers
+                    //add event listeners for form submit
+                    form.addEventListener("submit", function(e){
+                        e.preventDefault(); 
+
+                        console.log("Hellooo", e);
+                        console.log("Form is being submitted");
+                    });  
+                }else if(form.attachEvent){
+                    //Old IE
+                    form.attachEvent('onsubmit', function(){
+                        console.log("Form is being submitted");
+                    });            
+                }
+            }
+
+
 
             // errorOnKeyEntry : function () {
             // // Write your own error handling
