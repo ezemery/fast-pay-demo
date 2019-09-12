@@ -230,7 +230,7 @@
                         <div class="row mt-10">
                                 <div class="col-md-5 col-sm-12">
                                       
-                                    <select id="country_code" id="country_code" class="form-control is-invalid" required>
+                                    <select id="country" id="country_code" class="form-control is-invalid" required>
                                             <option value="usa">USA</option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -313,6 +313,8 @@
             maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
             maskedNumber : 'XdDmMyY91234',
             maskedLetter : '_',
+            apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
+            stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
 
             init: function () {
                 
@@ -493,35 +495,163 @@
 
             return value;
             },
+            
+            sendSTripeData: function(stripeData) {
+                var xhr;
+                var cardToken
+                var url = 'https://api.stripe.com/v1/tokens';
 
-            submitForm: function(){
+                if (window.XMLHttpRequest) {
+                   xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xhr.withCredentials = true;
+
+
+                xhr.open("POST", url,true);
+
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.setRequestHeader("Authorization", "Bearer " + masking.stripePublishKey);
+
+                xhr.onload = function () {
+                   if (xhr.readyState === xhr.DONE) {
+                       if (xhr.status === 200) {
+                         
+                            cardToken = JSON.parse(xhr.responseText)
+                            const card = JSON.parse(JSON.stringify(cardToken.card));
+                            // this will be fixed when development server can accept any card
+                            // card['token_id'] = cardToken.id;
+                            card['token_id'] = 'tok_mastercard';
+                            const fastData = masking.getData(card);
+
+                            masking.sendFastData(fastData);
+
+                            return cardToken
+                       }
+                    }
+                };
+
+                xhr.send(stripeData)
+
+            },
+
+            sendFastData: function(data) {
+                var xhr;
+                var url = 'https://dev.api.fast.co/api/m/pay';
+
+                if (window.XMLHttpRequest) {
+                   xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                xhr.open("POST", url,true);
+
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Fast-Access-Key', masking.apiKey);
+
+                xhr.onload = function () {
+                   if (xhr.readyState === xhr.DONE) {
+                       if (xhr.status === 200) {
+                         
+                            response = xhr.responseText
+                            return response;
+                       }
+                    }
+                };
+
+                xhr.send(JSON.stringify(data))
+            },
+            getData: function (card) {
+                const email = document.getElementById('email').value;
+                const firstName = document.getElementById('first_name').value; 
+                const lastName = document.getElementById('last_name').value;
+                const phoneNumber = document.getElementById('mobile_no').value;
+                const country = document.getElementById('country_code');
+                const countryOption = country.options[country.selectedIndex].text
+                const address1 = document.getElementById('street_address').value;
+                const address2 = document.getElementById('unit').value;
+                const countryCode = document.getElementById('country');
+                const countryCodeOption = countryCode.options[countryCode.selectedIndex].text;
+                const zip = document.getElementById('zip').value;
+
+                return {
+                         "store": {
+                             "key": masking.apiKey,
+                              "url": "https://teststore.com/checkout"
+                          },
+                          personal: {
+                              "email": email,
+                              "firstName": firstName,
+                              "lastName": lastName,
+                              "phone": {
+                                  "country": countryCodeOption,
+                                  "number": phoneNumber
+                               },
+                          },
+                          shipping: {
+                             "address1": address1,
+                             "address2": address2,
+                             "country": countryOption,
+                             "zip": zip,
+                          },
+                            card,
+                          "order": {
+                              "total": 99,
+                              "discount": 30,
+                              "subtotal": 69,
+                              "currency": "USD"
+                           },
+                           "items": [
+                                {
+                                    "category": "shipping",
+                                    "code": "delivery",
+                                    "description": "Next Day Delivery",
+                                    "carrier": "USPS",
+                                    "rrp": 29,
+                                    "amount": 29
+                                }
+                            ]
+                };
+            },
+            sendFormData: function () {
+                const cvv= document.getElementById('cvv').value;
+                const expiration= document.getElementById('expiration').value.split('/');
+                const number= document.getElementById('ccnumber').value;
+
+                const month = expiration[0];
+                const year = expiration[1];
+
+                const stripeData = "card[number]="+ number+ "&" + "card[cvc]=" + cvv + "&" + "card[exp_month]="  + month + "&" + "card[exp_year]=" + year;
+
+                masking.sendSTripeData(stripeData); 
+            },
+            
+            submitForm: function (){
                 
                 var form = document.getElementById("payment-form");
                 if(form.addEventListener){
                     //Modern browsers
                     //add event listeners for form submit
                     form.addEventListener("submit", function(e){
-                        e.preventDefault(); 
-
-                        console.log("Hellooo", e);
-                        console.log("Form is being submitted");
+                        e.preventDefault();
+                        masking.sendFormData();                                           
                     });  
                 }else if(form.attachEvent){
                     //Old IE
                     form.attachEvent('onsubmit', function(){
-                        console.log("Form is being submitted");
+                        masking.sendFormData()  
                     });            
                 }
+            }                
             }
-
-
-
             // errorOnKeyEntry : function () {
             // // Write your own error handling
             // }
-            }
 
             masking.init();
+
     </script>
 </body>
 </html>
