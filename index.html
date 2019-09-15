@@ -44,6 +44,7 @@
         background: #FAFAFA;
         border: 0.5px solid #DADADA;
         box-sizing: border-box;
+        font-size: 14px;
         /* border-radius: 4px; */
     }
     #zip{
@@ -280,7 +281,7 @@
         <form class="form" id="payment-form">
             <div class="fast_personal-details">
                 <p class="fast-pay-title mt-0">Personal Info</p>
-                <div class="row mt-10">
+                <div class="row mt-12">
                         <div class="col-md-12 col-sm-12">
                             <div class="input-group">
                                     <div class="input-group-prepend">
@@ -293,11 +294,11 @@
                                     </div>
                             </div>
 
-                            <p class="suggest-p">suggestions: <span class="suggest-span">@gmail.com  @hotmail.com  @live.com</span></p> 
+                            <!-- <p class="suggest-p">suggestions: <span class="suggest-span">@gmail.com  @hotmail.com  @live.com</span></p>  -->
                         </div>  
                     </div>
 
-                    <div class="row mt-10">
+                    <div class="row mt-12">
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                     <div class="input-group-prepend">
@@ -355,28 +356,35 @@
                 </div>
                 <div class="fast_shipping-details">
                     <p class="fast-pay-title">Shipping Details</p>
-                    <div class="row mt-10">
-                            <div class="col-md-7 col-sm-12">
+                    <div class="row mt-12">
+                            <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/map.svg"/></div>
                                         </div>
-                                        <label for="street_address">Street address</label>
+                                        <label for="street_address">Street Address, P.O Box, Company Name</label>
                                         <input id="street_address" type="text" name="street_address" class="form-control" title="enter your street address" required>
                                         <div class="invalid-feedback">
                                                 Please enter your street address
                                         </div>
                                 </div>
                             </div>
-                            <div class="col-md-5 col-sm-12">
-                                    <label for="unit">Unit/Suite/Company</label>
-                                    <input id="unit" type="text" name="unit" class="form-control" title="enter your unit/suite/company" required>
-                                    <div class="invalid-feedback">
-                                            Please enter your Unit/Suite/Company
-                                    </div>
-                                    
-                                </div>
                         </div>
+                        <div class="row mt-12">
+                                <div class="col-md-12 col-sm-12">
+                                        <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/map.svg"/></div>
+                                                </div>
+                                                <label for="unit">Apartment, suite, unit, building or floor</label>
+                                                <input id="unit" type="text" name="street_address" class="form-control" title="enter your street address" required>
+                                                <div class="invalid-feedback">
+                                                        Please enter your street address
+                                                </div>
+                                        </div>
+                                        
+                                    </div>
+                            </div>
                         <div class="row mt-12">
                                     <div class="col-md-5 col-sm-12">
                                     
