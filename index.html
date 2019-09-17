@@ -31,19 +31,13 @@
          box-sizing: border-box;
          border-radius: 5px;
      }
-    .input-group .form-control{
-        font-family: TTNorms;
-        padding: 25px 5px;
-        border-radius: 0px 4px 4px 0px !important;
-        background: #FAFAFA;
-        border: 0.5px solid #DADADA;
-        box-sizing: border-box;
-        /* border-radius: 4px; */
+     .fast-pay-mobile{
+            display:none;
     }
     .form-control{
         font-family: TTNorms;
         padding: 25px 15px;
-        background: #FAFAFA;
+        background: #fff;
         border: 0.5px solid #DADADA;
         box-sizing: border-box;
         font-size: 14px;
@@ -177,14 +171,26 @@
         border-radius: 0;
         border-right: 0px;
         padding: .37rem .6rem;
-        border-radius: 4px 0px 0px 4px;
-        background: #fafafa !important;
+        background: #F8F8F8 !important;
     }
     .input-group-text.prepend.phone{
        border:none;
        padding-left:0px;
     }
+    .autocomplete-items{
+        position: absolute;
+        z-index: 10;
+        padding: 10px;
+        -webkit-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        -moz-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        width: 100%;
+        background: #fff;
+        height: 120px;
+        overflow-y: scroll;
+        top: 50px;
 
+    }
     .input-group-text.append{
         /* width: auto;
         height: calc(1.5em + .75rem + 2px);
@@ -198,6 +204,9 @@
         padding: .37rem .6rem;
         border-radius: 0px 4px 4px 0px;
         background: #fafafa !important;
+    }
+    .p-10{
+        padding: 10px;
     }
     .pr-0{
         padding-right: 0;
@@ -249,6 +258,11 @@
 
 @media only screen and (max-width: 585px){
         .fast-pay{
+            display: none;
+            width:100%;
+        }
+        .fast-pay-mobile{
+            display:block;
             width:100%;
         }
         .mobile-zip{
@@ -283,7 +297,7 @@
         <form class="form" id="payment-form">
             <div class="fast_personal-details">
                     <div id="map"></div>
-                <p class="fast-pay-title mt-0">Personal Info</p>
+                <h4 class="fast-pay-title mt-0">Personal Info</h4>
                 <div class="row mt-12">
                         <div class="col-md-12 col-sm-12">
                             <div class="input-group">
@@ -358,7 +372,7 @@
 
                 </div>
                 <div class="fast_shipping-details">
-                    <p class="fast-pay-title">Shipping Details</p>
+                    <h4 class="fast-pay-title">Shipping Details</h4>
                     <div class="row mt-12">
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
@@ -400,7 +414,7 @@
                                     <div class="col-md-7 col-sm-12">
                                             <div class="input-group">
                                                     <label for="zip">Zip, or City</label>
-                                                    <input id="zip" type="number" name="zip" class="form-control" title="enter your Search Zip, or City" placeholder="" required>
+                                                    <input id="zip" type="tel" name="zip" class="form-control" title="enter your Search Zip, or City" placeholder="" required>
                                                     <div class="input-group-append">
                                                             <div class="input-group-text append"> <img id="icon" class="card-icon" src="./assets/img/search.svg"/></div>
                                                         </div>
@@ -414,7 +428,7 @@
                 </div>
                 <div class="fast_pay--button">  
                     
-                        <p class="fast-pay-title">Card Details</p>
+                        <h4 class="fast-pay-title">Card Details</h4>
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="input-group">
@@ -463,59 +477,175 @@
                     </form>
                 </div>
 
-                <!-- <div class="fast-pay-mobile">
+                <div class="fast-pay-mobile">
                     <form>
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Personal Details
-                                    </button>
-                                </h2>
+                                    Personal Info
                                 </div>
                             
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                     <div class="row p-10"> 
+                                                <div class="col-md-12 col-sm-12 mt-12">
+                                                    <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/email.svg"/></div>
+                                                            </div>
+                                                            <label for="email_mobile">Email</label>
+                                                            <input id="email_mobile" type="email" name="email" class="form-control" title="enter your email address" required>
+                                                            <div class="invalid-feedback">
+                                                                    Please enter the correct email
+                                                            </div>
+                                                    </div>
+                        
+                                                    <!-- <p class="suggest-p">suggestions: <span class="suggest-span">@gmail.com  @hotmail.com  @live.com</span></p>  -->
+                                                </div>  
+                                                <div class="col-md-6 col-sm-6 mt-12">
+                                                    <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/person.svg"/></div>
+                                                            </div>
+                                                            <label for="first_name_mobile">First name</label>
+                                                            <input id="first_name_mobile" type="text" name="first_name" class="form-control" title="enter your first name" required>
+                                                            <div class="invalid-feedback">
+                                                                    Please enter your first name
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 mt-12">
+                                                        <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/person.svg"/></div>
+                                                                </div>
+                                                                <label for="last_name_mobile">Last name</label>
+                                                                <input id="last_name_mobile" type="text" name="last_name"class="form-control" title="enter your last name" required>
+                                                                <div class="invalid-feedback">
+                                                                        Please enter your Last name
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Shipping Details
-                                    </button>
-                                </h2>
+                                    Shipping Details
                                 </div>
-                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="row mt-12 p-10">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/map.svg"/></div>
+                                                            </div>
+                                                            <label for="street_address_mobile">Street Address, P.O Box, Company Name</label>
+                                                            <input id="street_address_mobile" type="text" name="street_address" class="form-control" title="enter your street address" placeholder="" required>
+                                                            <div class="invalid-feedback">
+                                                                    Please enter your street address
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-12 p-10">
+                                                    <div class="col-md-12 col-sm-12">
+                                                            <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text prepend"> <img id="icon" class="card-icon" src="./assets/img/map.svg"/></div>
+                                                                    </div>
+                                                                    <label for="floor_mobile">Apartment, suite, unit, building or floor</label>
+                                                                    <input id="floor_mobile" type="text" name="street_address" class="form-control" title="enter your street address"  placeholder="" required>
+                                                                    <div class="invalid-feedback">
+                                                                            Please enter your street address
+                                                                    </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                </div>
+                                            <div class="row mt-12 p-10">
+                                                        <div class="col-md-5 col-sm-12">
+                                                        
+                                                            <select id="country_mobile" class="custom-select" required>
+                                                                <option selected value="USA">USA</option>
+                                                                <option value="Nigeria">+234 Nigeria</option>
+                                                            </select>
+                                                           
+                                                        </div>
+                                                        <div class="col-md-7 col-sm-12">
+                                                                <div class="input-group">
+                                                                        <label for="zip_mobile">Zip, or City</label>
+                                                                        <input id="zip_mobile" type="tel" name="zip" class="form-control" title="enter your Search Zip, or City" placeholder="" required>
+                                                                        <div class="input-group-append">
+                                                                                <div class="input-group-text append"> <img id="icon" class="card-icon" src="./assets/img/search.svg"/></div>
+                                                                            </div>
+                                                                        <div class="invalid-feedback">
+                                                                                Please select country zip
+                                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header" id="headingThree">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Card Details
-                                    </button>
-                                </h2>
+                                    Card Details   
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
+                                        <div class="row p-10">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text prepend"> <img id="ci" class="card-icon" src="./assets/img/cc.svg"/></div>
+                                                                </div>
+                                                            <input id="ccnumber" type="tel" name="ccnumber" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked " title="16-digit number" required>
+                                                            <div class="invalid-feedback">
+                                                                    Please enter the correct number
+                                                            </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-12">
+                                                        <input id="expiration" type="tel" placeholder="MM/YY" class="form-control masked" pattern="(1[0-2]|0[1-9])\/\d\d" data-valid-example="11/18" title="2-digit month and 2-digit year" required>
+                                                        <div class="invalid-feedback">
+                                                                Please enter the correct expiry month
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-12">
+                                                        <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" required>
+                                                        <div class="invalid-feedback">
+                                                                Please enter the correct cvv
+                                                        </div>
+                                                    </div>
+                                            </div>
                                 </div>
                             </div>
-                         </div>
+								 </div>
+								 <div class="row p-10">
+										<div class="col-md-12 col-sm-12">
+												  <div class="checkbox">
+														<label for="agree-check"></label>
+															 <input id="agree-check" type="checkbox" class="custom-checkbox" />
+															 <span class="agreement">I agree to the <b class="color-fast">Terms and conditions</b></span>
+												  </div>
+												  <button type="submit" class="btn btn-green">Pay $120 Now</button>
+										</div>
+								 </div>
+								 <div class="row p-10">
+										<div class="col-md-12 col-sm-12">
+												 
+												  <p class="secure-text">
+														 <img class="secure-img" src="./assets/img/card-lock.svg"/> Another easy & secure payment by <img src="./assets/img/Fast-logo-pay.svg"/>
+												  </p>
+										</div>   
+								 </div>
                     </form>
 
 
-                </div> -->
-   
-    <script>
+                </div>
+        <script>
+               
+                    
+        </script>
+        <script>
          var masking = {
 
             // User defined Values
@@ -525,6 +655,7 @@
             maskedLetter : '_',
             apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
             stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
+            zip : ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia"],
 
             init: function () {
                 
@@ -533,6 +664,8 @@
             masking.activateMasking(masking.maskedInputs);
             masking.submitForm();
             masking.formFocus();
+            masking.mobileToggle();
+            masking.autocomplete(document.getElementById("zip"), masking.zip);
             },
 
             setUpMasks: function (inputs) {
@@ -706,6 +839,17 @@
 
             return value;
             },
+            mobileToggle: function(){
+                var card = document.querySelectorAll(".card");
+                card.forEach(function(element, i){
+                    element.addEventListener("click", function(e){
+                            if(e.target.className === "card-header"){
+                                var cardbody  = element.children[1];
+                                cardbody.classList.toggle("show");
+                            }
+                        })
+                    })
+            },
             formFocus: function(){
                 var form = document.querySelectorAll(".form-control");
                 form.forEach(function(element, i){
@@ -714,15 +858,13 @@
                     })
                 })
                 
-                form.forEach(function(element, i){
-                    
-                    
-                form[i].addEventListener("focusout", function(){
-                     if(form[i].value.length === 0 ){
-                        form[i].parentElement.classList.remove("placeholder-focus");
-                     }
-                    
-                })
+                form.forEach(function(element, i){ 
+                    form[i].addEventListener("focusout", function(){
+                        if(form[i].value.length === 0 ){
+                            form[i].parentElement.classList.remove("placeholder-focus");
+                        }
+                        
+                    })
 
                 })
                 
@@ -875,18 +1017,106 @@
                         masking.sendFormData()  
                     });            
                 }
-            }                
-            }
-            // errorOnKeyEntry : function () {
-            // // Write your own error handling
-            // }
+            },
+            autocomplete: function(inp, arr) {
+                /*the autocomplete function takes two arguments,
+                the text field element and an array of possible autocompleted values:*/
+                var currentFocus;
+                /*execute a function when someone writes in the text field:*/
+                inp.addEventListener("input", function(e) {
+                    var a, b, i, val = this.value;
+                    /*close any already open lists of autocompleted values*/
+                    closeAllLists();
+                    if (!val) { return false;}
+                    currentFocus = -1;
+                    /*create a DIV element that will contain the items (values):*/
+                    a = document.createElement("DIV");
+                    a.setAttribute("id", this.id + "autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
+                    /*append the DIV element as a child of the autocomplete container:*/
+                    this.parentNode.appendChild(a);
+                    /*for each item in the array...*/
+                    for (i = 0; i < arr.length; i++) {
+                        /*check if the item starts with the same letters as the text field value:*/
+                        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                            b.addEventListener("click", function(e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                        }
+                    }
+                });
 
-            masking.init();
-
-    </script>
-     <script>
-      
-            function initMap() {
+                  /*execute a function presses a key on the keyboard:*/
+                    inp.addEventListener("keydown", function(e) {
+                        var x = document.getElementById(this.id + "autocomplete-list");
+                        if (x) x = x.getElementsByTagName("div");
+                        if (e.keyCode == 40) {
+                            /*If the arrow DOWN key is pressed,
+                            increase the currentFocus variable:*/
+                            currentFocus++;
+                            /*and and make the current item more visible:*/
+                            addActive(x);
+                        } else if (e.keyCode == 38) { //up
+                            /*If the arrow UP key is pressed,
+                            decrease the currentFocus variable:*/
+                            currentFocus--;
+                            /*and and make the current item more visible:*/
+                            addActive(x);
+                        } else if (e.keyCode == 13) {
+                            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                            e.preventDefault();
+                            if (currentFocus > -1) {
+                            /*and simulate a click on the "active" item:*/
+                            if (x) x[currentFocus].click();
+                            }
+                        }
+                    });
+                    function addActive(x) {
+                            /*a function to classify an item as "active":*/
+                            if (!x) return false;
+                            /*start by removing the "active" class on all items:*/
+                            removeActive(x);
+                            if (currentFocus >= x.length) currentFocus = 0;
+                            if (currentFocus < 0) currentFocus = (x.length - 1);
+                            /*add class "autocomplete-active":*/
+                            x[currentFocus].classList.add("autocomplete-active");
+                        }
+                    function removeActive(x) {
+                            /*a function to remove the "active" class from all autocomplete items:*/
+                            for (var i = 0; i < x.length; i++) {
+                            x[i].classList.remove("autocomplete-active");
+                            }
+                        }
+                    function closeAllLists(elmnt) {
+                            /*close all autocomplete lists in the document,
+                            except the one passed as an argument:*/
+                            var x = document.getElementsByClassName("autocomplete-items");
+                            for (var i = 0; i < x.length; i++) {
+                            if (elmnt != x[i] && elmnt != inp) {
+                            x[i].parentNode.removeChild(x[i]);
+                            }
+                        }
+                        }
+                        /*execute a function when someone clicks in the document:*/
+                    document.addEventListener("click", function (e) {
+                            closeAllLists(e.target);
+                        });
+            
+            },
+            initMap: function() {
               var map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: -33.8688, lng: 151.2195},
                 zoom: 13
@@ -894,13 +1124,8 @@
 
               var street_address = document.getElementById('street_address');
               var floor = document.getElementById('floor');
-              var zip = document.getElementById('zip');
-              var options = {
-                types: ['(regions)']
-                }
               var autocomplete_street_address = new google.maps.places.Autocomplete(street_address);
               var autocomplete_floor = new google.maps.places.Autocomplete(floor);
-              var autocomplete_zip = new google.maps.places.Autocomplete(zip, options);
       
       
               // Set the data fields to return when the user selects a place.
@@ -927,8 +1152,20 @@
                 }
               });
             }
-          </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeBChix31yBelWnY7EQVSjkVaV4vAl9tI&libraries=places&callback=initMap"
+
+            }
+            // errorOnKeyEntry : function () {
+            // // Write your own error handling
+            // }
+
+            masking.init();
+
+    </script>
+     <script>
+      
+            
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeBChix31yBelWnY7EQVSjkVaV4vAl9tI&libraries=places&callback=masking.initMap"
     async defer></script>
 </body>
 </html>
