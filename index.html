@@ -115,6 +115,10 @@
         font-size: 14px;
 		  transition: bottom .1s linear;
     }
+	 
+	 label.left-15{
+		left: 15px;
+	 }
 
     .placeholder-focus label {
         bottom: 30px;
@@ -347,7 +351,7 @@
                             </div>
                             <div class="col-md-9 col-sm-9 mobile-phone">
                                     <div class="input-group">
-                                            <label for="mobile_no">Mobile number</label>
+                                            <label for="mobile_no" class="left-15">Mobile number</label>
                                             <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number" required>       
                                     </div>
                             </div>
@@ -396,7 +400,7 @@
                                     </div>
                                     <div class="col-md-9 col-sm-9">
                                             <div class="input-group">
-                                                    <label for="zip">Zip, or City</label>
+                                                    <label for="zip" class="left-15">Zip, or City</label>
                                                     <input id="zip" type="tel" name="zip" class="form-control zip" title="enter your Search Zip, or City" placeholder="" required>
                                                     <div class="input-group-append">
                                                             <div class="input-group-text append"> <img id="icon" class="card-icon" src="./assets/img/search.svg"/></div>
@@ -418,7 +422,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text prepend"> <img id="ci" class="card-icon" src="./assets/img/cc.svg"/></div>
                                             </div>
-                                        <input id="ccnumber" type="tel" name="ccnumber" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked " title="16-digit number" required>
+                                        <input id="ccnumber" type="tel" name="ccnumber" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked shipping" title="16-digit number" required>
                                         <div class="invalid-feedback">
                                                 Please enter the correct number
                                         </div>
