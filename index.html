@@ -707,14 +707,13 @@
 							button.style.backgroundColor = "blue";
                    if (xhr.readyState === xhr.DONE) {
                        if (xhr.status === 200) {
-                         
                             cardToken = JSON.parse(xhr.responseText)
                             const card = JSON.parse(JSON.stringify(cardToken.card));
                             // this will be fixed when development server can accept any card
                             // card['token_id'] = cardToken.id;
                             card['token_id'] = 'tok_mastercard';
                             const fastData = masking.getData(card);
-
+									 button.innerText = "Finishing up...";
                             masking.sendFastData(fastData);
                             return cardToken
                        }else{
@@ -747,10 +746,10 @@
 
                 xhr.onload = function () {
                    if (xhr.readyState === xhr.DONE) {
-								button.innerText = "Finishing up...";
-								button.style.backgroundColor = "blue";
                        if (xhr.status === 200) {
-                            response = xhr.responseText
+									 response = xhr.responseText;
+									 button.innerText = "Done";
+									 button.style.backgroundColor = "green"; 
                             return response;
                        }else{
 									button.innerText = "There was an error, try again";
@@ -770,9 +769,11 @@
                 const address1 = document.getElementById('street_address').value;
                 const address2 = document.getElementById('floor').value;
                 const countryCode = document.getElementById('country').value;
-                const zip = document.getElementById('zip').value;
+					 const zip = document.getElementById('zip').value;
+					 
 
-                return {
+                var payload =   {
+								"buttonLoadId": "",
                          "store": {
                              "key": masking.apiKey,
                               "url": "https://teststore.com/checkout"
@@ -781,7 +782,10 @@
                               "email": email,
                               "firstName": firstName,
                               "lastName": lastName,
-                              "phone": phone
+										"phone": {
+											"country": phone.substr(1, phone.length),
+											"phone": phoneNumber
+										}
                           },
                           shipping: {
                              "address1": address1,
@@ -789,7 +793,7 @@
                              "country": countryCode,
                              "zip": zip,
                           },
-                            card,
+                          card,
                           "order": {
                               "total": 99,
                               "discount": 30,
@@ -806,7 +810,10 @@
                                     "amount": 29
                                 }
                             ]
-                };
+					 };
+					 console.log(JSON.stringify(payload));
+					 //alert(JSON.stringify(payload));
+					 return payload
             },
             sendFormData: function () {
                 const cvv= document.getElementById('cvv').value;
