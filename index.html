@@ -119,7 +119,7 @@
     .mt-12{
         margin-top: 12px;
     }
-    label{
+    .input-group label{
         position: absolute;
         bottom: 8px;
         right: 0;
@@ -161,10 +161,13 @@
         background:#fff !important;
     }
     .checkbox{
-        padding: 16px 0px;
+        padding: 2px 0px;
     }
-    .custom-checkbox{
-        margin:10px 0px;
+    .checkbox input[type=radio]:checked + label:before{
+        color: #88D20F;
+    }
+    .checkbox label{
+        font-family: Graphick-Light !important;
     }
 
     .custom-checkbox .custom-control-label::before {
@@ -244,8 +247,8 @@
 		 border-top-left-radius: 3px !important;
     	border-bottom-left-radius: 3px !important;
 	 }
-	 .expiry.left:after {
-   	background: #fff;
+	 .expiry.left::after {
+   	    background: #fff;
 		border-right: 1px solid #363636;
 		content: "";
 		height: 50px;
@@ -532,6 +535,19 @@
                                         </div>
                             </div>
                     
+                </div>
+                <div class="fast_shipping-method">
+                    <h4 class="fast-pay-title">Shipping Method</h4>
+                    <div class="row mt-12">
+                            <div class="col-md-12 col-sm-12">
+                                    <div class="checkbox">
+                                        <label><input type="radio" value=""> &nbsp;&nbsp; Free Shipping - $0.00</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="radio" value=""> &nbsp;&nbsp; Express Shipping - $10.91</label>
+                                    </div>
+                            </div>         
+                        </div>     
                 </div>
                 <div class="fast_pay--button">  
                     

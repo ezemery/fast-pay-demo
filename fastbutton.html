@@ -31,26 +31,40 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
     }
+
+    .fast-logo{
+        width: 50px;
+        height: auto;
+    }
     .btn:hover{
         color: #fff;
     }
     .btn .text{
         display: inline-block;
-        border-right: 1px solid rgba(255, 255, 255, 0.3);
-        width: 300px;
+        width: 250px;
     }
+    .btn .text::after{
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+        content: "";
+        height: 100px;
+        position: absolute;
+        right: 80px;
+        top: -50px;
 
+    }
     .btn-group{
         background: #363636;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
+        padding: 10px;
         }
     </style>
     <title>Fast button</title>
 </head>
 <body>
         <div class="btn-group" role="group" aria-label="fast checkout">
-                <button type="button" class="btn"><div ><span class="text">Fast Checkout</span><img src="./assets/img/Fast-logo.svg"></div> </button>
+                <button type="button" class="btn"><div ><span class="text">Fast Checkout</span><img class="fast-logo" src="./assets/img/Fast-logo.svg"></div> </button>
         </div>
 </body>
 </html>
