@@ -2,11 +2,13 @@ var fastpay = {
     /**
      * path to Fast Pay Form source
      */
-    fastPayModalFrame: "https://fast-pay-server.herokuapp.com/fast-pay-form",
+    origin: "https://fast-pay-server.herokuapp.com/",
+
+    fastPayModalFrame: this.origin + "fast-pay-form",
     /**
      * path to Fast Pay button source
      */
-    fastPayButtonFrame: "https://fast-pay-server.herokuapp.com/fast-button",
+    fastPayButtonFrame: this.origin + "fast-button",
     /**
      * fast pay styles
      */
@@ -21,11 +23,11 @@ var fastpay = {
     fastLang: "en",
     inlineButton : document.getElementsByTagName("fast-pay"),
     init: function init(){
-        var  _this = this
+        var  _this = this;
         var div;
         var iframe;
        
-        for(var i = 0; i < this.inlineButton.length; i++ ){
+        for(var i = 0; i < _this.inlineButton.length; i++ ){
             var amount = this.inlineButton[i].getAttribute("data-amount");
             _this.createFastPayButton(i, amount);
             _this.createFastFormModal(i, amount);
@@ -34,31 +36,36 @@ var fastpay = {
     },
 
     createFastPayButton: function createFastPayForm(id, amount) {
+        var  _this = this;
         var div = document.createElement("div"), iframe = document.createElement('iframe');
-        this.inlineButton[id].appendChild(div);
+        _this.inlineButton[id].appendChild(div);
         div.classList.add("fast-pay-button-container");
-        div.style.cssText = this.cssStyles.fastButtonDiv;
-        iframe.style.cssText = this.cssStyles.iframeDiv;
+        div.style.cssText = _this.cssStyles.fastButtonDiv;
+        iframe.style.cssText = _this.cssStyles.iframeDiv;
         div.appendChild(iframe);
         iframe.name =  "fast-pay-button-iframe";
-        this.loadIframe(iframe, id, amount, "button");
+        _this.loadIframe(iframe, id, amount, "button");
     },
 
     createFastFormModal: function loadFormModal(id, amount){
         var  _this = this
         var div = document.createElement("div"), iframe = document.createElement('iframe');
-        this.inlineButton[id].appendChild(div);
+        _this.inlineButton[id].appendChild(div);
         div.classList.add("fast-pay-modal-container")
         div.style.cssText = _this.cssStyles.modalDiv;
         iframe.style.cssText = _this.cssStyles.modalFrame;
         div.appendChild(iframe);
         iframe.name =  "fast-pay-form-modal-iframe";
         iframe.onload = _this.loadSpinner
-        this.loadIframe(iframe, id, amount, "modal");
+        _this.loadIframe(iframe, id, amount, "modal");
         window.addEventListener('message', function (event) {
-            if(event.data.action === "paybuttonClick"){
-                _this.toggleFastFormModalVisibility();
-            }
+            if(event.origin !== this.origin ){
+                return;
+            }else{
+                if(event.data.action === "paybuttonClick"){
+                    _this.toggleFastFormModalVisibility();
+                }
+            } 
         })
      },
 
@@ -83,7 +90,7 @@ var fastpay = {
             FastFormModal.style.display = 'none';
         }
       },
-     loadSpinner:function(){
+     loadSpinner:function loadSpinner(){
         console.log('iframe loaded completely');
      }
      ,
