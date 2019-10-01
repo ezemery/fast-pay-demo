@@ -42,10 +42,58 @@
     .btn:hover{
         color: #fff;
     }
+
+    iframe{
+        border: none;
+        width:100%;
+        height: auto;
+    }
     </style>
     <title>Fast button</title>
 </head>
 <body>
-        <button type="button" class="btn"><div><img class="fast-logo" src="./assets/img/fast-logo-white.svg"><span class="text">Fast Checkout - </span><span class="amount">$121.9</span></button>
+        <button id="fast-pay" type="button" class="btn"><div><img class="fast-logo" src="./assets/img/fast-logo-white.svg"><span class="text">Fast Checkout - </span><span class="amount">$121.9</span></button>
+<script>
+ var payButton = {
+      /**
+     * path to Fast Pay button source
+     */
+     fastPayFrame: "https://fast-pay.netlify.com",
+    /**
+     * get instanc of the button
+     */
+    buttonElement: document.getElementById("fast-pay"),
+    oninit:function(){
+        this.buttonElement.addEventListener("click", function(){
+            payButton.loadFormModal();
+        })
+     },
+
+     loadFormModal: function(){
+        var div = document.createElement("div");
+        var iframe = document.createElement('iframe');
+        var body = document.getElementsByTagName("body")[0];
+        body.appendChild(div);
+        div.style.cssText = "width: 100%!important;height:100vh;position:absolute; z-index:999999; top: 0; background:";
+        iframe.style.cssText = "display: block !important; width: 100%!important;height: 100%!important;margin: auto;border: none!important;position: absolute!important;right: 0!important; top:0!important;background: red!important;";
+        iframe.setAttribute("noresize", true)
+        div.appendChild(iframe);
+        this.loadIframe(iframe);
+     },
+
+     loadIframe: function(iframe){
+        iframe.src = this.fastPayFrame
+        iframe.onload = payButton.loadSpinner
+        iframe.name =  "iframe";
+        iframe.scrolling="no"
+     },
+
+     loadSpinner:function(){
+        console.log('iframe loaded completely');
+     }
+ }    
+ payButton.oninit();
+
+</script>
 </body>
 </html>
