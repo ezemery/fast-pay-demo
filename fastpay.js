@@ -59,7 +59,7 @@ var fastpay = {
         iframe.onload = _this.loadSpinner
         _this.loadIframe(iframe, id, amount, "modal");
         window.addEventListener('message', function (event) {
-            if(event.origin !== this.origin ){
+            if(event.origin !== _this.origin ){
                 return;
             }else{
                 if(event.data.action === "paybuttonClick"){
