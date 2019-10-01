@@ -7,6 +7,10 @@ var fastpay = {
      * path to Fast Pay button source
      */
     fastPayButtonFrame: "https://fast-pay-server.herokuapp.com/fast-button",
+    /**
+     * fast pay styles
+     */
+
     cssStyles : {
         modalDiv:"display:none; width: 100%!important;height:100vh !important;position:fixed; top:0 !important; right:0 !important; z-index:99999999; top: 0",
         modalFrame:"display: block !important; width: 100%!important;height: 100%!important;margin: auto;border: none!important;position: absolute!important;right: 0!important; top:0!important;background: rgba(0,0,0,0.5)",
@@ -40,15 +44,6 @@ var fastpay = {
         this.loadIframe(iframe, id, amount, "button");
     },
 
-    toggleFastFormModalVisibility: function toggleFastFormModalVisibility() {
-        var FastFormModal = document.querySelector('.fast-pay-modal-container');
-        if (FastFormModal.style.display === 'none') {
-            FastFormModal.style.display = "block"; // Request for client Height on hidden form
-        } else {
-            FastFormModal.style.display = 'none';
-        }
-      },
-
     createFastFormModal: function loadFormModal(id, amount){
         var  _this = this
         var div = document.createElement("div"), iframe = document.createElement('iframe');
@@ -76,10 +71,18 @@ var fastpay = {
          }
         iframe.setAttribute("noresize", true);
         iframe.setAttribute("allowfullscreen", true)
-        iframe.scrolling="no";
+       
         iframe.src = url + "?id=" + id + "&amount=" + amount;
      },
 
+     toggleFastFormModalVisibility: function toggleFastFormModalVisibility() {
+        var FastFormModal = document.querySelector('.fast-pay-modal-container');
+        if (FastFormModal.style.display === 'none') {
+            FastFormModal.style.display = "block"; // Request for client Height on hidden form
+        } else {
+            FastFormModal.style.display = 'none';
+        }
+      },
      loadSpinner:function(){
         console.log('iframe loaded completely');
      }
