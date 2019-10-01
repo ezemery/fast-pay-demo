@@ -1,14 +1,17 @@
 var fastpay = {
     /**
+     * server origin
+     */
+    origin: "https://fast-pay-server.herokuapp.com",
+    /**
      * path to Fast Pay Form source
      */
-    origin: "https://fast-pay-server.herokuapp.com/",
 
-    fastPayModalFrame: this.origin + "fast-pay-form",
+    fastPayModalFrame: "https://fast-pay-server.herokuapp.com/fast-pay-form",
     /**
      * path to Fast Pay button source
      */
-    fastPayButtonFrame: this.origin + "fast-button",
+    fastPayButtonFrame: "https://fast-pay-server.herokuapp.com/fast-button",
     /**
      * fast pay styles
      */
@@ -24,9 +27,6 @@ var fastpay = {
     inlineButton : document.getElementsByTagName("fast-pay"),
     init: function init(){
         var  _this = this;
-        var div;
-        var iframe;
-       
         for(var i = 0; i < _this.inlineButton.length; i++ ){
             var amount = this.inlineButton[i].getAttribute("data-amount");
             _this.createFastPayButton(i, amount);
@@ -48,7 +48,7 @@ var fastpay = {
     },
 
     createFastFormModal: function loadFormModal(id, amount){
-        var  _this = this
+        var  _this = this;
         var div = document.createElement("div"), iframe = document.createElement('iframe');
         _this.inlineButton[id].appendChild(div);
         div.classList.add("fast-pay-modal-container")
@@ -59,7 +59,7 @@ var fastpay = {
         iframe.onload = _this.loadSpinner
         _this.loadIframe(iframe, id, amount, "modal");
         window.addEventListener('message', function (event) {
-            if(event.origin !== _this.origin ){
+            if(event.origin !== _this.origin){
                 return;
             }else{
                 if(event.data.action === "paybuttonClick"){
@@ -70,11 +70,11 @@ var fastpay = {
      },
 
      loadIframe: function loadIframe(iframe, id, amount, type){
-         var url = ""
+         var url = "", _this = this;
          if(type === "button"){
-            url = url = this.fastPayButtonFrame;
+            url = url = _this.fastPayButtonFrame;
          }else{
-            url = this.fastPayModalFrame;
+            url = _this.fastPayModalFrame;
          }
         iframe.setAttribute("noresize", true);
         iframe.setAttribute("allowfullscreen", true)
