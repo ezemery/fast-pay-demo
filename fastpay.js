@@ -31,7 +31,6 @@ var fastpay = {
             var amount = this.inlineButton[i].getAttribute("data-amount");
             _this.createFastPayButton(i, amount);
             _this.createFastFormModal(i, amount);
-            
         }
     },
 
@@ -44,6 +43,7 @@ var fastpay = {
         iframe.style.cssText = _this.cssStyles.iframeDiv;
         div.appendChild(iframe);
         iframe.name =  "fast-pay-button-iframe";
+        iframe.onload = _this.fastPayButtonOnLoad(id, amount);
         _this.loadIframe(iframe, id, amount, "button");
     },
 
@@ -56,18 +56,9 @@ var fastpay = {
         iframe.style.cssText = _this.cssStyles.modalFrame;
         div.appendChild(iframe);
         iframe.name =  "fast-pay-form-modal-iframe";
-        iframe.onload = _this.loadSpinner
+        iframe.id =  "fast-pay-form-modal-iframe";
+        iframe.onload = _this.fastFormModalOnLoad;
         _this.loadIframe(iframe, id, amount, "modal");
-
-        window.addEventListener('message', function (event) {
-            if(event.origin !== _this.origin){
-                return;
-            }else{
-                if(event.data.action === "paybuttonClick"){
-                    _this.toggleFastFormModalVisibility();
-                }
-            } 
-        })
      },
 
      loadIframe: function loadIframe(iframe, id, amount, type){
@@ -91,7 +82,31 @@ var fastpay = {
             FastFormModal.style.display = 'none';
         }
       },
-     loadSpinner:function loadSpinner(){
+
+      fastPayButtonOnLoad: function fastPayButtonOnLoad(id, amount){
+          var _this = this;
+        window.addEventListener('message', function (event) {
+            if(event.origin !== _this.origin){
+                return;
+            }else{
+                if(event.data.action === "paybuttonClick"){
+                    _this.toggleFastFormModalVisibility();
+                }
+            } 
+        })
+      },
+      
+      fastFormModalOnLoad:function fastFormModalOnLoad(){
+        var _this2 = this;
+        window.addEventListener('message', function (event) {
+            if(event.origin !== fastpay.origin){
+                return;
+            }else{
+                if(event.data.action === "closeModal"){
+                    fastpay.toggleFastFormModalVisibility();
+                }
+            } 
+        })
         console.log('iframe loaded completely');
      }
      ,
