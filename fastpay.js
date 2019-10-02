@@ -58,6 +58,7 @@ var fastpay = {
         iframe.name =  "fast-pay-form-modal-iframe";
         iframe.onload = _this.loadSpinner
         _this.loadIframe(iframe, id, amount, "modal");
+
         window.addEventListener('message', function (event) {
             if(event.origin !== _this.origin){
                 return;
@@ -72,7 +73,7 @@ var fastpay = {
      loadIframe: function loadIframe(iframe, id, amount, type){
          var url = "", _this = this;
          if(type === "button"){
-            url = url = _this.fastPayButtonFrame;
+            url = _this.fastPayButtonFrame;
          }else{
             url = _this.fastPayModalFrame;
          }
