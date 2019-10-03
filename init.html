@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Fast Pay Initial</title>
+  </head>
+  <body>
+    <div class="fast-pay-returning"></div>
+    <script>
+      var initFrame = {
+        // this code is gotten from w3school
+        //https://www.w3schools.com/js/js_cookies.asp
+        getCookie: function(cname) {
+          var name = cname + "=";
+          var decodedCookie = decodeURIComponent(document.cookie);
+          var ca = decodedCookie.split(";");
+          for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+            }
+          }
+          return "";
+        },
+        origin: "*",
+        init: function init() {
+          // listen to when docs load
+          window.onload = function() {
+            parent.postMessage(
+              { cookie: initFrame.getCookie("fast-pay"), action: 'load-cookie'  },
+              initFrame.origin
+            );
+          };
+        }
+      };
+      initFrame.init();
+    </script>
+    <script></script>
+  </body>
+</html>
