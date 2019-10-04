@@ -62,7 +62,6 @@ var cssStyles = {
   function init(data) {
     //this is the good place to use cookie for determining new and existing user
     for (var i = 0; i < inlineButton.length; i++) {
-        console.log("here");
         createInitButton(i, data);
     }
   };
@@ -96,15 +95,8 @@ var cssStyles = {
   function createFastPayButton(num, data) {
     iframe = createFastFrame(num, "fast-pay-button-iframe", 'button');
     loadIframe(iframe, data.key, fastPayButtonFrame);
-    var frame = window.document.getElementById("fast-pay-button-iframe").contentWindow;
+    //var frame = window.document.getElementById("fast-pay-button-iframe");
      //Todo: same origin for post message
-    console.log("posting message to Iframe",frame);
-    frame.postMessage({
-        action:"config",
-        values:globalFastData
-    }, "*");
-   
-
   };
   function createReturningButton(num, data) {
     iframe = createFastFrame(num, "fast-pay-returning-checkout-button-iframe", 'button');
@@ -142,6 +134,9 @@ var cssStyles = {
   };
 
   function createInitButton(num, data) {
+    //console.log("posting message to Iframe",frame);
+    
+    
     iframe = createFastFrame(num, "fast-pay-init-iframe", "init-frame");
 
     loadIframe(iframe, data.key, fastPayEmptyFrame);
@@ -159,7 +154,6 @@ var cssStyles = {
               createReturningButton(num, data);
               createFastReturningUserFormModal(num, data);
             } else {
-                console.log(globalFastData);
               createFastPayButton(num, data);
               createFastFormModal(num, data);
               
@@ -179,6 +173,13 @@ var cssStyles = {
   }
 
   function loadedIframe(iframe){
+
+    console.log(iframe);
+    iframe.contentWindow.postMessage({
+        action:"config",
+        values:globalFastData
+    }, "*");
+
     window.addEventListener("message", function(event) {
         var action = event.data.action;
         if (event.origin !== origin) {
