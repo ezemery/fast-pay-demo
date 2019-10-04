@@ -34,13 +34,13 @@ var message_handlers = {};
 
 var cssStyles = {
     modalDiv:
-      "display:table;margin:auto;width:100%!important; min-width: 100%; min-height:100%; height:100vh!important;position:fixed;top:0!important; z-index:99999999;top:0",
+      "display:none;margin:auto;width:100%!important; min-width: 100%; min-height:100%; height:100vh!important;position:fixed;top:0!important; z-index:99999999;top:0",
     modalFrame:
       "width: 100px!important;min-width: 100%; min-height:100%;height:100%!important;margin:auto;border:none!important;background: rgba(0,0,0,0.5)",
     fastButtonDiv:
-      "display:table!important;width:100%!important;min-width: 100%;min-height:100%;height:100vh!important;position:relative;z-index:16777271",
+      "display:table!important;width:100%!important;min-width: 100%; height:100vh!important;position:relative;z-index:16777271",
     iframeDiv:
-      "width:100%!important;min-width: 100%;min-height:100%;height:100%!important;border:none!important;position:relative!important;background: transparent!important;"
+      "width:100%!important;min-width: 100%;height:100%!important;border:none!important;position:relative!important;background: transparent!important;"
   };
     /**
      * fast languages
@@ -114,24 +114,24 @@ var cssStyles = {
     iframe.onload = loadedIframe(iframe);
   }
 
-  function toggleFastFormModalVisibility() {
-    var FastFormModal = window.document.querySelector(".fast-pay-modal-container");
-    if (FastFormModal.style.display === "none") {
-      FastFormModal.style.display = "block";
-      console.log(FastFormModal.style.display);
+  function toggleFastFormModalVisibility(action) {
+      var fastFormDisplay = window.document.querySelector(".fast-pay-modal-container");
+    if (action === "editIconClick" || action === "paybuttonClick") {
+        fastFormDisplay.style.display = "table";
       // Request for client Height on hidden form
     } else {
-      FastFormModal.style.display = "none";
+        fastFormDisplay.style.display = "none";
     }
   }
 
   function loadedIframe(iframe){
     window.addEventListener("message", function(event) {
+        var action = event.data.action;
         if (event.origin !== origin) {
           return;
         } else {
-          if (event.data.action === "editIconClick" || "paybuttonClick" || "closeModal" ) {
-            toggleFastFormModalVisibility();
+          if (action === "editIconClick" || action === "paybuttonClick" || action === "closeModal" ) {
+            toggleFastFormModalVisibility(action);
           }
         }
       });
