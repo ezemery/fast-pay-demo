@@ -12,19 +12,36 @@
     }
     .pay{
         position: relative;
-        width: 600px;
-
-        margin-top: 50px
+        width: 100%;
+        height: 400px;
     }
     </style>
 </head>
 <body>
-        <!-- key 28daJw9jGble0xY81ZWXk1V5yNEKMz7m -->
-    <h1>Hello</h1>
-    
+
+    <h1>Hello fast Pay</h1>
+
     <div class="pay">
-    <fast-pay data-amount="$121.99" data-free-shipping="$10" data-freeshipping="$10"></fast-pay>
-    </div> 
+        <fast-pay></fast-pay>
+    </div>
     <script src="fastpay.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function(){
+            function fastpay(){
+            var x = getFastPaySetup({
+                "key":"28daJw9jGble0xY81ZWXk1V5yNEKMz7m",
+                "amount": 10,
+                "currency": "USD",
+                "meta":[
+                    {"Size":"Medium"}
+                ]
+        })
+        }
+    fastpay();
+})
+
+        
+    </script>
+   
 </body>
 </html>
