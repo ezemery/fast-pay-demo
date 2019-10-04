@@ -62,6 +62,7 @@ var cssStyles = {
   function init(data) {
     //this is the good place to use cookie for determining new and existing user
     for (var i = 0; i < inlineButton.length; i++) {
+        console.log("here");
         createInitButton(i, data);
     }
   };
@@ -75,12 +76,16 @@ var cssStyles = {
       div.style.cssText = cssStyles.fastButtonDiv;
       iframe.style.cssText = cssStyles.iframeDiv;
     }
-
     if (type === "modal") {
       div.classList.add("fast-pay-modal-container");
       div.style.cssText = cssStyles.modalDiv;
       iframe.style.cssText = cssStyles.modalFrame;
     }
+    if (type === "init-frame") {
+        div.classList.add("fast-pay-init-frame");
+        div.style.cssText = cssStyles.fastButtonDiv;
+        iframe.style.cssText = cssStyles.iframeDiv;
+      }
     div.appendChild(iframe);
     iframe.setAttribute("id", name)
     iframe.name = name;
@@ -91,13 +96,14 @@ var cssStyles = {
   function createFastPayButton(num, data) {
     iframe = createFastFrame(num, "fast-pay-button-iframe", 'button');
     loadIframe(iframe, data.key, fastPayButtonFrame);
-    var frame = window.document.getElementById("fast-pay-button-iframe");
-    console.log(window);
-    window.postMessage({
+    var frame = window.document.getElementById("fast-pay-button-iframe").contentWindow;
+     //Todo: same origin for post message
+    console.log("posting message to Iframe",frame);
+    frame.postMessage({
         action:"config",
         values:globalFastData
     }, "*");
-    //Todo: same origin for post message
+   
 
   };
   function createReturningButton(num, data) {
@@ -136,7 +142,7 @@ var cssStyles = {
   };
 
   function createInitButton(num, data) {
-    iframe = createFastFrame(num, "fast-pay-init-iframe", "button");
+    iframe = createFastFrame(num, "fast-pay-init-iframe", "init-frame");
 
     loadIframe(iframe, data.key, fastPayEmptyFrame);
     window.addEventListener("message", function(event) {
@@ -149,9 +155,11 @@ var cssStyles = {
           for (var i = 0; i < inlineButton.length; i++) {
             var amount = inlineButton[i].getAttribute("fast-pay");
             if (cookie) {
+                console.log(globalFastData);
               createReturningButton(num, data);
               createFastReturningUserFormModal(num, data);
             } else {
+                console.log(globalFastData);
               createFastPayButton(num, data);
               createFastFormModal(num, data);
               
@@ -165,7 +173,9 @@ var cssStyles = {
   function removeElement() {
     // Removes an element from the document
     var element = document.getElementById('fast-pay-init-iframe');
+    var elementDiv = document.querySelector(".fast-pay-init-frame")
     element.parentNode.removeChild(element);
+    elementDiv.parentNode.removeChild(elementDiv);
   }
 
   function loadedIframe(iframe){

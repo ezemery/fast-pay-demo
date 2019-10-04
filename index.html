@@ -26,7 +26,8 @@
     </div>
     <script src="fastpay.js"></script>
     <script>
-        function fastpay(){
+        window.addEventListener("DOMContentLoaded", function(){
+            function fastpay(){
             var x = getFastPaySetup({
                 "key":"28daJw9jGble0xY81ZWXk1V5yNEKMz7m",
                 "amount": 10,
@@ -36,7 +37,10 @@
                 ]
         })
         }
-   fastpay();
+    fastpay();
+})
+
+        
     </script>
    
 </body>
