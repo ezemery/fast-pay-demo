@@ -33,6 +33,10 @@
  * path to Fast Pay Returning Checkout button source
  */
   var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
+ /**
+ * path to Fast Pay button init
+ */
+  var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
 /**
  * fast pay styles
  */
@@ -58,8 +62,7 @@ var cssStyles = {
   function init(data) {
     //this is the good place to use cookie for determining new and existing user
     for (var i = 0; i < inlineButton.length; i++) {
-      createFastPayButton(i,data);
-      createFastFormModal(i,data)
+        createInitButton(i, data);
     }
   };
 
@@ -130,6 +133,39 @@ var cssStyles = {
     } else {
         fastFormDisplay.style.display = "none";
     }
+  };
+
+  function createInitButton(num, data) {
+    iframe = createFastFrame(num, "fast-pay-init-iframe", "button");
+
+    loadIframe(iframe, data.key, fastPayEmptyFrame);
+    window.addEventListener("message", function(event) {
+      if (event.origin !== origin) {
+        return;
+      } else {
+        if (event.data.action === "load-cookie") {
+          const cookie = event.data.cookie;
+          removeElement();
+          for (var i = 0; i < inlineButton.length; i++) {
+            var amount = inlineButton[i].getAttribute("fast-pay");
+            if (cookie) {
+              createReturningButton(num, data);
+              createFastReturningUserFormModal(num, data);
+            } else {
+              createFastPayButton(num, data);
+              createFastFormModal(num, data);
+              
+            }
+          }
+        }
+      }
+    });
+  };
+
+  function removeElement() {
+    // Removes an element from the document
+    var element = document.getElementById('fast-pay-init-iframe');
+    element.parentNode.removeChild(element);
   }
 
   function loadedIframe(iframe){
