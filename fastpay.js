@@ -10,7 +10,6 @@
         #       #     #  #####     #    #       #     #    # 
    */
   var globalFastData;
-  var _this = this;
   var iframe;
   /**
    * server origin
