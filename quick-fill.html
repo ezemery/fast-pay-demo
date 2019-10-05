@@ -30,12 +30,26 @@
      .fast-pay{
          margin: auto;
          width:500px;
-         padding: 1.3rem 20px;
+         padding: 2rem 20px;
          background: #FFFFFF;
          border: 2px solid #EEEEEE;
          box-sizing: border-box;
          border-radius: 5px;
      }
+     .fast-close__form {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        line-height: 18px;
+        vertical-align: middle;
+        color: black;
+        border: 0.3px solid black;
+        position: absolute;
+        cursor: pointer;
+        text-align: center;
+        top: 15px;
+        right: 20px;
+    }
 	  .col-md-3{
 			max-width: calc(100% / 4);
 			flex: 0 0 25%;
@@ -536,6 +550,7 @@
 </head>
 <body>
     <div class="fast-pay">
+        <div id="fast-close_form" class="fast-close__form">&times;</div>
         <form class="form" id="payment-form">
             <h4 class="fast-pay-title mt-0">Personal Info</h4>
             <div class="new__form-set">
