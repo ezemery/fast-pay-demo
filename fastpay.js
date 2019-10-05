@@ -2,31 +2,31 @@ var fastpay = {
     /**
      * server origin
      */
-     origin : "http://41b95e7d.ngrok.io",
+     origin : "https://fast-pay-server.herokuapp.com",
     /**
      * path to Fast Pay Form source
      */
   
-    fastPayModalFrame: "http://41b95e7d.ngrok.io/fast-pay-form",
+    fastPayModalFrame: "https://fast-pay-server.herokuapp.com/fast-pay-form",
     /**
      * path to Fast Pay Form source
      */
   
-    fastPayReturningModalFrame: "http://41b95e7d.ngrok.io/fast-pay-form",
+    fastPayReturningModalFrame: "https://fast-pay-server.herokuapp.com/fast-pay-form",
     /**
     /**
      * path to Fast Pay button source
      */
-     fastPayButtonFrame :  "http://41b95e7d.ngrok.io/fast-button",
+     fastPayButtonFrame :  "https://fast-pay-server.herokuapp.com/fast-button",
       /**
      * path to Fast Pay Returning Checkout button source
      */
     fastPayReturningButtonFrame:
-      "http://41b95e7d.ngrok.io/fast-returning-button",
+      "https://fast-pay-server.herokuapp.com/fast-returning-button",
     /**
      * path to Fast Pay empty source
      */
-    fastPayEmptyFrame: "http://41b95e7d.ngrok.io/init",
+    fastPayEmptyFrame: "https://fast-pay-server.herokuapp.com/init",
     /**
      * fast pay styles
      */
@@ -232,6 +232,30 @@ var fastpay = {
     },
     loadSpinner: function loadSpinner() {
       console.log("iframe loaded completely");
+    },
+
+    /**
+     * Returns reference to current script tag
+     * @returns {HtmlElement}
+     */
+    currentScript: function() {
+        if (document.currentScript) {
+            return document.currentScript;
+        } else {
+            var scripts = document.getElementsByTagName('script');
+            return scripts[scripts.length - 1];
+        }
+    },
+
+    /**
+     * Extracts parameters from URL
+     * @param paramName Parameter to extract
+     * @param str URL string
+     * @returns {*}
+     */
+    getParams: function (paramName, str) {
+        var re = new RegExp('&' + paramName + '=([^&]*)', 'i');
+        return (str = str.replace(/\?/, '&').match(re)) ? str[1] : '';
     }
   };
   
