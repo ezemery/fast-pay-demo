@@ -1,6 +1,7 @@
 //'use strict';
 (function(window){
-    /**
+
+	 /**
         ########   #     #####  ####### ######     #    #     #
         #         # #   #     #    #    #     #   # #    #   #  
         #        #   #  #          #    #     #  #   #    # #   
@@ -9,213 +10,365 @@
         #       #     # #     #    #    #       #     #    #    
         #       #     #  #####     #    #       #     #    # 
    */
-  var globalFastData;
-  var iframe;
-  /**
-   * server origin
-   */
-  var origin = "https://fast-pay-server.herokuapp.com"; 
-   /**
-   * path to Fast Pay Form source
-   */
-  var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
-
-  /**
-   * path to Fast Pay Form source
-   */
-  var fastPayReturningModalFrame =  "https://fast-pay-server.herokuapp.com/quick-fill";
-
-   /**
-   * path to Fast Pay button source
-   */
-  var fastPayButtonFrame =  "https://fast-pay-server.herokuapp.com/fast-button";
-  /**
- * path to Fast Pay Returning Checkout button source
- */
-  var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
- /**
- * path to Fast Pay button init
- */
-  var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
-/**
- * fast pay styles
- */
-var inlineButton = window.document.getElementsByTagName("fast-pay");
-
-var message_handlers = {};
-
-var cssStyles = {
-    modalDiv:
-      "display:none;margin:auto;width:100%!important; min-width: 100%; min-height:100%; height:100vh!important;position:fixed;top:0!important; z-index:99999999;top:0",
-    modalFrame:
-      "width: 100px!important;min-width: 100%; min-height:100%;height:100%!important;margin:auto;border:none!important;background: rgba(0,0,0,0.5)",
-    fastButtonDiv:
-      "display:table!important;width:100%!important;min-width: 100%; height:100vh!important;position:relative;z-index:16777271",
-    iframeDiv:
-      "width:100%!important;min-width: 100%;height:100%!important;border:none!important;position:relative!important;background: transparent!important;"
-  };
+    var globalFastData;
+	 var iframe ;
+	 var div ;
+	 var source;
     /**
-     * fast languages
+     * server origin
      */
-  var fastLang= "en";
+    var origin = "https://fast-pay-server.herokuapp.com"; 
+     /**
+     * path to Fast Pay Form source
+     */
+    var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
+  
+    /**
+     * path to Fast Pay Form source
+     */
+    var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
+  
+     /**
+     * path to Fast Pay button source
+     */
+    var fastPayButtonFrame =  "https://fast-pay-server.herokuapp.com/fast-button";
+    /**
+   * path to Fast Pay Returning Checkout button source
+   */
+	 var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
+	 
+	 var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
+  /**
+   * fast pay styles
+   */
+  var inlineButton = window.document.getElementsByTagName("fast-pay");
+  
+  var message_handlers = {};
 
-  function init(data) {
-    //this is the good place to use cookie for determining new and existing user
-    for (var i = 0; i < inlineButton.length; i++) {
-        createInitButton(i, data);
-    }
-  };
+   /**
+	 * message handler for allcontentloaded info from iframe
+	 * @params message object
+	 */
+  message_handlers.allcontentloaded = function(data){
+	console.log(data);
+	source = data.source
+	data.source.postMessage(
+		{
+			 action: "clickreport",
+			 config: globalFastData
+		},
+		data.origin
+  );
+  }
 
-  function createFastFrame(num,name,type) {
-    var div = document.createElement("div"),
-      iframe = document.createElement("iframe");
-      inlineButton[num].appendChild(div);
-    if (type === "button") {
-      div.classList.add("fast-pay-button-container");
-      div.style.cssText = cssStyles.fastButtonDiv;
-      iframe.style.cssText = cssStyles.iframeDiv;
-    }
-    if (type === "modal") {
-      div.classList.add("fast-pay-modal-container");
-      div.style.cssText = cssStyles.modalDiv;
-      iframe.style.cssText = cssStyles.modalFrame;
-    }
-    if (type === "init-frame") {
-        div.classList.add("fast-pay-init-frame");
+  /**
+	 * message handler for paybuttonClick
+	 * @params message object
+	 */
+  message_handlers.paybuttonClick = function(data){
+   toggleFastFormModalVisibility()   
+	}
+
+	/**
+	 * message handler for editIconClick
+	 * @params message object
+	 */
+  message_handlers.editIconClick = function(data){
+    toggleFastFormModalVisibility()
+	}
+	/**
+	 * message handler for closeModal
+	 * @params message object
+	 */
+  message_handlers.closeModal = function(data){
+      toggleFastFormModalVisibility()
+	}
+	/**
+	 * message handler for loadCookie
+	 * @params message object
+	 */
+	
+	message_handlers.loadCookie = function(data){
+		const cookie = data.cookie;
+		removeElement('init-frame');
+		for (var i = 0; i < inlineButton.length; i++) {
+		  if (cookie) {
+			 createReturningButton(i,  globalFastData);
+			 createFastReturningUserFormModal(i,  globalFastData);
+		  } else {
+			 createFastPayButton(i,  globalFastData);
+			createFastFormModal(i,  globalFastData);
+		  }
+		}
+	}
+  
+	/**
+	 * iframe styles
+	 */
+  var cssStyles = {
+      modalDiv:
+        "display:none; width: 100%!important;height:100vh!important;position:fixed;top:0!important;right:0 !important; z-index:99999999;top:0",
+      modalFrame:
+        "display:block!important;width: 100%!important;height:100%!important;margin:auto;border:none!important;position:absolute!important;right: 0!important;top:0!important;background: rgba(0,0,0,0.5)",
+      fastButtonDiv:
+        "display:block!important;width:100%!important;height:100vh!important;position:relative;z-index:16777271",
+      iframeDiv:
+        "display:block!important;width:100%!important;height:100%!important;border:none!important;poasition:relative!important;background: transparent!important;"
+	 };
+	 
+      /**
+       * fast languages
+       */
+	 var fastLang = {
+		 "en": "en"
+	 };
+	 
+	  /**
+		* Initialise the fast pay form when initated with data attributes or initialisation function
+     * @params null
+	  * @return null
+     */
+  
+    function init() {
+		var iterableCollection = [].slice.call(inlineButton);
+		iterableCollection.forEach((element, i) => {
+			 var config = extractAttributes(inlineButton[i],[
+				  "key", "amount"
+			 ]);
+			 if(Object.keys(config).length !== 0 && config.constructor === Object){
+				  globalFastData = config;
+				  createInitButton(i, config);
+			 }else{
+				  window.getFastPaySetup = function(config){
+						globalFastData = config;
+					
+						if ( globalFastData && ! globalFastData.onclose) {
+							 /**
+							  * close the modal when everthing is successfull, come back to this later
+							  */
+							 
+						}
+						for (var c in config) {
+							 if (c === "meta") {
+							 /**
+							  * if user passes the meta object, this should be an array of extra info about the product
+							  */
+							 }
+						}
+
+						if(config.hasOwnProperty("amount") && config.hasOwnProperty("currency") && config.hasOwnProperty("key") ){
+							 createInitButton(i, config);
+						}else{
+							console.error("All parameters are required for fast pay button to initiate", ["key", "currency", "amount"])
+						}
+				  }
+			 }
+			 
+		});
+	 };
+
+	 /**
+	  * Extracts attribute from the button element
+     * @params button element node
+	  * @params attributes  array of values to extract
+	  * @return object of extracted values
+     */
+  
+	 
+	 function extractAttributes(element, attributes) {
+		var obj = {};
+		attributes.forEach(function(attrib) {
+			 var aa = element.getAttribute("data-" + attrib);
+			 if (aa) obj[attrib] = aa;
+		});
+		return obj;
+  }
+
+   /**
+	  * Creates an instance of an iframe
+     * @params num number from the iterator function
+	  * @params name  sets to the name an id of the iframe
+	  * @returns instance of  an iframe
+     */
+  
+    function createFastFrame(num,name,type) {
+        div = document.createElement("div");
+		  iframe = document.createElement("iframe");
+		  if (document.body) {
+			// If iframe already exists on the page, remove it from the body
+			if (document.getElementById(name)) {
+				removeElement(name);
+			}
+
+			inlineButton[num].appendChild(div);
+	  }
+      if (type === "button") {
+        div.classList.add("fast-pay-button-container");
         div.style.cssText = cssStyles.fastButtonDiv;
         iframe.style.cssText = cssStyles.iframeDiv;
       }
-    div.appendChild(iframe);
-    iframe.setAttribute("id", name)
-    iframe.name = name;
-    return iframe;
-  };
+  
+      if (type === "modal") {
+        div.classList.add("fast-pay-modal-container");
+        div.style.cssText = cssStyles.modalDiv;
+        iframe.style.cssText = cssStyles.modalFrame;
+		}
+		
+		if (type === "init-frame") {
+			div.id = "init-frame";
+			div.classList.add("fast-pay-button-container");
+			div.style.cssText = cssStyles.fastButtonDiv;
+			iframe.style.cssText = cssStyles.iframeDiv;
+		 }
 
+      div.appendChild(iframe);
+      iframe.setAttribute("id", name)
+      iframe.name = name;
+      return iframe;
+	 };
+	 
+  /**
+	  * loads the fast pay button iframe into the page
+     * @params num number from the iterator function
+	  * @params data  iframe config values
+	  * @returns null
+     */
+  
+    function createFastPayButton(num, data) {
+      iframe = createFastFrame(num, "payButton", 'button');
+      loadIframe(iframe, data.key, fastPayButtonFrame);
+		//var frame = window.frames.payButton;
+		// console.log(source);
+      // source.postMessage({
+      //     action:"config",
+      //     values:globalFastData
+      // }, "*");
+      //Todo: same origin for post message
+  
+	 };
+	 
+	 /**
+	  * loads the fast pay returning button iframe into the page
+     * @params num number from the iterator function
+	  * @params data  iframe config values
+	  * @returns null
+     */
 
-  function createFastPayButton(num, data) {
-    iframe = createFastFrame(num, "fast-pay-button-iframe", 'button');
-    loadIframe(iframe, data.key, fastPayButtonFrame);
-    //var frame = window.document.getElementById("fast-pay-button-iframe");
-     //Todo: same origin for post message
-  };
-  function createReturningButton(num, data) {
-    iframe = createFastFrame(num, "fast-pay-returning-checkout-button-iframe", 'button');
-    loadIframe(iframe, data.key, fastPayReturningButtonFrame);
-  };
+    function createReturningButton(num, data) {
+      iframe = createFastFrame(num, "returningCheckoutButton", 'button');
+      loadIframe(iframe, data.key, fastPayReturningButtonFrame);
+    };
+  
 
-  function createFastFormModal(num, data) {
-    iframe = createFastFrame(num, "fast-pay-form-modal-iframe", "modal");
-    loadIframe(iframe, data.key, fastPayModalFrame);
-  };
+	 /**
+	  * loads the fast pay modal iframe into the page
+     * @params num number from the iterator function
+	  * @params data  iframe config values
+	  * @returns null
+     */
+    function createFastFormModal(num, data) {
+      iframe = createFastFrame(num, "payFormModal", "modal");
+      loadIframe(iframe, data.key, fastPayModalFrame);
+    };
+  
 
-  function createFastReturningUserFormModal(num, data) {
-    //this will be replaced with returning form
-    iframe = createFastFrame(num, "fast-pay-returning-checkout-modal-iframe", "modal");
-    loadIframe(iframe, data.key, fastPayReturningModalFrame);
-    
-  };
+	 /**
+	  * loads the fast pay returning modal iframe into the page
+     * @params num number from the iterator function
+	  * @params data  iframe config values
+	  * @returns null
+     */
 
-  function loadIframe(iframe, key, url) {
-    iframe.setAttribute("noresize", "yes");
-    iframe.setAttribute("margin", "auto");
-    iframe.setAttribute("allowfullscreen", "allowfullscreen");
-    iframe.src = url + "?key=" + key;
-    iframe.onload = loadedIframe(iframe);
-  }
+    function createFastReturningUserFormModal(num, data) {
+      //this will be replaced with returning form
+      iframe = createFastFrame(num, "returningCheckoutModal", "modal");
+      loadIframe(iframe, data.key, fastPayReturningModalFrame);
+      
+	 };
+	 
+	 /**
+	  * initialise the button to determine if the cookie is set 
+     * @params num number from the iterator function
+	  * @params data  iframe config values
+	  * @returns null
+     */
+	 function createInitButton( num, data) {
+      var iframe = createFastFrame(num, "init-frame", "init-frame");
+      loadIframe(iframe, data, fastPayEmptyFrame);
+	 };
+	 
+	 /**
+	  * remove iframe element from body
+     * @params id number from the iterator function
+	  * @returns null
+     */
+  
+    function removeElement(id) {
+      var element = document.getElementById(id);
+      element.parentNode.removeChild(element);
+	 };
+	 
 
-  function toggleFastFormModalVisibility(action) {
-      var fastFormDisplay = window.document.querySelector(".fast-pay-modal-container");
-    if (action === "editIconClick" || action === "paybuttonClick") {
-        fastFormDisplay.style.display = "table";
-      // Request for client Height on hidden form
-    } else {
-        fastFormDisplay.style.display = "none";
+	 /**
+	  * load function for the iframe
+     * @params iframe: an instance on the iframe
+	  * @params key: api key to authenticate the request
+	  * @params url: url of the iframe
+	  * @returns null
+     */
+    function loadIframe(iframe, key, url) {
+      iframe.setAttribute("noresize", true);
+      iframe.setAttribute("allowfullscreen", true);
+      iframe.src = url + "?key=" + key;
     }
-  };
+  
 
-  function createInitButton(num, data) {
-    //console.log("posting message to Iframe",frame);
-    
-    
-    iframe = createFastFrame(num, "fast-pay-init-iframe", "init-frame");
-
-    loadIframe(iframe, data.key, fastPayEmptyFrame);
-    window.addEventListener("message", function(event) {
-      if (event.origin !== origin) {
-        return;
+	  /**
+	  * toggle function for the modal
+     * @params null
+	  * @returns null
+     */
+    function toggleFastFormModalVisibility() {
+      var FastFormModal = document.querySelector(".fast-pay-modal-container");
+      if (FastFormModal.style.display === "none") {
+        FastFormModal.style.display = "block"; // Request for client Height on hidden form
       } else {
-        if (event.data.action === "load-cookie") {
-          const cookie = event.data.cookie;
-          removeElement();
-          for (var i = 0; i < inlineButton.length; i++) {
-            var amount = inlineButton[i].getAttribute("fast-pay");
-            if (cookie) {
-                console.log(globalFastData);
-              createReturningButton(num, data);
-              createFastReturningUserFormModal(num, data);
-            } else {
-              createFastPayButton(num, data);
-              createFastFormModal(num, data);
-              
-            }
-          }
-        }
+        FastFormModal.style.display = "none";
       }
-    });
-  };
-
-  function removeElement() {
-    // Removes an element from the document
-    var element = document.getElementById('fast-pay-init-iframe');
-    var elementDiv = document.querySelector(".fast-pay-init-frame")
-    element.parentNode.removeChild(element);
-    elementDiv.parentNode.removeChild(elementDiv);
+	 }
+	 
+	  /**
+	  * add event listeners for all messages for the iframe and map to the event listener fumction
+     * @params object: event message 
+	  * @returns null
+     */
+  
+    window.addEventListener(
+        "message",
+        function(message) {
+            console.log(message);
+            if (
+                message &&
+                message.data &&
+                message.data.action &&
+                message_handlers[message.data.action]
+            ) {
+                message_handlers[message.data.action](message);
+            }
+        },
+        false
+	 );
+	 
+	  /**
+	  * load spinner for the iframe
+     * @params null
+	  * @returns null
+     */
+  
+  function loadSpinner() {
+      console.log("iframe loaded completely");
   }
 
-  function loadedIframe(iframe){
-
-    console.log(iframe);
-    iframe.contentWindow.postMessage({
-        action:"config",
-        values:globalFastData
-    }, "*");
-
-    window.addEventListener("message", function(event) {
-        var action = event.data.action;
-        if (event.origin !== origin) {
-          return;
-        } else {
-          if (action === "editIconClick" || action === "paybuttonClick" || action === "closeModal" ) {
-            toggleFastFormModalVisibility(action);
-          }
-        }
-      });
-  }
-
-function loadSpinner() {
-    console.log("iframe loaded completely");
-}
-
-window.getFastPaySetup = function(config){
-    globalFastData = config;
- 
-    if (globalFastData && !globalFastData.onclose) {
-        /**
-         * close the modal when everthing is successfull, come back to this later
-         */
-        
-    }
-
-    for (var c in config) {
-        if (c === "meta") {
-        /**
-         * if user passes the meta object, this should be an array of extra info about the product
-         */
-        }
-    }
-    if(config.hasOwnProperty("amount") && config.hasOwnProperty("currency") & config.hasOwnProperty("key") ){
-        init(config);
-    }
-} 
-
-}(window));
+	init()  
+  }(window));
+  
