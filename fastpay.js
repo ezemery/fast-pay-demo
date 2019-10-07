@@ -17,27 +17,27 @@
     /**
      * server origin
      */
-    var origin = "https://fast-pay-server.herokuapp.com"; 
+    var origin = "http://41b95e7d.ngrok.io"; 
      /**
      * path to Fast Pay Form source
      */
-    var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
+    var fastPayModalFrame = "http://41b95e7d.ngrok.io/fast-pay-form";
   
     /**
      * path to Fast Pay Form source
      */
-    var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
+    var fastPayReturningModalFrame = "http://41b95e7d.ngrok.io/quick-fill";
   
      /**
      * path to Fast Pay button source
      */
-    var fastPayButtonFrame =  "https://fast-pay-server.herokuapp.com/fast-button";
+    var fastPayButtonFrame =  "http://41b95e7d.ngrok.io/fast-button";
     /**
    * path to Fast Pay Returning Checkout button source
    */
-	 var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
+	 var fastPayReturningButtonFrame = "http://41b95e7d.ngrok.io/fast-returning-button";
 	 
-	 var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
+	 var fastPayEmptyFrame = "http://41b95e7d.ngrok.io/init";
   /**
    * fast pay styles
    */
@@ -107,13 +107,13 @@
 	 */
   var cssStyles = {
       modalDiv:
-        "display:none; width: 100%!important;height:100vh!important;position:fixed;top:0!important;right:0 !important; z-index:99999999;top:0",
+        "display:none;min-width:100% !important; min-height:100% important; width: 100%!important;height:100vh!important;position:fixed;top:0!important;right:0 !important; left:0 !important; bottom:0!important; z-index:99999999;overflow: hidden !important;",
       modalFrame:
-        "display:block!important;width: 100%!important;height:100%!important;margin:auto;border:none!important;position:absolute!important;right: 0!important;top:0!important;background: rgba(0,0,0,0.5)",
+        "display:table;min-width:100% !important; min-height:100% important; width: 100%!important;height:100%!important;margin:auto;border:none!important;position:absolute!important; right: 0!important;top:0!important; left:0 !important; bottom: 0 !important; background: rgba(0,0,0,0.5)",
       fastButtonDiv:
-        "display:block!important;width:100%!important;height:100vh!important;position:relative;z-index:16777271",
+        "display:table;min-width:100% !important; min-height:100% important;width:100%!important;height:100vh!important;position:relative;z-index:16777271",
       iframeDiv:
-        "display:block!important;width:100%!important;height:100%!important;border:none!important;poasition:relative!important;background: transparent!important;"
+        "display:table;min-width:100% !important; min-height:100% important;width:100%!important;height:100%!important;border:none!important;poasition:relative!important;background: transparent!important;"
 	 };
 	 
       /**
@@ -331,7 +331,7 @@
     function toggleFastFormModalVisibility() {
       var FastFormModal = document.querySelector(".fast-pay-modal-container");
       if (FastFormModal.style.display === "none") {
-        FastFormModal.style.display = "block"; // Request for client Height on hidden form
+        FastFormModal.style.display = "table"; // Request for client Height on hidden form
       } else {
         FastFormModal.style.display = "none";
       }
