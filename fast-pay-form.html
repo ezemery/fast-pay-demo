@@ -20,31 +20,33 @@
         font-display: swap;
         src: url("./assets/fonts/Graphik-Light.otf");
      }
-	  @font-face {
+    @font-face {
+    font-family: Graphick-Bold;
+    font-display: swap;
+    src: url("./assets/fonts/Graphik-Regular.otf");
+    }
+    
+    p,.form-control, .custom-select, label{
         font-family: Graphick-Bold;
-        font-display: swap;
-        src: url("./assets/fonts/Graphik-Regular.otf");
-     }
-		p,.form-control, .custom-select, label{
-			font-family: Graphick-Bold;
-		}
+    }
      .fast-close__form{
-        width: 20px;
+        display: inline-block;
+        width: 100px;
         color: #7CB342;
         line-height: 18px;
         vertical-align: middle;
-        color: black;
-        border: 0.3px solid black;
-        position: relative;
+        position: absolute;
         cursor: pointer;
-        left: 99%;
+        left: 82.5%;
         text-align: center;
      }
      .fast-pay{
          margin: auto;
+         display: table;
          position: relative;
          width:500px;
-         padding: 1.3rem 20px;
+         overflow: hidden;
+         padding: 1.1rem 18px;
          background: #FFFFFF;
          border: 2px solid #EEEEEE;
          box-sizing: border-box;
@@ -72,8 +74,8 @@
         border: 1px solid #363636;
         box-sizing: border-box;
         font-size: 14px;
-		  border-top-right-radius: 3px !important;
-    	  border-bottom-right-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
 		
     }
 	 .form-control:focus{
@@ -372,6 +374,9 @@
     }
 
 @media only screen and (max-width: 585px){
+            .fast-close__form{
+                left: 79%;
+            }
 			.fast-pay {
 				width: 100%;
 				border: none;
@@ -432,6 +437,43 @@
 			.form-control.masked{
 				padding: 25px 7px;
 			}
+    }
+
+    /*** iPhone and iOS Form Input Zoom Fixes ***/
+    /* Fix Input Zoom on devices older than iPhone 5: */
+    @media screen and (device-aspect-ratio: 2/3) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+    @media screen and (device-aspect-ratio: 40/71) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+    @media screen and (device-aspect-ratio: 375/667) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+    @media screen and (device-aspect-ratio: 9/16) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
     }
     </style>
     <title>Fast Pay</title>
@@ -1176,14 +1218,47 @@
             
             }
             }
-            // errorOnKeyEntry : function () {
-            // // Write your own error handling
-            // }
+            var  origin  = "*";
+            var message_handlers = {};
+            var buttonElement = window.document.getElementById("send-button");
+
+            message_handlers.clickreport = function(message){
+                var currency ;
+                switch(message.data.config.currency.toLowerCase()){
+                    case "usd":
+                        currency = "$";
+                        break;
+                    default:
+                    currency = undefined;
+                }
+                buttonElement.innerText = "Pay " + currency + message.data.config.amount + " Now";
+            //Todo: same origin for post message
+            };
+
             window.addEventListener("click", function(e){
                 if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
-                    console.log("close modal");
                     parent.postMessage({action: 'closeModal'}, "*");
                 }
+            })
+            window.addEventListener(
+                "message",
+                function(message) {
+
+                    if (
+                        message &&
+                        message.data &&
+                        message.data.action &&
+                        message_handlers[message.data.action]
+                    ) {
+                        message_handlers[message.data.action](message);
+                    }
+                },
+                false
+            );
+
+
+            window.addEventListener("DOMContentLoaded", function(){
+                window.parent.postMessage({action: 'allcontentloaded'}, origin);
             })
             masking.init();
            

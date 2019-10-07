@@ -1466,17 +1466,48 @@
             
             }
             }
-            // errorOnKeyEntry : function () {
-            // // Write your own error handling
-            // }
+            var  origin  = "*";
+            var message_handlers = {};
+            var buttonElement = window.document.getElementById("send-button");
+
+            message_handlers.clickreport = function(message){
+                var currency ;
+                switch(message.data.config.currency.toLowerCase()){
+                    case "usd":
+                        currency = "$";
+                        break;
+                    default:
+                    currency = undefined;
+                }
+                buttonElement.innerText = "Pay " + currency + message.data.config.amount + " Now";
+            //Todo: same origin for post message
+            };
+
             window.addEventListener("click", function(e){
                 if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
-                    console.log("close modal");
                     parent.postMessage({action: 'closeModal'}, "*");
                 }
             })
-            masking.init();
+            window.addEventListener(
+                "message",
+                function(message) {
 
+                    if (
+                        message &&
+                        message.data &&
+                        message.data.action &&
+                        message_handlers[message.data.action]
+                    ) {
+                        message_handlers[message.data.action](message);
+                    }
+                },
+                false
+            );
+
+
+            window.addEventListener("DOMContentLoaded", function(){
+                window.parent.postMessage({action: 'allcontentloaded'}, origin);
+            })
             masking.init();
 
     </script>
