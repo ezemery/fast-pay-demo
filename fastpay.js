@@ -50,7 +50,6 @@
 	 * @params message object
 	 */
   message_handlers.allcontentloaded = function(data){
-	console.log(data);
 	source = data.source
 	data.source.postMessage(
 		{
@@ -89,7 +88,7 @@
 	 */
 	
 	message_handlers.loadCookie = function(data){
-		const cookie = data.cookie;
+		const cookie = data.data.cookie;
 		removeElement('init-frame');
 		for (var i = 0; i < inlineButton.length; i++) {
 		  if (cookie) {
@@ -169,8 +168,8 @@
 
 	 /**
 	  * Extracts attribute from the button element
-     * @params button element node
-	  * @params attributes  array of values to extract
+     * @params element button node
+	  * @params attributes array of values to extract
 	  * @return object of extracted values
      */
   
@@ -237,14 +236,6 @@
     function createFastPayButton(num, data) {
       iframe = createFastFrame(num, "payButton", 'button');
       loadIframe(iframe, data.key, fastPayButtonFrame);
-		//var frame = window.frames.payButton;
-		// console.log(source);
-      // source.postMessage({
-      //     action:"config",
-      //     values:globalFastData
-      // }, "*");
-      //Todo: same origin for post message
-  
 	 };
 	 
 	 /**
@@ -338,8 +329,8 @@
 	 }
 	 
 	  /**
-	  * add event listeners for all messages for the iframe and map to the event listener fumction
-     * @params object: event message 
+	  * add event listeners for all messages for the iframe and map to the event listener functions
+     * @params message: event object 
 	  * @returns null
      */
   
