@@ -17,27 +17,27 @@
     /**
      * server origin
      */
-    var origin = "http://41b95e7d.ngrok.io"; 
+    var origin = "https://fast-pay-server.herokuapp.com"; 
      /**
      * path to Fast Pay Form source
      */
-    var fastPayModalFrame = "http://41b95e7d.ngrok.io/fast-pay-form";
+    var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
   
     /**
      * path to Fast Pay Form source
      */
-    var fastPayReturningModalFrame = "http://41b95e7d.ngrok.io/quick-fill";
+    var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
   
      /**
      * path to Fast Pay button source
      */
-    var fastPayButtonFrame =  "http://41b95e7d.ngrok.io/fast-button";
+    var fastPayButtonFrame =  "https://fast-pay-server.herokuapp.com/fast-button";
     /**
    * path to Fast Pay Returning Checkout button source
    */
-	 var fastPayReturningButtonFrame = "http://41b95e7d.ngrok.io/fast-returning-button";
+	 var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
 	 
-	 var fastPayEmptyFrame = "http://41b95e7d.ngrok.io/init";
+	 var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
   /**
    * fast pay styles
    */
