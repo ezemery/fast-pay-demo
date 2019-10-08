@@ -1,48 +1,48 @@
 //'use strict';
-(function(window){
-
-	 /**
-        ########   #     #####  ####### ######     #    #     #
-        #         # #   #     #    #    #     #   # #    #   #  
-        #        #   #  #          #    #     #  #   #    # #   
-        #####   #     #  #####     #    ######  #     #    #    
-        #       #######       #    #    #       #######    #    
-        #       #     # #     #    #    #       #     #    #    
-        #       #     #  #####     #    #       #     #    # 
+(function(window) {
+  /**
+       ########   #     #####  ####### ######     #    #     #
+       #         # #   #     #    #    #     #   # #    #   #  
+       #        #   #  #          #    #     #  #   #    # #   
+       #####   #     #  #####     #    ######  #     #    #    
+       #       #######       #    #    #       #######    #    
+       #       #     # #     #    #    #       #     #    #    
+       #       #     #  #####     #    #       #     #    # 
+  */
+  var globalFastData;
+  var iframe;
+  var div;
+  var source;
+  /**
+   * server origin
    */
-    var globalFastData;
-	 var iframe ;
-	 var div ;
-	 var source;
-    /**
-     * server origin
-     */
-    var origin = "https://fast-pay-server.herokuapp.com"; 
-     /**
-     * path to Fast Pay Form source
-     */
-    var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
-  
-    /**
-     * path to Fast Pay Form source
-     */
-    var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
-  
-     /**
-     * path to Fast Pay button source
-     */
-    var fastPayButtonFrame =  "https://fast-pay-server.herokuapp.com/fast-button";
-    /**
+  var origin = "https://fast-pay-server.herokuapp.com";
+  /**
+   * path to Fast Pay Form source
+   */
+  var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
+
+  /**
+   * path to Fast Pay Form source
+   */
+  var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
+
+  /**
+   * path to Fast Pay button source
+   */
+  var fastPayButtonFrame = "https://fast-pay-server.herokuapp.com/fast-button";
+  /**
    * path to Fast Pay Returning Checkout button source
    */
-	 var fastPayReturningButtonFrame = "https://fast-pay-server.herokuapp.com/fast-returning-button";
-	 
-	 var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
+  var fastPayReturningButtonFrame =
+    "https://fast-pay-server.herokuapp.com/fast-returning-button";
+
+  var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
   /**
    * fast pay styles
    */
   var inlineButton = window.document.getElementsByTagName("fast-pay");
-  
+
   var message_handlers = {};
 
    /**
@@ -183,49 +183,119 @@
 		return obj;
   }
 
-   /**
-	  * Creates an instance of an iframe
-     * @params num number from the iterator function
-	  * @params name  sets to the name an id of the iframe
-	  * @returns instance of  an iframe
-     */
-  
-    function createFastFrame(num,name,type) {
-        div = document.createElement("div");
-		  iframe = document.createElement("iframe");
-		  if (document.body) {
-			// If iframe already exists on the page, remove it from the body
-			if (document.getElementById(name)) {
-				removeElement(name);
-			}
+  /**
+   * Extracts attribute from the button element
+   * @params button element node
+   * @params attributes  array of values to extract
+   * @return object of extracted values
+   */
 
-			inlineButton[num].appendChild(div);
-	  }
-      if (type === "button") {
-        div.classList.add("fast-pay-button-container");
-        div.style.cssText = cssStyles.fastButtonDiv;
-        iframe.style.cssText = cssStyles.iframeDiv;
+  function extractAttributes(element, attributes) {
+    var obj = {};
+    attributes.forEach(function(attrib) {
+      var aa = element.getAttribute("data-" + attrib);
+      if (aa) obj[attrib] = aa;
+    });
+    return obj;
+  }
+
+  /**
+   * Creates an instance of an iframe
+   * @params num number from the iterator function
+   * @params name  sets to the name an id of the iframe
+   * @returns instance of  an iframe
+   */
+
+  function createFastFrame(num, name, type) {
+    div = document.createElement("div");
+    iframe = document.createElement("iframe");
+    if (document.body) {
+      // If iframe already exists on the page, remove it from the body
+      if (document.getElementById(name)) {
+        removeElement(name);
       }
-  
-      if (type === "modal") {
-        div.classList.add("fast-pay-modal-container");
-        div.style.cssText = cssStyles.modalDiv;
-        iframe.style.cssText = cssStyles.modalFrame;
-		}
-		
-		if (type === "init-frame") {
-			div.id = "init-frame";
-			div.classList.add("fast-pay-button-container");
-			div.style.cssText = cssStyles.fastButtonDiv;
-			iframe.style.cssText = cssStyles.iframeDiv;
-		 }
 
-      div.appendChild(iframe);
-      iframe.setAttribute("id", name)
-      iframe.name = name;
-      return iframe;
-	 };
-	 
+      inlineButton[num].appendChild(div);
+    }
+    if (type === "button") {
+      div.classList.add("fast-pay-button-container");
+      div.style.cssText = cssStyles.fastButtonDiv;
+      iframe.style.cssText = cssStyles.iframeDiv;
+    }
+
+    if (type === "modal") {
+      div.classList.add("fast-pay-modal-container");
+      div.style.cssText = cssStyles.modalDiv;
+      iframe.style.cssText = cssStyles.modalFrame;
+    }
+
+    if (type === "init-frame") {
+      div.id = "init-frame";
+      div.classList.add("fast-pay-button-container");
+      div.style.cssText = cssStyles.fastButtonDiv;
+      iframe.style.cssText = cssStyles.iframeDiv;
+    }
+
+    div.appendChild(iframe);
+    iframe.setAttribute("id", name);
+    iframe.name = name;
+    return iframe;
+  }
+
+  /**
+   * loads the fast pay button iframe into the page
+   * @params num number from the iterator function
+   * @params data  iframe config values
+   * @returns null
+   */
+
+  function createFastPayButton(num, data) {
+    iframe = createFastFrame(num, "payButton", "button");
+    loadIframe(iframe, data.key, fastPayButtonFrame);
+    //var frame = window.frames.payButton;
+    // source.postMessage({
+    //     action:"config",
+    //     values:globalFastData
+    // }, "*");
+    //Todo: same origin for post message
+  }
+
+  /**
+   * loads the fast pay returning button iframe into the page
+   * @params num number from the iterator function
+   * @params data  iframe config values
+   * @returns null
+   */
+
+  function createReturningButton(num, data) {
+    iframe = createFastFrame(num, "returningCheckoutButton", "button");
+    loadIframe(iframe, data.key, fastPayReturningButtonFrame);
+  }
+
+  /**
+   * loads the fast pay modal iframe into the page
+   * @params num number from the iterator function
+   * @params data  iframe config values
+   * @returns null
+   */
+  function createFastFormModal(num, data) {
+    iframe = createFastFrame(num, "payFormModal", "modal");
+    loadIframe(iframe, data.key, fastPayModalFrame);
+  }
+
+  /**
+   * loads the fast pay returning modal iframe into the page
+   * @params num number from the iterator function
+   * @params data  iframe config values
+   * @returns null
+   */
+
+  function createFastReturningUserFormModal(num, data) {
+    //this will be replaced with returning form
+    iframe = createFastFrame(num, "returningCheckoutModal", "modal");
+    loadIframe(iframe, data.key, fastPayReturningModalFrame);
+  }
+
   /**
 	  * loads the fast pay button iframe into the page
      * @params num number from the iterator function
@@ -337,7 +407,6 @@
     window.addEventListener(
         "message",
         function(message) {
-            console.log(message);
             if (
                 message &&
                 message.data &&
@@ -357,9 +426,8 @@
      */
   
   function loadSpinner() {
-      console.log("iframe loaded completely");
+    console.log("iframe loaded completely");
   }
 
-	init()  
-  }(window));
-  
+  init();
+})(window);
