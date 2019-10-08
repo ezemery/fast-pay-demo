@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="/assets/js/utils.js"></script>
+    <style>
+      /*!
+   * Bootstrap v4.3.1 (https://getbootstrap.com/)
+   * Copyright 2011-2019 The Bootstrap Authors
+   * Copyright 2011-2019 Twitter, Inc.
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+   */
+      :root {
+        --blue: #007bff;
+        --indigo: #6610f2;
+        --purple: #6f42c1;
+        --pink: #e83e8c;
+        --red: #dc3545;
+        --orange: #fd7e14;
+        --yellow: #ffc107;
+        --green: #28a745;
+        --teal: #20c997;
+        --cyan: #17a2b8;
+        --white: #fff;
+        --gray: #6c757d;
+        --gray-dark: #343a40;
+        --primary: #007bff;
+        --secondary: #6c757d;
+        --success: #28a745;
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --breakpoint-xs: 0;
+        --breakpoint-sm: 576px;
+        --breakpoint-md: 768px;
+        --breakpoint-lg: 992px;
+        --breakpoint-xl: 1200px;
+        --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+        --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+      *,
+      ::after,
+      ::before {
+        box-sizing: border-box;
+      }
+      html {
+        font-family: sans-serif;
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: left;
+        background-color: #fff;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      img {
+        vertical-align: middle;
+        border-style: none;
+      }
+      button {
+        border-radius: 0;
+      }
+      button:focus {
+        outline: 1px dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+      }
+      button {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+      }
+      button {
+        overflow: visible;
+      }
+      button {
+        text-transform: none;
+      }
+      button {
+        -webkit-appearance: button;
+      }
+      [type="button"]:not(:disabled),
+      [type="reset"]:not(:disabled),
+      [type="submit"]:not(:disabled),
+      button:not(:disabled) {
+        cursor: pointer;
+      }
+      button::-moz-focus-inner {
+        padding: 0;
+        border-style: none;
+      }
+      ::-webkit-file-upload-button {
+        font: inherit;
+        -webkit-appearance: button;
+      }
+      .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+      }
+      .col-12,
+      .col-md-6,
+      .col-sm-6 {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      .col-12 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      @media (min-width: 576px) {
+        .col-sm-6 {
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+      }
+      @media (min-width: 768px) {
+        .col-md-6 {
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+      }
+      .custom-control-input.is-valid:focus:not(:checked)
+        ~ .custom-control-label::before,
+      .was-validated
+        .custom-control-input:valid:focus:not(:checked)
+        ~ .custom-control-label::before {
+        border-color: #28a745;
+      }
+      .custom-control-input.is-invalid:focus:not(:checked)
+        ~ .custom-control-label::before,
+      .was-validated
+        .custom-control-input:invalid:focus:not(:checked)
+        ~ .custom-control-label::before {
+        border-color: #dc3545;
+      }
+      .btn {
+        display: inline-block;
+        font-weight: 400;
+        color: #212529;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .btn {
+          transition: none;
+        }
+      }
+      .btn:hover {
+        color: #212529;
+        text-decoration: none;
+      }
+      .btn:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+      .btn:disabled {
+        opacity: 0.65;
+      }
+      .btn-primary:not(:disabled):not(.disabled).active,
+      .btn-primary:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #0062cc;
+        border-color: #005cbf;
+      }
+      .btn-primary:not(:disabled):not(.disabled).active:focus,
+      .btn-primary:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+      }
+      .btn-secondary:not(:disabled):not(.disabled).active,
+      .btn-secondary:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #545b62;
+        border-color: #4e555b;
+      }
+      .btn-secondary:not(:disabled):not(.disabled).active:focus,
+      .btn-secondary:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+      }
+      .btn-success:not(:disabled):not(.disabled).active,
+      .btn-success:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #1e7e34;
+        border-color: #1c7430;
+      }
+      .btn-success:not(:disabled):not(.disabled).active:focus,
+      .btn-success:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+      }
+      .btn-info:not(:disabled):not(.disabled).active,
+      .btn-info:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #117a8b;
+        border-color: #10707f;
+      }
+      .btn-info:not(:disabled):not(.disabled).active:focus,
+      .btn-info:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+      }
+      .btn-warning:not(:disabled):not(.disabled).active,
+      .btn-warning:not(:disabled):not(.disabled):active {
+        color: #212529;
+        background-color: #d39e00;
+        border-color: #c69500;
+      }
+      .btn-warning:not(:disabled):not(.disabled).active:focus,
+      .btn-warning:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5);
+      }
+      .btn-danger:not(:disabled):not(.disabled).active,
+      .btn-danger:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #bd2130;
+        border-color: #b21f2d;
+      }
+      .btn-danger:not(:disabled):not(.disabled).active:focus,
+      .btn-danger:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
+      }
+      .btn-light:not(:disabled):not(.disabled).active,
+      .btn-light:not(:disabled):not(.disabled):active {
+        color: #212529;
+        background-color: #dae0e5;
+        border-color: #d3d9df;
+      }
+      .btn-light:not(:disabled):not(.disabled).active:focus,
+      .btn-light:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+      }
+      .btn-dark:not(:disabled):not(.disabled).active,
+      .btn-dark:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #1d2124;
+        border-color: #171a1d;
+      }
+      .btn-dark:not(:disabled):not(.disabled).active:focus,
+      .btn-dark:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+      }
+      .btn-outline-primary:not(:disabled):not(.disabled).active,
+      .btn-outline-primary:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-primary:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+      }
+      .btn-outline-secondary:not(:disabled):not(.disabled).active,
+      .btn-outline-secondary:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+      .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-secondary:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+      }
+      .btn-outline-success:not(:disabled):not(.disabled).active,
+      .btn-outline-success:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+      }
+      .btn-outline-success:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-success:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+      }
+      .btn-outline-info:not(:disabled):not(.disabled).active,
+      .btn-outline-info:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+      }
+      .btn-outline-info:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-info:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+      }
+      .btn-outline-warning:not(:disabled):not(.disabled).active,
+      .btn-outline-warning:not(:disabled):not(.disabled):active {
+        color: #212529;
+        background-color: #ffc107;
+        border-color: #ffc107;
+      }
+      .btn-outline-warning:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-warning:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+      }
+      .btn-outline-danger:not(:disabled):not(.disabled).active,
+      .btn-outline-danger:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+      .btn-outline-danger:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-danger:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+      }
+      .btn-outline-light:not(:disabled):not(.disabled).active,
+      .btn-outline-light:not(:disabled):not(.disabled):active {
+        color: #212529;
+        background-color: #f8f9fa;
+        border-color: #f8f9fa;
+      }
+      .btn-outline-light:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-light:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+      }
+      .btn-outline-dark:not(:disabled):not(.disabled).active,
+      .btn-outline-dark:not(:disabled):not(.disabled):active {
+        color: #fff;
+        background-color: #343a40;
+        border-color: #343a40;
+      }
+      .btn-outline-dark:not(:disabled):not(.disabled).active:focus,
+      .btn-outline-dark:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+      }
+      .custom-control-input:focus:not(:checked)
+        ~ .custom-control-label::before {
+        border-color: #80bdff;
+      }
+      .custom-control-input:not(:disabled):active
+        ~ .custom-control-label::before {
+        color: #fff;
+        background-color: #b3d7ff;
+        border-color: #b3d7ff;
+      }
+      .close:not(:disabled):not(.disabled):focus,
+      .close:not(:disabled):not(.disabled):hover {
+        opacity: 0.75;
+      }
+      @supports ((position: -webkit-sticky) or (position: sticky)) {
+      }
+      .mb-0 {
+        margin-bottom: 0 !important;
+      }
+      .m-3 {
+        margin: 1rem !important;
+      }
+      .pb-3 {
+        padding-bottom: 1rem !important;
+      }
+      .mr-auto {
+        margin-right: auto !important;
+      }
+      @media (min-width: 768px) {
+        .pb-md-0 {
+          padding-bottom: 0 !important;
+        }
+        .m-md-auto {
+          margin: auto !important;
+        }
+      }
+      @media print {
+        *,
+        ::after,
+        ::before {
+          text-shadow: none !important;
+          box-shadow: none !important;
+        }
+        img {
+          page-break-inside: avoid;
+        }
+        p {
+          orphans: 3;
+          widows: 3;
+        }
+        @page {
+          size: a3;
+        }
+        body {
+          min-width: 992px !important;
+        }
+      }
+    </style>
+    <style>
+      @font-face {
+        font-family: Graphick-Light;
+        font-display: swap;
+        src: url("./assets/fonts/Graphik-Light.otf");
+      }
+      @font-face {
+        font-family: Graphick-Bold;
+        font-display: swap;
+        src: url("./assets/fonts/Graphik-Regular.otf");
+      }
+      p,
+      .form-control,
+      .custom-select,
+      label {
+        font-family: Graphick-Bold;
+      }
+      .fast-pay-returning form .btn-pay-fast {
+        background: #363636;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 0px 0px 4px 4px;
+        font-size: 17px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ffffff;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .fast-pay-returning form {
+        background: #ffffff;
+        border: 1px solid #d1d1d1;
+        box-sizing: border-box;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .fast-pay-returning form .row {
+        /*margin: 19px 2rem;*/
+        padding: 9px 0px 1rem;
+        border-bottom: 1px solid #d1d1d9;
+      }
+      .fast-pay-returning form .row .card-type p {
+        font-size: 10px;
+        margin: 2px 16px;
+        font-size: 16px;
+        line-height: 18px;
+        color: #363636;
+        font-weight: 900;
+      }
+
+      .fast-pay-returning form .row .card-type {
+        display: flex;
+      }
+      .fast-pay-returning .card-address p {
+        font-size: 16px;
+        line-height: 18px;
+        color: #696969;
+      }
+
+      .fast-pay-returning .card-address img {
+        display: block;
+        margin-left: auto;
+        cursor: pointer;
+      }
+      .fast-pay-returning .card-address {
+        display: flex;
+      }
+
+      .card-number {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+    <title>Fast Pay Returning User</title>
+  </head>
+  <body>
+    <div class="fast-pay-returning">
+      <form action="">
+        <div class="row m-3">
+          <div class="col-md-6 card-type pb-3 pb-md-0 col-sm-6 col-12">
+            <img src="assets/img/visa.svg" alt="" id="card-type" />
+            <p id="card-number" class="card-number"></p>
+          </div>
+          <div class="col-md-6 card-address col-sm-6 col-6">
+            <p
+              style="font-size: 16px; line-height: 18px;color: #696969;"
+              id="address"
+            ></p>
+            <img src="assets/img/edit.svg" alt="" id="edit-details" />
+          </div>
+        </div>
+        <button class="btn btn-pay-fast" id="fast-pay"></button>
+      </form>
+    </div>
+    <script>
+      var payReturningUsersButton = {
+        /**
+         * get instanc of the button
+         */
+        buttonElement: document.getElementById("fast-pay"),
+        /**
+         * get instanc of the edit icon
+         */
+        editImageElement: document.getElementById("edit-details"),
+        origin: "*",
+        cookie: "",currency: "",
+        currency: '',
+        init: function init() {
+          this.editImageElement.addEventListener("click", function(e) {
+            payReturningUsersButton.showReturningUserForm();
+          });
+
+          this.buttonElement.addEventListener("click", function(e) {
+            //read from fast pay data from cookie
+            // send to fast api
+            const cookie = payReturningUsersButton.cookie;
+            payReturningUsersButton.sendFastData(cookie);
+          });
+        },
+        showReturningUserForm: function showForm() {
+          var _this = this;
+          parent.postMessage({ action: "editIconClick" }, _this.origin);
+        },
+        sendFastData: function(data) {
+          var _this = this,
+            xhr,
+            url = "https://dev.api.fast.co/api/m/pay",
+            button = _this.buttonElement;
+
+          if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+          } else if (window.ActiveXObject) {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+
+          xhr.open("POST", url, true);
+
+          xhr.setRequestHeader("Content-type", "application/json");
+          xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
+
+          xhr.onload = function() {
+            if (xhr.readyState === xhr.DONE) {
+              if (xhr.status === 200) {
+                response = xhr.responseText;
+                button.innerText = "Done";
+                button.style.backgroundColor = "green";
+                return response;
+              } else {
+                button.innerText = "There was an error, try again";
+                button.style.backgroundColor = "red";
+              }
+            }
+          };
+          xhr.send(data);
+        }
+      };
+
+      var message_handlers = {};
+
+      message_handlers.clickreport = function(message) {
+        payReturningUsersButton.apiKey = message.data.config.key;
+        payReturningUsersButton.currency = message.data.config.currency;
+        payReturningUsersButton.cookie = window.matchCookie(
+          window.getCookie("fast-pay")
+        );
+        const userDetails = window.parsed(payReturningUsersButton.cookie);
+
+        const last4 = userDetails.card.last4;
+        const cardNumber = document.getElementById("card-number");
+        var currencySymbol = window.getCurrency(payReturningUsersButton.currency)
+
+
+        cardNumber.textContent = "* " + last4 + "";
+
+        const address = document.getElementById("address");
+        address.textContent =
+          userDetails.shipping.address1 +
+          ", " +
+          userDetails.shipping.city +
+          " " +
+          userDetails.shipping.zip;
+
+        payReturningUsersButton.buttonElement.textContent =
+          "FAST CHECKOUT - " + currencySymbol + message.data.config.amount;
+      };
+
+      window.addEventListener(
+        "message",
+        function(message) {
+          if (
+            message &&
+            message.data &&
+            message.data.action &&
+            message_handlers[message.data.action]
+          ) {
+            message_handlers[message.data.action](message);
+          }
+        },
+        false
+      );
+
+      window.addEventListener("DOMContentLoaded", function() {
+        window.parent.postMessage(
+          { action: "allcontentloaded" },
+          payReturningUsersButton.origin
+        );
+      });
+      payReturningUsersButton.init();
+    </script>
+  </body>
+</html>
