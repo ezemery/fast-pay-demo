@@ -50,6 +50,37 @@
          border: 2px solid #EEEEEE;
          box-sizing: border-box;
      }
+
+     .fast-close__form {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        line-height: 18px;
+        vertical-align: middle;
+        color: black;
+        border: 0.3px solid black;
+        position: absolute;
+        cursor: pointer;
+        text-align: center;
+        top: 15px;
+        right: 20px;
+    }
+      .col-md-3{
+            max-width: calc(100% / 4);
+            flex: 0 0 25%;
+            -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+            transition: max-width .5s;
+        }
+        .none{
+            display: none;
+        }
+      .expand{
+            position: relative;
+            max-width: 100% !important;
+            flex: 0 0 100%;
+            z-index: 99;
+        }
+        
 	  .col-md-3{
 			max-width: calc(100% / 4);
 			flex: 0 0 25%;
@@ -66,6 +97,7 @@
 			z-index: 99;
 		}
 		
+
     .form-control{
         padding: 25px 15px;
         background: #fff;
@@ -634,9 +666,23 @@
                     </div>
                 </form>
                 </div>
-        <script>
-         var masking = {
 
+            </div>
+            <div class="new__form-set">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                             
+                        <p class="secure-text">
+                        <img class="secure-img" src="./assets/img/card-lock.svg"/> Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
+                        <button id="send-button" type="submit" class="btn btn-green">Pay <span class="data-amount">$120</span> Now</button>
+                    </div>   
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <script>
+     var masking = {
             // User defined Values
             //maskedInputs : document.getElementsByClassName('masked'), // add with IE 8's death
             maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
@@ -662,6 +708,7 @@
                 _this.autocomplete(document.getElementById("country"), _this.countries, "country");
                 _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
                 _this.autocomplete(document.getElementById("email"), _this.domains, "email");
+
 			},
 
             setUpMasks: function (inputs) {
@@ -683,6 +730,7 @@
                 placeholder = input.getAttribute('placeholder');
                 input.setAttribute('maxlength', placeholder.length);
             },
+
 
             // add event listeners
             activateMasking : function (inputs) {
@@ -721,9 +769,11 @@
                 return;
                 }
 
+
             document.getElementById(id).value = _this.handleCurrentValue(e);
 
             },
+
 
             handleCurrentValue : function (e) {
             var isCharsetPresent = e.target.getAttribute('data-charset'), 
@@ -731,8 +781,10 @@
                 value = e.target.value, l = placeholder.length, newValue = '', 
                 i, j, isInt, isLetter, strippedValue, card, icon = document.getElementById('ccnumber'), _this=this;
 
+
             // strip special characters
             strippedValue = isCharsetPresent ? value.replace(/\W/g, "") : value.replace(/\D/g, "");
+
 
             for (i = 0, j = 0; i < l; i++) {
                 var x = 
@@ -741,9 +793,11 @@
                 matchesNumber = _this.maskedNumber.indexOf(placeholder[i]) >= 0;
                 matchesLetter = _this.maskedLetter.indexOf(placeholder[i]) >= 0;
 
+
                 if ((matchesNumber && isInt) || (isCharsetPresent && matchesLetter && isLetter)) {
                         newValue += strippedValue[j++];
 								card = _this.ValidateCreditCardNumber();
+
                         card === "Visa" ?  icon.style.backgroundImage = "url('./assets/img/visa.svg')": 
                         card === "Mastercard" ? icon.style.backgroundImage = "url('./assets/img/mastercard.svg')": 
                         card === "JCB" ? icon.style.backgroundImage = "url('./assets/img/jcb.svg')": 
@@ -752,9 +806,11 @@
                         card === "Diners" ? icon.style.backgroundImage = "url('./assets/img/diners.svg')":
                         icon.style.backgroundImage = "url('./assets/img/cc.svg')";                         
 
+
                     } else if ((!isCharsetPresent && !isInt && matchesNumber) || (isCharsetPresent && ((matchesLetter && !isLetter) || (matchesNumber && !isInt)))) {
                         // masking.errorOnKeyEntry(); // write your own error handling function
                         return newValue; 
+
 
                 } else {
                     newValue += placeholder[i];
@@ -763,6 +819,7 @@
                 if (strippedValue[j] == undefined) { 
                     break;
                 }
+
 				}
 				
             if (e.target.getAttribute('data-valid-example')) {
@@ -787,12 +844,10 @@
                 re = new RegExp("^35(2[89]|[3-8][0-9])");
                 if (number.match(re) != null)
                     return "JCB";
-
                 // AMEX
                 re = new RegExp("^3[47]");
                 if (number.match(re) != null)
                     return "AMEX";
-
                 // Visa Electron
                 re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
                 if (number.match(re) != null)
@@ -813,13 +868,16 @@
                 if (number.match(re) != null)
                     return "Discover";
 
+
                 return "";
                 },
+
 
             validateProgress : function (e, value) {
             var validExample = e.target.getAttribute('data-valid-example'),
                 pattern = new RegExp(e.target.getAttribute('pattern')),
                 placeholder = e.target.getAttribute('placeholder'),
+
 					 l = value.length, testValue = '';
 					 
 					//convert to months
@@ -830,6 +888,7 @@
 						}
 						return value;
 					}
+
 
             return value;
             },
@@ -872,19 +931,18 @@
 										}
                         
                     })
-
                 })
                 
             },
             sendSTripeData: function(stripeData) {
                 var _this = this, xhr,cardToken, button = document.getElementById("send-button"), url = 'https://api.stripe.com/v1/tokens';
-
                 if (window.XMLHttpRequest) {
                    xhr = new XMLHttpRequest();
                 } else if (window.ActiveXObject) {
                     xhr = new ActiveXObject("Microsoft.XMLHTTP");
                 }
                 xhr.withCredentials = true;
+
 
 
                 xhr.open("POST", url,true);
@@ -895,6 +953,7 @@
                 xhr.onload = function () {
 							button.innerText = "Processing Data...";
 							button.style.backgroundColor = "blue";
+
                    if (xhr.readyState === xhr.DONE) {
                        if (xhr.status === 200) {
                             cardToken = JSON.parse(xhr.responseText)
@@ -903,6 +962,7 @@
                             // card['token_id'] = cardToken.id;
                             card['token_id'] = 'tok_mastercard';
                             var fastData = _this.getData(card);
+
 							button.innerText = "Finishing up...";
                             _this.sendFastData(fastData);
                             return cardToken
@@ -920,12 +980,12 @@
 
             sendFastData: function(data) {
                 var _this = this, xhr,url = 'https://dev.api.fast.co/api/m/pay', button = document.getElementById("send-button");
-
                 if (window.XMLHttpRequest) {
                    xhr = new XMLHttpRequest();
                 } else if (window.ActiveXObject) {
                     xhr = new ActiveXObject("Microsoft.XMLHTTP");
                 }
+
 
                 xhr.open("POST", url,true);
 
@@ -945,7 +1005,6 @@
 							  }
                     }
                 };
-
                 xhr.send(JSON.stringify(data))
             },
             getData: function (card) {
@@ -959,6 +1018,7 @@
                 countryCode = document.getElementById('country').value,
                 zip = document.getElementById('zip').value,
                 _this = this;
+
 					 
 
                 var payload =   {
@@ -971,6 +1031,7 @@
                               "email": email,
                               "firstName": firstName,
                               "lastName": lastName,
+
 										"phone": {
 											"country": phone.substr(1, phone.length),
 											"phone": phoneNumber
@@ -999,6 +1060,7 @@
                                     "amount": 29
                                 }
                             ]
+
 					 };
 					 console.log(JSON.stringify(payload));
 					 //alert(JSON.stringify(payload));
@@ -1012,7 +1074,6 @@
                 _this = this;
 
                 stripeData = "card[number]="+ number+ "&" + "card[cvc]=" + cvv + "&" + "card[exp_month]="  + month_expiry + "&" + "card[exp_year]=" + year_expiry;
-
                 _this.sendSTripeData(stripeData); 
             },
             
@@ -1134,6 +1195,7 @@
 							}
                 });
 
+
                   /*execute a function presses a key on the keyboard:*/
                     inp.addEventListener("keydown", function(e) {
                         var x = document.getElementById(this.id + "autocomplete-list");
@@ -1235,7 +1297,7 @@
                 window.parent.postMessage({action: 'allcontentloaded'}, origin);
             })
             masking.init();
-           
+
 
     </script>
      <script>
