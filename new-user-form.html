@@ -639,8 +639,8 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
-                                    <label for="street_address">Street Address, P.O Box, Company</label>
-                                    <input id="street_address" type="text" name="street_address" class="form-control radius" title="enter your street address" placeholder="" required>
+                                    <label for="address1">Street Address, P.O Box, Company</label>
+                                    <input id="address1" type="text" name="address1" class="form-control radius" title="enter your street address" placeholder="" required>
                                     <div class="invalid-feedback">Please enter your street address</div>
                                 </div>
                                 
@@ -651,8 +651,8 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="input-group">
-                                <label for="floor">Apartment, suite, unit, building or floor</label>
-                                <input id="floor" type="text" name="street_address" class="form-control radius" title="enter your street address"  placeholder="" required>
+                                <label for="address2">Apartment, suite, unit, building or address2</label>
+                                <input id="address2" type="text" name="address1" class="form-control radius" title="enter your street address"  placeholder="" required>
                                 <div class="invalid-feedback">Please enter your street address</div>
                             </div>
                             
@@ -1010,9 +1010,9 @@
                 lastName = document.getElementById('last_name').value,
                 phoneNumber = document.getElementById('mobile_no').value,
                 phone = document.getElementById('phone_code').value,
-                address1 = document.getElementById('street_address').value,
-                address2 = document.getElementById('floor').value,
-                countryCode = document.getElementById('country').value,
+                address1 = document.getElementById('address1').value,
+                address2 = document.getElementById('address2').value,
+                country = document.getElementById('country').value,
                 zip = document.getElementById('zip').value,
                 _this = this;
                      
@@ -1023,19 +1023,19 @@
                               "url": "https://teststore.com/checkout"
                           },
                           personal: {
-                              "email": email,
-                              "firstName": firstName,
-                              "lastName": lastName,
+                               email,
+                              firstName,
+                             lastName,
                                         "phone": {
                                             "country": phone.substr(1, phone.length),
                                             "phone": phoneNumber
                                         }
                           },
                           shipping: {
-                             "address1": address1,
-                             "address2": address2,
-                             "country": countryCode,
-                             "zip": zip,
+                              address1,
+                             address2,
+                              country,
+                              zip,
                           },
                           card,
                           "order": {
@@ -1055,7 +1055,6 @@
                                 }
                             ]
                      };
-                     console.log(JSON.stringify(payload));
                      //alert(JSON.stringify(payload));
                      return payload
             },
