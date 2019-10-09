@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="/assets/js/utils.js"></script>
+
     <style>
           /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -595,7 +597,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="input-group">
                             <label for="email">Email</label>
-                            <input list="email" type="email" name="email" class="form-control radius" title="enter your email address" required>
+                            <input list="email" type="email" name="email" id="email_input" class="form-control radius" title="enter your email address" required>
                             <datalist id="email">
                               <option value="fast@gmail.com">
                               <option value="here@yahoo.com">
@@ -661,8 +663,8 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
-                                    <label for="street_address">Street Address, P.O Box, Company</label>
-                                    <input id="street_address" type="text" name="street_address" class="form-control radius" title="enter your street address" placeholder="" required>
+                                    <label for="address1">Street Address, P.O Box, Company</label>
+                                    <input id="address1" type="text" name="address1" class="form-control radius" title="enter your street address" placeholder="" required>
                                     <div class="invalid-feedback">Please enter your street address</div>
                                 </div>
                                 
@@ -673,8 +675,8 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
-                                    <label for="floor">Apartment, suite, unit, building or floor</label>
-                                    <input id="floor" type="text" name="street_address" class="form-control radius" title="enter your street address"  placeholder="" required>
+                                    <label for="address2">Apartment, suite, unit, building or floor<label>
+                                    <input id="address2" type="text" name="address1" class="form-control radius" title="enter your address1 address"  placeholder="" required>
                                     <div class="invalid-feedback">Please enter your street address</div>
                                 </div>
                                 
@@ -707,10 +709,10 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="checkbox">
-                                <label><input type="radio" value=""> &nbsp;&nbsp; Free Shipping - $0.00</label>
+                                <label><input type="radio" name="shipping_method" value=""> &nbsp;&nbsp; Free Shipping - $0.00</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="radio" value=""> &nbsp;&nbsp; Express Shipping - $10.91</label>
+                                <label><input type="radio" name="shipping_method" value=""> &nbsp;&nbsp; Express Shipping - $10.91</label>
                             </div>
                         </div>         
                     </div>     
@@ -787,29 +789,9 @@
         maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
         maskedNumber : '0MMYY1234',
         maskedLetter : '_',
-        shippingAddress: [
-        {
-            floor:'1430',
-            street:"Katy Flewellen Rd",
-            country: "Indiana",
-            city:"Indianapolis"
-        },
-        {
-            floor:'1430',
-            street:"Katy Flewellen Rd",
-            country: "Indiana",
-            city:"Indianapolis"
-        }],
-        user_card: [
-            {
-                lastFourNumber: "34244",
-                type:"Visa"
-            },
-            {
-                lastFourNumber: "34244",
-                type:"Mastercard"
-            }
-        ],
+        origin: '*',
+        shippingAddress: [],
+        userCard: [],
         apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
         stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
         zip:{"11101":"Lekki", "110111": "Ajah","112333":"VI","11124":"Ikoyi", "1234":"Maruwa", "12356":"Eti Osa"},
@@ -837,7 +819,6 @@
 
         setUpMasks: function (inputs) {
         var i, l = inputs.length,_this = this;
-
             for(i = 0; i < l; i++) {
                 _this.createShell(inputs[i]);
             }
@@ -1114,14 +1095,14 @@
             xhr.send(JSON.stringify(data))
         },
         getData: function (card) {
-            var email = document.getElementById('email').value,
+            var email = document.getElementById('email_input').value,
             firstName = document.getElementById('first_name').value,
             lastName = document.getElementById('last_name').value,
             phoneNumber = document.getElementById('mobile_no').value,
             phone = document.getElementById('phone_code').value,
-            address1 = document.getElementById('street_address').value,
-            address2 = document.getElementById('floor').value,
-            countryCode = document.getElementById('country').value,
+            address1 = document.getElementById('address1').value,
+            address2 = document.getElementById('address2').value,
+            country = document.getElementById('country').value,
             zip = document.getElementById('zip').value,
             _this = this;
 				 
@@ -1133,19 +1114,19 @@
                           "url": "https://teststore.com/checkout"
                       },
                       personal: {
-                          "email": email,
-                          "firstName": firstName,
-                          "lastName": lastName,
+                           email,
+                          firstName,
+                           lastName,
 									"phone": {
 										"country": phone.substr(1, phone.length),
 										"phone": phoneNumber
 									}
                       },
                       shipping: {
-                         "address1": address1,
-                         "address2": address2,
-                         "country": countryCode,
-                         "zip": zip,
+                          address1,
+                          address2,
+                          country,
+                          zip,
                       },
                       card,
                       "order": {
@@ -1185,16 +1166,16 @@
             var open_shipping_button = document.getElementById('add-shipping-address'), shipping_button = document.getElementById('add-shipping-det');
             
             function addShippingDetails() {
-                var address1 = document.getElementById('street_address').value,
-                address2 = document.getElementById('floor').value,
-                countryCode = document.getElementById('country').value,
+                var address1 = document.getElementById('address1').value,
+                address2 = document.getElementById('address2').value,
+                country = document.getElementById('country').value,
                 zip = document.getElementById('zip').value,
                 newShippingAddress = [];
                 // console.log(_this.shippingAddress)
-                if(address1 && address2 && countryCode && zip){
-                     newShippingAddress.unshift(..._this.shippingAddress,{floor:address2, street:address1, country: countryCode, city:zip})
+                if(address1 && address2 && country && zip){
+                     newShippingAddress.unshift(..._this.shippingAddress,{address2, address1,  country, zip})
                      _this.shippingAddress = newShippingAddress
-                     address1,address2,countryCode,zip = ''
+                     address1,address2,country,zip = ''
                       _this.getShippingAddress()
                 }
                
@@ -1232,7 +1213,7 @@
             function submitform()
             {
               // alert('test');
-              document.getElementById("code_form").submit();
+            //   document.getElementById("code_form").submit();
             }
             
         },
@@ -1270,17 +1251,17 @@
             var output = ''
             for(i in address){
                 output += `<div class="checkbox">
-                                    <label><input type="radio" value=""> &nbsp;&nbsp;${address[i].floor},${address[i].street}, ${address[i].country} ${address[i].city}</label>
+                                    <label><input name="shipping" type="radio" value=""> &nbsp;&nbsp;${address[i].address2},${address[i].address1}, ${address[i].country} ${address[i].zip}</label>
                                 </div>`
             }
             document.getElementById('shipping_address_output').innerHTML = output
         },
         getCardDetials: function(){
             var _this = this;
-            var card = _this.user_card
+            var card = _this.userCard
             var output = ''
             for(i in card){
-                output += `<option value="${card[i].lastFourNumber}">XXXX ${card[i].lastFourNumber}</option>`
+                output += `<option value="${card[i].last4}">XXXX ${card[i].last4}</option>`
             }
             document.getElementById('card__select').innerHTML = output
         },
@@ -1459,8 +1440,66 @@
                         closeAllLists(e.target);
                     });
         
+        },
+        setValue: function(value) {
+            var _this = this;
+             var email = document.getElementById('email_input'),
+             firstName = document.getElementById('first_name'),
+             lastName = document.getElementById('last_name'),
+             phoneNumber = document.getElementById('mobile_no'),
+             phone = document.getElementById('phone_code'),
+             address1 =  document.getElementById('address1'),
+             address2 = document.getElementById('address2'),
+             country = document.getElementById('country'),
+             zip = document.getElementById('zip');
+
+            email.value = value.personal.email;
+            email.parentNode.classList.add('placeholder-focus');
+
+            firstName.value = value.personal.firstName;
+            firstName.parentNode.classList.add('placeholder-focus');
+
+            lastName.value = value.personal.lastName;
+            lastName.parentNode.classList.add('placeholder-focus');
+
+            phoneNumber.value = value.personal.phone.phone;
+            phoneNumber.parentNode.classList.add('placeholder-focus');
+
+            phone.value = value.personal.phone.country
+
+            this.shippingAddress = value.shipping;
+            this.userCard = value.card;
         }
         }
+
+        var message_handlers = {};
+
+message_handlers.clickreport = function(message) {
+    
+  masking.user = window.parsed(window.matchCookie(
+    window.getCookie("fast-pay")
+  ));
+masking.setValue( window.parsed(window.matchCookie(
+    window.getCookie("fast-pay")
+  )))
+  masking.init();
+
+};
+
+window.addEventListener(
+  "message",
+  function(message) {
+    if (
+      message &&
+      message.data &&
+      message.data.action &&
+      message_handlers[message.data.action]
+    ) {
+      message_handlers[message.data.action](message);
+    }
+  },
+  false
+);
         window.addEventListener("click", function(e){
                 if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
                     parent.postMessage({action: 'closeModal'}, "*");
@@ -1468,9 +1507,9 @@
             })
 
         window.addEventListener("DOMContentLoaded", function(){
-                window.parent.postMessage({action: 'allcontentloaded'}, origin);
+                window.parent.postMessage({action: 'allcontentloaded'}, masking.origin);
+
             })
-            masking.init();
 
 </script>
  <script>
