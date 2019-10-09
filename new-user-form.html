@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <style>
+          /*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:transparent}h4{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}b{font-weight:bolder}small{font-size:80%}img{vertical-align:middle;border-style:none}label{display:inline-block;margin-bottom:.5rem}button{border-radius:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}button,input,select{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,input{overflow:visible}button,select{text-transform:none}select{word-wrap:normal}[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}[type=submit]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none}input[type=radio]{box-sizing:border-box;padding:0}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}h4{margin-bottom:.5rem;font-weight:500;line-height:1.2}h4{font-size:1.5rem}small{font-size:80%;font-weight:400}.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}.col-md-12,.col-md-3,.col-md-6,.col-md-9,.col-sm-12,.col-sm-3,.col-sm-6,.col-sm-9{position:relative;width:100%;padding-right:15px;padding-left:15px}@media (min-width:576px){.col-sm-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}.col-sm-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}.col-sm-9{-ms-flex:0 0 75%;flex:0 0 75%;max-width:75%}.col-sm-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%}}@media (min-width:768px){.col-md-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}.col-md-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}.col-md-9{-ms-flex:0 0 75%;flex:0 0 75%;max-width:75%}.col-md-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%}}.form-control{display:block;width:100%;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.form-control{transition:none}}.form-control::-ms-expand{background-color:transparent;border:0}.form-control:focus{color:#495057;background-color:#fff;border-color:#80bdff;outline:0;box-shadow:0 0 0 .2rem rgba(0,123,255,.25)}.form-control::-webkit-input-placeholder{color:#6c757d;opacity:1}.form-control::-moz-placeholder{color:#6c757d;opacity:1}.form-control:-ms-input-placeholder{color:#6c757d;opacity:1}.form-control::-ms-input-placeholder{color:#6c757d;opacity:1}.form-control:disabled{background-color:#e9ecef;opacity:1}select.form-control:focus::-ms-value{color:#495057;background-color:#fff}.custom-control-input.is-valid:focus:not(:checked)~.custom-control-label::before,.was-validated .custom-control-input:valid:focus:not(:checked)~.custom-control-label::before{border-color:#28a745}.invalid-feedback{display:none;width:100%;margin-top:.25rem;font-size:80%;color:#dc3545}.custom-control-input.is-invalid:focus:not(:checked)~.custom-control-label::before,.was-validated .custom-control-input:invalid:focus:not(:checked)~.custom-control-label::before{border-color:#dc3545}.btn{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:0 0 0 .2rem rgba(0,123,255,.25)}.btn:disabled{opacity:.65}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active{color:#fff;background-color:#0062cc;border-color:#005cbf}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(38,143,255,.5)}.btn-secondary:not(:disabled):not(.disabled).active,.btn-secondary:not(:disabled):not(.disabled):active{color:#fff;background-color:#545b62;border-color:#4e555b}.btn-secondary:not(:disabled):not(.disabled).active:focus,.btn-secondary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(130,138,145,.5)}.btn-success:not(:disabled):not(.disabled).active,.btn-success:not(:disabled):not(.disabled):active{color:#fff;background-color:#1e7e34;border-color:#1c7430}.btn-success:not(:disabled):not(.disabled).active:focus,.btn-success:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(72,180,97,.5)}.btn-info:not(:disabled):not(.disabled).active,.btn-info:not(:disabled):not(.disabled):active{color:#fff;background-color:#117a8b;border-color:#10707f}.btn-info:not(:disabled):not(.disabled).active:focus,.btn-info:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(58,176,195,.5)}.btn-warning:not(:disabled):not(.disabled).active,.btn-warning:not(:disabled):not(.disabled):active{color:#212529;background-color:#d39e00;border-color:#c69500}.btn-warning:not(:disabled):not(.disabled).active:focus,.btn-warning:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(222,170,12,.5)}.btn-danger:not(:disabled):not(.disabled).active,.btn-danger:not(:disabled):not(.disabled):active{color:#fff;background-color:#bd2130;border-color:#b21f2d}.btn-danger:not(:disabled):not(.disabled).active:focus,.btn-danger:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(225,83,97,.5)}.btn-light:not(:disabled):not(.disabled).active,.btn-light:not(:disabled):not(.disabled):active{color:#212529;background-color:#dae0e5;border-color:#d3d9df}.btn-light:not(:disabled):not(.disabled).active:focus,.btn-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(216,217,219,.5)}.btn-dark:not(:disabled):not(.disabled).active,.btn-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#1d2124;border-color:#171a1d}.btn-dark:not(:disabled):not(.disabled).active:focus,.btn-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(82,88,93,.5)}.btn-outline-primary:not(:disabled):not(.disabled).active,.btn-outline-primary:not(:disabled):not(.disabled):active{color:#fff;background-color:#007bff;border-color:#007bff}.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.btn-outline-primary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}.btn-outline-secondary:not(:disabled):not(.disabled).active,.btn-outline-secondary:not(:disabled):not(.disabled):active{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-outline-secondary:not(:disabled):not(.disabled).active:focus,.btn-outline-secondary:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(108,117,125,.5)}.btn-outline-success:not(:disabled):not(.disabled).active,.btn-outline-success:not(:disabled):not(.disabled):active{color:#fff;background-color:#28a745;border-color:#28a745}.btn-outline-success:not(:disabled):not(.disabled).active:focus,.btn-outline-success:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(40,167,69,.5)}.btn-outline-info:not(:disabled):not(.disabled).active,.btn-outline-info:not(:disabled):not(.disabled):active{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-outline-info:not(:disabled):not(.disabled).active:focus,.btn-outline-info:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(23,162,184,.5)}.btn-outline-warning:not(:disabled):not(.disabled).active,.btn-outline-warning:not(:disabled):not(.disabled):active{color:#212529;background-color:#ffc107;border-color:#ffc107}.btn-outline-warning:not(:disabled):not(.disabled).active:focus,.btn-outline-warning:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(255,193,7,.5)}.btn-outline-danger:not(:disabled):not(.disabled).active,.btn-outline-danger:not(:disabled):not(.disabled):active{color:#fff;background-color:#dc3545;border-color:#dc3545}.btn-outline-danger:not(:disabled):not(.disabled).active:focus,.btn-outline-danger:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(220,53,69,.5)}.btn-outline-light:not(:disabled):not(.disabled).active,.btn-outline-light:not(:disabled):not(.disabled):active{color:#212529;background-color:#f8f9fa;border-color:#f8f9fa}.btn-outline-light:not(:disabled):not(.disabled).active:focus,.btn-outline-light:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(248,249,250,.5)}.btn-outline-dark:not(:disabled):not(.disabled).active,.btn-outline-dark:not(:disabled):not(.disabled):active{color:#fff;background-color:#343a40;border-color:#343a40}.btn-outline-dark:not(:disabled):not(.disabled).active:focus,.btn-outline-dark:not(:disabled):not(.disabled):active:focus{box-shadow:0 0 0 .2rem rgba(52,58,64,.5)}.input-group{position:relative;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:stretch;align-items:stretch;width:100%}.input-group>.form-control{position:relative;-ms-flex:1 1 auto;flex:1 1 auto;width:1%;margin-bottom:0}.input-group>.form-control:focus{z-index:3}.input-group>.form-control:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.input-group>.form-control:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.input-group-append{display:-ms-flexbox;display:flex}.input-group-append{margin-left:-1px}.input-group-text{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;padding:.375rem .75rem;margin-bottom:0;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:.25rem}.input-group>.input-group-append>.input-group-text{border-top-left-radius:0;border-bottom-left-radius:0}.custom-control-input:focus:not(:checked)~.custom-control-label::before{border-color:#80bdff}.custom-control-input:not(:disabled):active~.custom-control-label::before{color:#fff;background-color:#b3d7ff;border-color:#b3d7ff}.close:not(:disabled):not(.disabled):focus,.close:not(:disabled):not(.disabled):hover{opacity:.75}@supports ((position:-webkit-sticky) or (position:sticky)){}.mt-0{margin-top:0!important}.mt-3{margin-top:1rem!important}@media print{*,::after,::before{text-shadow:none!important;box-shadow:none!important}img{page-break-inside:avoid}p{orphans:3;widows:3}@page{size:a3}body{min-width:992px!important}}
+/*# sourceMappingURL=bootstrap.min.css.map */
+   </style>
+    <style>
+    @font-face {
+        font-family: Graphick-Light;
+        font-display: swap;
+        src: url("./assets/fonts/Graphik-Light.otf");
+     }
+      @font-face {
+        font-family: Graphick-Bold;
+        font-display: swap;
+        src: url("./assets/fonts/Graphik-Regular.otf");
+     }
+        p,.form-control, .custom-select, label{
+            font-family: Graphick-Bold;
+        }
+     .fast-pay{
+         margin: auto;
+         width:500px;
+         padding: 2rem 20px;
+         background-color: #fff;
+         overflow-x: hidden;
+         border: 2px solid #EEEEEE;
+         box-sizing: border-box;
+         position: relative;
+     }
+     .fast-close__form{
+        display: inline-block;
+        width: 100px;
+        color: #7CB342;
+        line-height: 18px;
+        vertical-align: middle;
+        position: absolute;
+        cursor: pointer;
+        right: -5px;
+        text-align: center;
+     }
+      .col-md-3{
+            max-width: calc(100% / 4);
+            flex: 0 0 25%;
+            -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+            transition: max-width .5s;
+        }
+        .none{
+            display: none;
+        }
+      .expand{
+            position: relative;
+            max-width: 100% !important;
+            flex: 0 0 100%;
+            z-index: 99;
+        }
+        
+    .form-control{
+        padding: 25px 15px;
+        background: #fff;
+        border: 1px solid #363636;
+        box-sizing: border-box;
+        font-size: 14px;
+          border-top-right-radius: 3px !important;
+          border-bottom-right-radius: 3px !important;
+        
+    }
+    .row{
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -4px;
+        margin-left: -4px;
+    }
+    .new__form-set {
+        margin: 0.8rem 0;
+    }
+     .form-control:focus{
+        background:#fff;
+        box-shadow:none !important;
+        border: 1px solid #363636 !important;
+    }
+     .form-control.pad{
+       padding-left: 50px;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus
+    {
+        background:#fff !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+     .radius{
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+     }
+     .zip{
+        border-right: none !important;
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+     }
+     .personal, .shipping{
+        border-left: none !important;
+     }
+     .col-md-12, .col-md-3, .col-md-5, .col-md-6, .col-md-7, .col-md-9, .col-sm-12 {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+    
+    .custom-select {
+        height: calc(1.5em + 0.75rem + 15px);
+        background-color: #fff !important;
+          border: 0.5px solid #DADADA;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .custom-select:focus {
+        background:#fff;
+        box-shadow:none !important;
+    }
+
+    .custom-select:focus::-ms-value {
+        color: #495057;
+        background-color: #fff;
+    }
+
+    .mt-10{
+        margin-top: 10px;
+    }
+    .mt-12{
+        margin-top: 12px;
+    }
+    .input-group label{
+        position: absolute;
+        bottom: 8px;
+        right: 0;
+        left: 15px;
+        z-index: 5;
+        color: rgba(132, 140, 153, 0.8);
+        font-size: 14px;
+          transition: bottom .1s linear;
+    }
+     
+     label.left-50{
+        left: 50px;
+     }
+
+    .placeholder-focus label {
+        bottom: 30px;
+        width: 10px;
+        display: table;
+          width: intrinsic; 
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        padding: 2px;
+        background: #fff;
+          transition: all .2s ease-in;
+    }
+
+    .suggest-p{
+        color: #969696;
+    }
+    .suggest-span{
+        color: #88D20F;
+    }
+    .invalid-feedback{
+        display:none !important;
+    }
+   
+    .input-group-text{
+        background:#fff !important;
+    }
+    .checkbox{
+        padding: 2px 0px;
+    }
+    .checkbox input[type=radio]:checked + label:before{
+        color: #88D20F;
+    }
+    .checkbox label{
+        font-family: Graphick-Light !important;
+    }
+
+    .custom-checkbox .custom-control-label::before {
+        border-radius: 50% !important ;
+    }
+    .custom-control-input:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: #88D20F;
+        background-color: #88D20F;
+      
+    }
+    .fast-pay-title{
+        font-family: Graphick-Bold;
+        text-transform: uppercase;
+          font-size: 16px;
+          line-height: 18px;
+          letter-spacing: 0.04em;
+          color: #363636;
+        margin-top: 1.2rem;
+        margin-bottom: .8rem;
+        font-weight: 900;
+    }
+    .input-email{
+        display: flex;
+    }
+    .input-group-text.prepend{
+        width: 43px;
+        height: calc(1.5em + .75rem + 15px);
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        padding: .37rem .6rem;
+        background: #F8F8F8 !important;
+    }
+    #card-form-button{
+        display: none;
+    }
+    .input-group-text.prepend.phone{
+       border:none;
+       padding-left:0px;
+    }
+     .input-group-text {
+        border: 0.5px solid #DADADA;
+     }
+     
+    .autocomplete-items{
+        position: absolute;
+        margin-top: 10px;
+        z-index: 10;
+        padding: 10px;
+        border: 1px solid rgba(25, 56, 31, 0.2);
+        box-sizing: border-box;
+        border-radius: 3px;
+        -webkit-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        -moz-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+        width: 98%;
+        background: #fff;
+        height: 120px;
+        overflow-y: scroll;
+        top: 50px;
+
+    }
+    .input-email{
+        border: 1px solid #363636;
+        border-radius: 3px;
+    }
+    .email-code input:focus{
+        border:none !important;
+    }
+    /*.email-code input{
+        border:none !important;
+    }
+    .code-left::before{
+        background: #fff;
+        border-right: 1px solid #363636 !important;
+        content: "";
+        margin-left:-8px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        -webkit-transform: skew(-20deg);
+        -moz-transform: skew(-20deg);
+        transform: skew(-20deg);
+    }
+    .code-left::after{
+        background: #fff;
+        border-right: 1px solid #363636 !important;
+        content: "";
+        margin-left:48px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        -webkit-transform: skew(-20deg);
+        -moz-transform: skew(-20deg);
+        transform: skew(-20deg);
+    }
+    .code-right::after{
+        background: #fff;
+        border-right: 1px solid #363636 !important;
+        content: "";
+        margin-left:48px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        -webkit-transform: skew(-20deg);
+        -moz-transform: skew(-20deg);
+        transform: skew(-20deg);
+    }*/
+    
+    .input-group-text.append{
+        width: 43px;
+        height: calc(1.5em + .75rem + 15px);
+        border-radius: 0;
+        border-left: 0px;
+        padding: .37rem .6rem;
+          border-top-right-radius: 3px !important;
+          border-bottom-right-radius: 3px !important;
+        background: #fafafa !important;
+    }
+     .expiry{
+         width:50%;
+         border: 1px solid #363636;
+     }
+     .expiry.right{
+        border-left: none;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
+     }
+     .expiry.left{
+         position: relative;
+         border-right:none;
+         border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+     }
+     .expiry.left::after {
+        background: #fff;
+        border-right: 1px solid #363636;
+        content: "";
+        height: 50px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        -webkit-transform: skew(-20deg);
+        -moz-transform: skew(-20deg);
+        transform: skew(-20deg);
+    }
+     .expiry input{
+         border: none;
+     }
+     .expiry input:focus{
+         border: none !important;
+     }
+    .p-10{
+        padding: 10px;
+    }
+    .pr-0{
+        padding-right: 0;
+    }
+    .pl-0{
+        padding-left: 0;
+    }
+    .mt-0{
+        margin-top: 0;
+    }
+    .agreement{
+        color: #696969;
+    }
+    .color-fast{
+        color: #88D20F;
+    }
+    .is-invalid{
+        border-color:#dc3545 !important; 
+    }
+    .is-valid{
+        border-color:#88D20F !important;
+    }
+    #email{
+        background-repeat: no-repeat;
+        background-size: 25px 20px;
+        background-position: center right 10px;
+        transition: all .3s ease-in-out;
+    }
+     #country{
+        background-repeat: no-repeat;
+        background-size: 25px 20px;
+        background-position: center left 10px;
+        transition: all .3s ease-in-out;
+     }
+
+     #country{
+    background-image: url("./assets/img/flag.svg");
+    }
+
+    #phone_code{
+        background-repeat: no-repeat;
+        background-size: 25px 20px;
+        background-position: center left 10px;
+        transition: all .3s ease-in-out;
+    }
+
+    #phone_code{
+    background-image: url("./assets/img/flag.svg");
+    }
+
+     #ccnumber {
+        background-repeat: no-repeat;
+        background-size: 25px 20px;
+        background-position: center right 10px;
+        transition: all .3s ease-in-out;
+    }
+    #shipping-form{
+        display: none;
+    }
+    .open-form{
+        display: block !important;
+        animation-name: fade;
+        animation-duration: .7s;
+    }
+    .rotate_3d{
+        transform: rotate(45deg);
+        transition: all .2s ease;
+    }
+    .add__form{
+        float: right;
+        cursor: pointer;
+    }
+    .email-code input:last-child {
+        border: none !important;
+    }
+
+    .email-code input {
+        border:none;
+        border-right: 1px solid #363636 !important;
+        border-radius: 1px !important;
+    }
+    .email-code input:focus {
+        border:none;
+        border-right: 1px solid #363636 !important;
+        border-radius: 1px !important;
+    }
+    .email-code{
+        display: flex;
+    }
+    @keyframes fade{
+        from{
+            opacity: 0.3;
+        }
+        to{
+            opacity: 1;
+        }
+    }
+    .btn-add {
+        padding: 7px 40px;
+        background: #363636;
+        color: #fff;
+        margin-left: 4px;
+    }
+    #ccnumber{
+    background-image: url("./assets/img/cc.svg");
+    }
+    .card-icon{
+         display: block;
+          margin: auto;
+        width: 15px;
+        height: calc(1.5em + .75rem + 2px);
+    }
+    .secure-text{
+         margin-top: 10px;
+       text-align: center;
+         font-size: 14px;
+    }
+    .secure-img{
+            display: inline-block;
+            width: 25px;
+    }
+    .btn.btn-green{
+          font-family: Graphick-Bold;
+        text-transform: uppercase;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        background: #363636;
+        border: none;
+        border-radius: 4px;
+        padding: 15px;
+        text-align: center;
+        color: #fff;
+    }
+
+@media only screen and (max-width: 585px){
+            .fast-pay {
+                width: 100%;
+                border: none;
+            }
+            .form-control{
+                font-size: 16px;
+                
+            }
+            .col-sm-9{
+                width: calc(100%  * ( 3/ 4));
+            }
+            .col-sm-7{
+                width: 58.3333%;
+            }
+            .col-sm-5{
+                width: 41.6667%;
+            }
+            .col-sm-6{
+                width: calc(100% / 2);
+            }
+            .col-sm-3{
+                max-width: calc(100% / 4);
+                -webkit-transition: max-width .5s; /* For Safari 3.1 to 6.0 */
+                transition: max-width .5s;
+            }
+            label{
+                font-size: 13px;
+            }
+            .col-sm-3.expand{
+                max-width: 100% !important;
+                z-index: 10;
+            }
+        
+        .sm-12{
+            width: 100%
+        }
+        .secure-img{
+            width: 30px;
+        }
+        .secure-text{
+            margin-top: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+          #country{
+                background-position: center left 5px;
+                background-size: 20px 15px;
+            }
+            #phone_code{
+                background-position: center left 5px;
+                background-size: 20px 15px;
+            }
+            #ccnumber{
+            background-image: none !important;
+            }
+            label.left-50 {
+                left: 33px;
+            }
+            .form-control.pad{
+                padding-left: 33px;
+            }
+            .form-control.masked{
+                padding: 25px 7px;
+            }
+    }
+        /*** iPhone and iOS Form Input Zoom Fixes ***/
+    /* Fix Input Zoom on devices older than iPhone 5: */
+    @media screen and (device-aspect-ratio: 2/3) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+    @media screen and (device-aspect-ratio: 40/71) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+    @media screen and (device-aspect-ratio: 375/667) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+
+    /* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+    @media screen and (device-aspect-ratio: 9/16) {
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"], input[type="time"],
+        input[type="week"], input[type="number"], input[type="email"],
+        input[type="url"]{ font-size: 16px; }
+    }
+    </style>    
+    <title>Fast Pay</title>
+</head>
+<body>
+    <div class="fast-pay">
+        <div id="fast-close_form" class="fast-close__form">&lt; Back</div>
+        <form class="form" id="payment-form">
+            <h4 class="fast-pay-title mt-0">Personal Info</h4>
+            <div class="new__form-set">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                             <input id="email" type="email" name="email" class="form-control radius" title="enter your email address" required>
+                            <div class="invalid-feedback">Please enter the correct email</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new__form-set">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <label for="first_name">First name</label>
+                            <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" required>
+                            <div class="invalid-feedback">Please enter your first name</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <label for="last_name">Last name</label>
+                            <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" required>
+                            <div class="invalid-feedback">Please enter your Last name</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new__form-set">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <input id="phone_code" type="text" name="phone_code" class="form-control animate pad" placeholder="1" maxlength="4" title="enter phone number" required>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <div class="input-group">
+                            <label for="mobile_no">Mobile number</label>
+                            <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number"  required>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new__form-set">
+                <h4 class="fast-pay-title">Shipping Details</h4>
+                <div class="new__form-set">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="input-group">
+                                    <label for="street_address">Street Address, P.O Box, Company</label>
+                                    <input id="street_address" type="text" name="street_address" class="form-control radius" title="enter your street address" placeholder="" required>
+                                    <div class="invalid-feedback">Please enter your street address</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <label for="floor">Apartment, suite, unit, building or floor</label>
+                                <input id="floor" type="text" name="street_address" class="form-control radius" title="enter your street address"  placeholder="" required>
+                                <div class="invalid-feedback">Please enter your street address</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2" required>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <div class="input-group">
+                                <label for="zip">Zip, or City</label>
+                                <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip, or City" placeholder="" required>
+                                <div class="invalid-feedback">Please select country zip</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new__form-set">
+                <div class="fast_shipping-method">
+                    <h4 class="fast-pay-title">Shipping Method</h4>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="checkbox">
+                                <label><input type="radio" value=""> &nbsp;&nbsp; Free Shipping - $0.00</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="radio" value=""> &nbsp;&nbsp; Express Shipping - $10.91</label>
+                            </div>
+                        </div>         
+                    </div>     
+                </div>
+            </div>
+            <div class="new__form-set">
+                <h4 class="fast-pay-title">Card Details</h4>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" title="16-digit number" required>
+                            <div class="invalid-feedback">Please enter the correct number</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="input-group">
+                            <div class="expiry left">
+                                <input id="month_expiry" class="form-control masked" type="tel" placeholder="MM" pattern="(\d{2})" data-valid-example="11" title="2-digit month" required>
+                            </div>
+                            
+                            <div class="expiry right">
+                                <input id="year_expiry"  class="form-control masked" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" title="2-digit year" required>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">Please enter the correct expiry month</div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" required>
+                        <div class="invalid-feedback">
+                                Please enter the correct cvv
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new__form-set">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                             
+                        <p class="secure-text">
+                        <img class="secure-img" src="./assets/img/card-lock.svg"/> Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
+                        <button id="send-button" type="submit" class="btn btn-green">Pay <span class="data-amount">$120</span> Now</button>
+                    </div>   
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <script>
+     var masking = {
+            // User defined Values
+            //maskedInputs : document.getElementsByClassName('masked'), // add with IE 8's death
+            maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
+            maskedNumber : '0MMYY1234',
+            maskedLetter : '_',
+            queryURL : location.href.split("?")[1],
+            apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
+            stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
+            zip:{"11101":"Lekki", "110111": "Ajah","112333":"VI","11124":"Ikoyi", "1234":"Maruwa", "12356":"Eti Osa"},
+            countries : {"BD": "880", "BE": "32", "BF": "226", "BG": "359", "BA": "387", "BB": "1-246", "WF": "681", "BL": "590", "BM": "1-441", "BN": "673", "BO": "591", "BH": "973", "BI": "257", "BJ": "229", "BT": "975", "JM": "1-876", "BV": "", "BW": "267", "WS": "685", "BQ": "599", "BR": "55", "BS": "1-242", "JE": "44-1534", "BY": "375", "BZ": "501", "RU": "7", "RW": "250", "RS": "381", "TL": "670", "RE": "262", "TM": "993", "TJ": "992", "RO": "40", "TK": "690", "GW": "245", "GU": "1-671", "GT": "502", "GS": "", "GR": "30", "GQ": "240", "GP": "590", "JP": "81", "GY": "592", "GG": "44-1481", "GF": "594", "GE": "995", "GD": "1-473", "GB": "44", "GA": "241", "SV": "503", "GN": "224", "GM": "220", "GL": "299", "GI": "350", "GH": "233", "OM": "968", "TN": "216", "JO": "962", "HR": "385", "HT": "509", "HU": "36", "HK": "852", "HN": "504", "HM": " ", "VE": "58", "PR": "1-787","PR": "1-939", "PS": "970", "PW": "680", "PT": "351", "SJ": "47", "PY": "595", "IQ": "964", "PA": "507", "PF": "689", "PG": "675", "PE": "51", "PK": "92", "PH": "63", "PN": "870", "PL": "48", "PM": "508", "ZM": "260", "EH": "212", "EE": "372", "EG": "20", "ZA": "27", "EC": "593", "IT": "39", "VN": "84", "SB": "677", "ET": "251", "SO": "252", "ZW": "263", "SA": "966", "ES": "34", "ER": "291", "ME": "382", "MD": "373", "MG": "261", "MF": "590", "MA": "212", "MC": "377", "UZ": "998", "MM": "95", "ML": "223", "MO": "853", "MN": "976", "MH": "692", "MK": "389", "MU": "230", "MT": "356", "MW": "265", "MV": "960", "MQ": "596", "MP": "1-670", "MS": "1-664", "MR": "222", "IM": "44-1624", "UG": "256", "TZ": "255", "MY": "60", "MX": "52", "IL": "972", "FR": "33", "IO": "246", "SH": "290", "FI": "358", "FJ": "679", "FK": "500", "FM": "691", "FO": "298", "NI": "505", "NL": "31", "NO": "47", "NA": "264", "VU": "678", "NC": "687", "NE": "227", "NF": "672", "NG": "234", "NZ": "64", "NP": "977", "NR": "674", "NU": "683", "CK": "682", "XK": "", "CI": "225", "CH": "41", "CO": "57", "CN": "86", "CM": "237", "CL": "56", "CC": "61", "CA": "1", "CG": "242", "CF": "236", "CD": "243", "CZ": "420", "CY": "357", "CX": "61", "CR": "506", "CW": "599", "CV": "238", "CU": "53", "SZ": "268", "SY": "963", "SX": "599", "KG": "996", "KE": "254", "SS": "211", "SR": "597", "KI": "686", "KH": "855", "KN": "1-869", "KM": "269", "ST": "239", "SK": "421", "KR": "82", "SI": "386", "KP": "850", "KW": "965", "SN": "221", "SM": "378", "SL": "232", "SC": "248", "KZ": "7", "KY": "1-345", "SG": "65", "SE": "46", "SD": "249", "DO": "1-809","DO": "1-829", "DM": "1-767", "DJ": "253", "DK": "45", "VG": "1-284", "DE": "49", "YE": "967", "DZ": "213", "US": "1", "UY": "598", "YT": "262", "UM": "1", "LB": "961", "LC": "1-758", "LA": "856", "TV": "688", "TW": "886", "TT": "1-868", "TR": "90", "LK": "94", "LI": "423", "LV": "371", "TO": "676", "LT": "370", "LU": "352", "LR": "231", "LS": "266", "TH": "66", "TF": "", "TG": "228", "TD": "235", "TC": "1-649", "LY": "218", "VA": "379", "VC": "1-784", "AE": "971", "AD": "376", "AG": "1-268", "AF": "93", "AI": "1-264", "VI": "1-340", "IS": "354", "IR": "98", "AM": "374", "AL": "355", "AO": "244", "AQ": "", "AS": "1-684", "AR": "54", "AU": "61", "AT": "43", "AW": "297", "IN": "91", "AX": "358-18", "AZ": "994", "IE": "353", "ID": "62", "UA": "380", "QA": "974", "MZ": "258"},
+            domains: ["fast.co","yahoo.com", "gmail.com", "google.com", "hotmail.com", "me.com", "aol.com", "mac.com", "live.com", "comcast.com", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk", "facebook.com", "verizon.net", "att.net", "gmz.com", "mail.com"],
+            init: function () {
+                var _this = this;
+                //get the amount data from the iframe url
+                _this.setUpMasks(_this.maskedInputs);
+                _this.maskedInputs = document.querySelectorAll('.masked'); // Repopulating. Needed b/c static node list was created above.
+                _this.activateMasking(_this.maskedInputs);
+                _this.submitForm();
+                _this.formFocus();
+                _this.mobileToggle();
+               // _this.setupButton(payAmount);
+                _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
+                _this.autocomplete(document.getElementById("country"), _this.countries, "country");
+                _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
+                _this.autocomplete(document.getElementById("email"), _this.domains, "email");
+            },
+            setUpMasks: function (inputs) {
+            var i, l = inputs.length,_this = this;
+                for(i = 0; i < l; i++) {
+                    _this.createShell(inputs[i]);
+                }
+            },
+            // setupButton:function(amount){
+            //     var button_amount = document.getElementsByClassName("data-amount");
+            //     for(var i = 0; i < button_amount.length; i++){
+            //         button_amount[i].innerText = amount;
+            //     }
+            // },
+            // replaces each masked input with a shall containing the input and it's mask.
+            createShell : function (input) {
+                var text = '', 
+                placeholder = input.getAttribute('placeholder');
+                input.setAttribute('maxlength', placeholder.length);
+            },
+            // add event listeners
+            activateMasking : function (inputs) {
+            var i, l,_this = this;
+            for (i = 0, l = inputs.length; i < l; i++) {
+                if (_this.maskedInputs[i].addEventListener) { // remove "if" after death of IE 8
+                _this.maskedInputs[i].addEventListener('keyup', function(e) {
+                    _this.handleValueChange(e);
+                }, false); 
+                } else if (_this.maskedInputs[i].attachEvent) { // For IE 8
+                    _this.maskedInputs[i].attachEvent("onkeyup", function(e) {
+                    e.target = e.srcElement; 
+                    _this.handleValueChange(e);
+                });
+                }
+            }
+            },
+            handleValueChange : function (e) {
+            var id = e.target.getAttribute('id'), _this = this;
+           
+                
+            switch (e.keyCode) { 
+                // allows navigating thru input
+                case 20: // caplocks
+                case 17: // control
+                case 18: // option
+                case 16: // shift
+                case 37: // arrow keys
+                case 38:
+                case 39:
+                case 40:
+                case  9: // tab (let blur handle tab)
+                return;
+                }
+            document.getElementById(id).value = _this.handleCurrentValue(e);
+            },
+            handleCurrentValue : function (e) {
+            var isCharsetPresent = e.target.getAttribute('data-charset'), 
+                placeholder = isCharsetPresent || e.target.getAttribute('placeholder'),
+                value = e.target.value, l = placeholder.length, newValue = '', 
+                i, j, isInt, isLetter, strippedValue, card, icon = document.getElementById('ccnumber'), _this=this;
+            // strip special characters
+            strippedValue = isCharsetPresent ? value.replace(/\W/g, "") : value.replace(/\D/g, "");
+            for (i = 0, j = 0; i < l; i++) {
+                var x = 
+                isInt = !isNaN(parseInt(strippedValue[j]));
+                isLetter = strippedValue[j] ? strippedValue[j].match(/[A-Z]/i) : false;
+                matchesNumber = _this.maskedNumber.indexOf(placeholder[i]) >= 0;
+                matchesLetter = _this.maskedLetter.indexOf(placeholder[i]) >= 0;
+                if ((matchesNumber && isInt) || (isCharsetPresent && matchesLetter && isLetter)) {
+                        newValue += strippedValue[j++];
+                                card = _this.ValidateCreditCardNumber();
+                        card === "Visa" ?  icon.style.backgroundImage = "url('./assets/img/visa.svg')": 
+                        card === "Mastercard" ? icon.style.backgroundImage = "url('./assets/img/mastercard.svg')": 
+                        card === "JCB" ? icon.style.backgroundImage = "url('./assets/img/jcb.svg')": 
+                        card === "AMEX" ? icon.style.backgroundImage = "url('./assets/img/amex.svg')":
+                        card === "Discover" ? icon.style.backgroundImage = "url('./assets/img/discover.svg')":
+                        card === "Diners" ? icon.style.backgroundImage = "url('./assets/img/diners.svg')":
+                        icon.style.backgroundImage = "url('./assets/img/cc.svg')";                         
+                    } else if ((!isCharsetPresent && !isInt && matchesNumber) || (isCharsetPresent && ((matchesLetter && !isLetter) || (matchesNumber && !isInt)))) {
+                        // masking.errorOnKeyEntry(); // write your own error handling function
+                        return newValue; 
+                } else {
+                    newValue += placeholder[i];
+                } 
+                // break if no characters left and the pattern is non-special character
+                if (strippedValue[j] == undefined) { 
+                    break;
+                }
+                }
+                
+            if (e.target.getAttribute('data-valid-example')) {
+                return _this.validateProgress(e, newValue);
+            }
+            return newValue;
+            },
+            ValidateCreditCardNumber : function() {
+                var number = document.getElementById("ccnumber").value;
+               // Diners - Carte Blanche
+                re = new RegExp("^30[0-5]");
+                if (number.match(re) != null)
+                    return "Diners - Carte Blanche";
+                // Diners
+                re = new RegExp("^(30[6-9]|36|38)");
+                if (number.match(re) != null)
+                    return "Diners";
+                // JCB
+                re = new RegExp("^35(2[89]|[3-8][0-9])");
+                if (number.match(re) != null)
+                    return "JCB";
+                // AMEX
+                re = new RegExp("^3[47]");
+                if (number.match(re) != null)
+                    return "AMEX";
+                // Visa Electron
+                re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
+                if (number.match(re) != null)
+                    return "Visa Electron";
+                // Visa
+                var re = new RegExp("^4");
+                if (number.match(re) != null)
+                    return "Visa";
+                // Mastercard
+                re = new RegExp("^5[1-5]");
+                if (number.match(re) != null)
+                    return "Mastercard";
+                // Discover
+                re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+                if (number.match(re) != null)
+                    return "Discover";
+                return "";
+                },
+            validateProgress : function (e, value) {
+            var validExample = e.target.getAttribute('data-valid-example'),
+                pattern = new RegExp(e.target.getAttribute('pattern')),
+                placeholder = e.target.getAttribute('placeholder'),
+                     l = value.length, testValue = '';
+                     
+                    //convert to months
+                    if (l == 1 && placeholder.toUpperCase().substr(0,2) == 'MM') {
+                        
+                        if(value > 1 && value < 10) {
+                        value = '0' + value;
+                        }
+                        return value;
+                    }
+            return value;
+            },
+            mobileToggle: function(){
+                var card = document.querySelectorAll(".card");
+                card.forEach(function(element, i){
+                    element.addEventListener("click", function(e){
+                            if(e.target.className === "card-header"){
+                                var cardbody  = element.children[1];
+                                cardbody.classList.toggle("show");
+                            }
+                        })
+                    })
+            },
+            formFocus: function(){
+                var form = document.querySelectorAll(".form-control");
+                form.forEach(function(element, i){
+                    form[i].addEventListener("focusin", function(){
+                                form[i].parentElement.classList.add("placeholder-focus");
+                                if(form[i].classList.contains('animate')){
+                                    // console.log(form[i].parentElement.nextElementSibling);
+                                    form[i].parentElement.classList.add("expand");
+                                    form[i].parentElement.nextElementSibling.classList.add("none");
+                                }
+                    })
+                })
+                form.forEach(function(element, i){
+                    form[i].addEventListener("input", function(){
+                                form[i].parentElement.classList.add("placeholder-focus");
+                    })
+                     })
+                form.forEach(function(element, i){ 
+                    form[i].addEventListener("focusout", function(){
+                        if(form[i].value.length === 0 ){
+                                     form[i].parentElement.classList.remove("placeholder-focus");
+                                }
+                                if(form[i].classList.contains('animate')){
+                                            form[i].parentElement.classList.remove("expand");
+                                            form[i].parentElement.nextElementSibling.classList.remove("none");
+                                        }
+                        
+                    })
+                })
+                
+            },
+            sendSTripeData: function(stripeData) {
+                var _this = this, xhr,cardToken, button = document.getElementById("send-button"), url = 'https://api.stripe.com/v1/tokens';
+                if (window.XMLHttpRequest) {
+                   xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xhr.withCredentials = true;
+                xhr.open("POST", url,true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.setRequestHeader("Authorization", "Bearer " + _this.stripePublishKey);
+                xhr.onload = function () {
+                            button.innerText = "Processing Data...";
+                            button.style.backgroundColor = "blue";
+                   if (xhr.readyState === xhr.DONE) {
+                       if (xhr.status === 200) {
+                            cardToken = JSON.parse(xhr.responseText)
+                            var card = JSON.parse(JSON.stringify(cardToken.card));
+                            // this will be fixed when development server can accept any card
+                            // card['token_id'] = cardToken.id;
+                            card['token_id'] = 'tok_mastercard';
+                            var fastData = _this.getData(card);
+                            button.innerText = "Finishing up...";
+                            _this.sendFastData(fastData);
+                            return cardToken
+                       }else{
+                                    button.innerText = "There was an error, try again";
+                                    button.style.backgroundColor = "red"; 
+                              }
+                    }
+                     };
+                xhr.send(stripeData)
+            },
+            sendFastData: function(data) {
+                var _this = this, xhr,url = 'https://dev.api.fast.co/api/m/pay', button = document.getElementById("send-button");
+                if (window.XMLHttpRequest) {
+                   xhr = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xhr.open("POST", url,true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Fast-Access-Key', _this.apiKey);
+                xhr.onload = function () {
+                   if (xhr.readyState === xhr.DONE) {
+                       if (xhr.status === 200) {
+                                     response = xhr.responseText;
+                                     button.innerText = "Done";
+                                     button.style.backgroundColor = "green"; 
+                            return response;
+                       }else{
+                                    button.innerText = "There was an error, try again";
+                                    button.style.backgroundColor = "red"; 
+                              }
+                    }
+                };
+                xhr.send(JSON.stringify(data))
+            },
+            getData: function (card) {
+                var email = document.getElementById('email').value,
+                firstName = document.getElementById('first_name').value,
+                lastName = document.getElementById('last_name').value,
+                phoneNumber = document.getElementById('mobile_no').value,
+                phone = document.getElementById('phone_code').value,
+                address1 = document.getElementById('street_address').value,
+                address2 = document.getElementById('floor').value,
+                countryCode = document.getElementById('country').value,
+                zip = document.getElementById('zip').value,
+                _this = this;
+                     
+                var payload =   {
+                                "buttonLoadId": "",
+                         "store": {
+                             "key": _this.apiKey,
+                              "url": "https://teststore.com/checkout"
+                          },
+                          personal: {
+                              "email": email,
+                              "firstName": firstName,
+                              "lastName": lastName,
+                                        "phone": {
+                                            "country": phone.substr(1, phone.length),
+                                            "phone": phoneNumber
+                                        }
+                          },
+                          shipping: {
+                             "address1": address1,
+                             "address2": address2,
+                             "country": countryCode,
+                             "zip": zip,
+                          },
+                          card,
+                          "order": {
+                              "total": 99,
+                              "discount": 30,
+                              "subtotal": 69,
+                              "currency": "USD"
+                           },
+                           "items": [
+                                {
+                                    "category": "shipping",
+                                    "code": "delivery",
+                                    "description": "Next Day Delivery",
+                                    "carrier": "USPS",
+                                    "rrp": 29,
+                                    "amount": 29
+                                }
+                            ]
+                     };
+                     console.log(JSON.stringify(payload));
+                     //alert(JSON.stringify(payload));
+                     return payload
+            },
+            sendFormData: function () {
+                var cvv= document.getElementById('cvv').value,
+                month_expiry= document.getElementById('month_expiry').value,
+                year_expiry= document.getElementById('year_expiry').value,
+                number= document.getElementById('ccnumber').value,
+                _this = this;
+                stripeData = "card[number]="+ number+ "&" + "card[cvc]=" + cvv + "&" + "card[exp_month]="  + month_expiry + "&" + "card[exp_year]=" + year_expiry;
+                _this.sendSTripeData(stripeData); 
+            },
+            
+            submitForm: function (){
+                
+                var form = document.getElementById("payment-form"), _this= this;
+                if(form.addEventListener){
+                    //Modern browsers
+                    //add event listeners for form submit
+                    form.addEventListener("submit", function(e){
+                        e.preventDefault();
+                        _this.sendFormData();                                           
+                    });  
+                }else if(form.attachEvent){
+                    //Old IE
+                    form.attachEvent('onsubmit', function(){
+                        _this.sendFormData()  
+                    });            
+                }
+            },
+            autocomplete: function(inp, values, type) {
+                /*the autocomplete function takes two arguments,
+                the text field element and an array of possible autocompleted values:*/
+                var currentFocus, _this =this;
+                /*execute a function when someone writes in the text field:*/
+                inp.addEventListener("input", function(e) {
+                    var a, b, i, val = this.value;
+                    /*close any already open lists of autocompleted values*/
+                    closeAllLists();
+                    if (!val) { return false;}
+                    currentFocus = -1;
+                    /*create a DIV element that will contain the items (values):*/
+                    a = document.createElement("DIV");
+                    a.setAttribute("id", this.id + "autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
+                    /*append the DIV element as a child of the autocomplete container:*/
+                    this.parentNode.appendChild(a);
+                          /*for each item in the array...*/
+                          var entries = Object.entries(values);
+                        
+                            if(type === "phone"){
+                            for (var [country_code, country_phone] of entries) {
+                                if (country_phone.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                    b = document.createElement("DIV");
+                                    b.innerHTML = "<img src='https://www.countryflags.io/"+country_code+"/flat/16.png'>  ";
+                                    b.innerHTML += "<strong>" + country_phone.substr(0, val.length) + "</strong>";
+                                    b.innerHTML += country_phone.substr(val.length);
+                                    b.innerHTML += " " + country_code;
+                                    b.innerHTML += "<input type='hidden' value='+" + country_phone + "'>";
+                                        b.addEventListener("click", function(e) {
+                                        inp.value = this.getElementsByTagName("input")[0].value;
+                                        inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+                                        closeAllLists();
+                                    });
+                                    a.appendChild(b);
+                                }
+                            }
+                            }else if(type === "country"){
+                                for (var [country_code, country_phone] of entries) {
+                                    if(country_code.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                    b = document.createElement("DIV");
+                                    b.innerHTML = "<img src='https://www.countryflags.io/"+country_code+"/flat/16.png'>  ";
+                                    b.innerHTML += "<strong>" + country_code.substr(0, val.length) + "</strong>";
+                                    b.innerHTML += country_code.substr(val.length);
+                                    b.innerHTML += "<input type='hidden' value='" + country_code + "'>";
+                                    b.addEventListener("click", function(e) {
+                                    inp.value = this.getElementsByTagName("input")[0].value;
+                                    inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+                                    closeAllLists();
+                                    });
+                                    a.appendChild(b);
+                                    }
+                            }
+                            }else if(type === "email"){
+                                if (val.indexOf("@") != -1) {
+                                    val = val.split("@")[0];
+                                    console.log("has @ symbol");
+                                    addEmailDatalist(val); 
+                                } else {
+                                    inp.classList.remove("is-valid");
+                                    inp.style.backgroundImage = "";
+                                    // empty list
+                                    closeAllLists();
+                                }
+                                function addEmailDatalist(value) {
+                                for (i = 0; i < _this.domains.length; i++) {
+                                        b = document.createElement("DIV");  
+                                        b.innerHTML += "<strong>" + value + "@" + _this.domains[i] + "</strong>";
+                                        b.innerHTML += "<input type='hidden' value='" + value + "@" + _this.domains[i]  + "'>";
+                                        b.addEventListener("click", function(e) {
+                                            inp.value = this.getElementsByTagName("input")[0].value;
+                                            inp.classList.add("is-valid");
+                                            inp.style.backgroundImage = "url('./assets/img/check.svg')";
+                                            closeAllLists();
+                                        });
+                                        a.appendChild(b);
+                                }
+                            }
+                            }else{
+                                for (var [country_code, country_phone] of entries) {
+                                    if(country_code.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                    b = document.createElement("DIV");
+                                    b.innerHTML += "<strong>" + country_code.substr(0, val.length) + "</strong>";
+                                    b.innerHTML += country_code.substr(val.length);
+                                    b.innerHTML += "<input type='hidden' value='" + country_code + "'>";
+                                    
+                                    b.addEventListener("click", function(e) {
+                                    inp.value = this.getElementsByTagName("input")[0].value;
+                                    closeAllLists();
+                                    });
+                                    a.appendChild(b);
+                                    }
+                                }
+                            }
+                });
+                  /*execute a function presses a key on the keyboard:*/
+                    inp.addEventListener("keydown", function(e) {
+                        var x = document.getElementById(this.id + "autocomplete-list");
+                        if (x) x = x.getElementsByTagName("div");
+                        if (e.keyCode == 40) {
+                            /*If the arrow DOWN key is pressed,
+                            increase the currentFocus variable:*/
+                            currentFocus++;
+                            /*and and make the current item more visible:*/
+                            addActive(x);
+                        } else if (e.keyCode == 38) { //up
+                            /*If the arrow UP key is pressed,
+                            decrease the currentFocus variable:*/
+                            currentFocus--;
+                            /*and and make the current item more visible:*/
+                            addActive(x);
+                        } else if (e.keyCode == 13) {
+                            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                            e.preventDefault();
+                            if (currentFocus > -1) {
+                            /*and simulate a click on the "active" item:*/
+                            if (x) x[currentFocus].click();
+                            }
+                        }
+                    });
+                    function addActive(x) {
+                            /*a function to classify an item as "active":*/
+                            if (!x) return false;
+                            /*start by removing the "active" class on all items:*/
+                            removeActive(x);
+                            if (currentFocus >= x.length) currentFocus = 0;
+                            if (currentFocus < 0) currentFocus = (x.length - 1);
+                            /*add class "autocomplete-active":*/
+                            x[currentFocus].classList.add("autocomplete-active");
+                        }
+                    function removeActive(x) {
+                            /*a function to remove the "active" class from all autocomplete items:*/
+                            for (var i = 0; i < x.length; i++) {
+                            x[i].classList.remove("autocomplete-active");
+                            }
+                        }
+                    function closeAllLists(elmnt) {
+                            /*close all autocomplete lists in the document,
+                            except the one passed as an argument:*/
+                            var x = document.getElementsByClassName("autocomplete-items");
+                            for (var i = 0; i < x.length; i++) {
+                            if (elmnt != x[i] && elmnt != inp) {
+                            x[i].parentNode.removeChild(x[i]);
+                            }
+                        }
+                        }
+                        /*execute a function when someone clicks in the document:*/
+                    document.addEventListener("click", function (e) {
+                            closeAllLists(e.target);
+                        });
+            
+            }
+            }
+            var  origin  = "*";
+            var message_handlers = {};
+            var buttonElement = window.document.getElementById("send-button");
+
+            message_handlers.clickreport = function(message){
+                var currency ;
+                switch(message.data.config.currency.toLowerCase()){
+                    case "usd":
+                        currency = "$";
+                        break;
+                    default:
+                    currency = undefined;
+                }
+                buttonElement.innerText = "Pay " + currency + message.data.config.amount + " Now";
+            //Todo: same origin for post message
+            };
+
+            window.addEventListener("click", function(e){
+                if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
+                    parent.postMessage({action: 'closeModal'}, "*");
+                }
+            })
+            window.addEventListener(
+                "message",
+                function(message) {
+
+                    if (
+                        message &&
+                        message.data &&
+                        message.data.action &&
+                        message_handlers[message.data.action]
+                    ) {
+                        message_handlers[message.data.action](message);
+                    }
+                },
+                false
+            );
+
+
+            window.addEventListener("DOMContentLoaded", function(){
+                window.parent.postMessage({action: 'allcontentloaded'}, origin);
+            })
+            masking.init();
+
+</script>
+ <script>
+  
+        
+</script>
+</body>
+</html>

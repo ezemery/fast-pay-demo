@@ -52,8 +52,32 @@
 (function(window){
      //Todo: same origin for post message
     var  origin  = "*";
-  
+    var message_handlers = {};
     var buttonElement = window.document.getElementById("fast-pay-button");
+  
+    message_handlers.config = function(){
+        alert("Hello");
+       //Todo: same origin for post message
+       console.log("received message", event)
+        if (event.data.action === "config"  ) {
+            console.log("received message")
+        }
+    };
+
+    message_handlers.clickreport = function(message){
+        var currency ;
+        switch(message.data.config.currency.toLowerCase()){
+            case "usd":
+                currency = "$";
+                break;
+            default:
+            currency = undefined;
+        }
+        buttonElement.innerText = "Fast Checkout - " + currency + message.data.config.amount
+       //Todo: same origin for post message
+    };
+  
+   
     function init(){
         buttonElement.addEventListener("click", function(e){
             showForm();
@@ -64,12 +88,24 @@
         window.parent.postMessage({action: 'paybuttonClick'}, origin);
      }
 
-    window.addEventListener("message", function(event) {
-       //Todo: same origin for post message
-        if (event.data.action === "config"  ) {
-            buttonElement.innerText = event.data.values.currency + "-" + event.data.values.amount
-        }
-    });
+     window.addEventListener(
+        "message",
+        function(message) {
+            if (
+                message &&
+                message.data &&
+                message.data.action &&
+                message_handlers[message.data.action]
+            ) {
+                message_handlers[message.data.action](message);
+            }
+        },
+        false
+     );
+     window.addEventListener("DOMContentLoaded", function(){
+        window.parent.postMessage({action: 'allcontentloaded'}, origin);
+     })
+   
     init();
 }(window))
 
