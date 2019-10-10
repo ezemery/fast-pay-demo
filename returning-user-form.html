@@ -695,7 +695,7 @@
                                     <div class="invalid-feedback">Please select country zip</div>
                                 </div>
                             </div>
-                             <p class="btn btn-add mt-3" id="add-shipping-det">Add New Address</p>
+                             <submit class="btn btn-add mt-3" id="add-shipping-det" onclick="masking.addNewShippingDetails()">Add New Address</submit>
                         </div>
                     </div>
                 </div>
@@ -764,7 +764,7 @@
                                     Please enter the correct cvv
                             </div>
                         </div>
-                        <p class="btn btn-add mt-3" id="add-shipping-det">Add New Card</p>
+                        <submit class="btn btn-add mt-3" id="add-shipping-det" onclick="masking.addNewCardDetails()">Add New Card</submit>
                     </div>
                 </div>
             </div>
@@ -815,6 +815,10 @@
             _this.autocomplete(document.getElementById("country"), _this.countries, "country");
             _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
             _this.autocomplete(document.getElementById("email"), _this.domains, "email");
+            // document.getElementById("add-shipping-det").addEventListener('click', function () {
+            //     console.log('clicked')
+            //     _this.addNewCardDetails();
+            // })
 		},
 
         setUpMasks: function (inputs) {
@@ -1065,7 +1069,7 @@
         },
 
         sendFastData: function(data) {
-            var _this = this, xhr,url = 'https://dev.api.fast.co/api/m/pay', button = document.getElementById("send-button");
+            var _this = this, xhr,url = 'https://389df815.ngrok.io/test', button = document.getElementById("send-button");
 
             if (window.XMLHttpRequest) {
                xhr = new XMLHttpRequest();
@@ -1259,6 +1263,7 @@
         getCardDetials: function(){
             var _this = this;
             var card = _this.userCard
+            console.log({card})
             var output = ''
             for(i in card){
                 output += `<option value="${card[i].last4}">XXXX ${card[i].last4}</option>`
@@ -1469,6 +1474,37 @@
 
             this.shippingAddress = value.shipping;
             this.userCard = value.card;
+        },
+        addNewCardDetails: function () {
+                var cvv= document.getElementById('cvv').value,
+                month_expiry= document.getElementById('month_expiry').value,
+                year_expiry= document.getElementById('year_expiry').value,
+                number= document.getElementById('ccnumber').value,
+                _this = this;
+                const card = {
+                    "exp_month": month_expiry,
+                    "exp_year": year_expiry,
+                    "last4": number.toString().slice(-4),
+                    "cardNumber": number,
+                }
+                _this.userCard.unshift(card);
+                _this.getCardDetials();
+
+        },
+        addNewShippingDetails: function () {
+                var address1= document.getElementById('address1').value,
+                address2= document.getElementById('address2').value,
+                country= document.getElementById('country').value,
+                zip= document.getElementById('zip').value,
+                _this = this;
+                const shippingDetails =     {
+                    address1,
+                    country,
+                    zip,
+                    address2
+                };
+                _this.shippingAddress.unshift(shippingDetails);
+                // _this.getShippingAddress();
         }
         }
 
