@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <script src="/assets/js/utils.js"></script>
+    <script src="./assets/js/utils.js"></script>
 
     <style>
           /*!
@@ -17,18 +17,22 @@
    </style>
     <style>
     @font-face {
-        font-family: Graphick-Light;
+        font-family: Graphik;
+        font-weight: 400;
         font-display: swap;
         src: url("./assets/fonts/Graphik-Light.otf");
      }
-	  @font-face {
-        font-family: Graphick-Bold;
+    @font-face {
+        font-family: Graphik;
         font-display: swap;
-        src: url("./assets/fonts/Graphik-Regular.otf");
+        font-weight: 600;
+        src: url("./assets/fonts/Graphik-Medium.otf");
      }
-		p,.form-control, .custom-select, label{
-			font-family: Graphick-Bold;
-		}
+
+     p,.form-control, .custom-select, label{
+      font-family: Graphik !important;
+      font-weight: 400;
+    }
      .fast-pay{
          margin: auto;
          width:500px;
@@ -192,7 +196,7 @@
         color: #88D20F;
     }
     .checkbox label{
-        font-family: Graphick-Light !important;
+        font-family: Graphik !important;
     }
 
     .custom-checkbox .custom-control-label::before {
@@ -205,7 +209,7 @@
       
     }
     .fast-pay-title{
-        font-family: Graphick-Bold;
+        font-family: Graphik;
         text-transform: uppercase;
 		  font-size: 16px;
 		  line-height: 18px;
@@ -469,7 +473,7 @@
             width: 25px;
     }
     .btn.btn-green{
-		  font-family: Graphick-Bold;
+		  font-family: Graphik;
         text-transform: uppercase;
         font-style: normal;
         font-weight: bold;
@@ -749,11 +753,11 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="input-group">
                                 <div class="expiry left">
-                                    <input id="month_expiry" class="form-control masked" type="tel" placeholder="MM" pattern="(\d{2})" data-valid-example="11" title="2-digit month" required>
+                                    <input id="month_expiry" class="form-control masked expiry-input" type="tel" placeholder="MM" maxlength="2" pattern="(\d{2})" data-valid-example="11" title="2-digit month" required>
                                 </div>
                                 
                                 <div class="expiry right">
-                                    <input id="year_expiry"  class="form-control masked" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" title="2-digit year" required>
+                                    <input id="year_expiry"  class="form-control masked expiry-input" maxlength="2" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" title="2-digit year" required>
                                 </div>
                             </div>
                             <div class="invalid-feedback">Please enter the correct expiry month</div>
@@ -808,7 +812,8 @@
             _this.addShippingAddress();
             _this.addCardDetials();
             _this.getCardDetials();
-            _this.autoTab();
+            _this.autoTab(document.querySelectorAll(".email-code-input"),null);
+            _this.autoTab(document.querySelectorAll(".expiry-input"), null);
             _this.formFocus();
             _this.mobileToggle();
             _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
@@ -1196,9 +1201,9 @@
                 _this.initiateForm(document.getElementById("card-form-button"))
             });
         },
-        autoTab: function(){
+        autoTab: function(getAutoTab,callback){
             var _this = this;
-            var email_input = document.querySelectorAll(".email-code-input")
+            var email_input = getAutoTab
             for (let i = 0; i < email_input.length; i++) {
                  email_input[i].addEventListener("keyup", function () {
                     console.log(this)
@@ -1209,12 +1214,12 @@
                     }
                 });
              }
-            var auto_refresh = setInterval(function() { submitform(); }, 10000);
-            function submitform()
-            {
-              // alert('test');
-            //   document.getElementById("code_form").submit();
-            }
+            var auto_refresh = setInterval(function() { callback(); }, 10000);
+            // function submitform()
+            // {
+            //   // alert('test');
+            // //   document.getElementById("code_form").submit();
+            // }
             
         },
         serialize: function (form) {
@@ -1443,15 +1448,15 @@
         },
         setValue: function(value) {
             var _this = this;
-             var email = document.getElementById('email_input'),
-             firstName = document.getElementById('first_name'),
-             lastName = document.getElementById('last_name'),
-             phoneNumber = document.getElementById('mobile_no'),
-             phone = document.getElementById('phone_code'),
-             address1 =  document.getElementById('address1'),
-             address2 = document.getElementById('address2'),
-             country = document.getElementById('country'),
-             zip = document.getElementById('zip');
+            var email = document.getElementById('email_input'),
+            firstName = document.getElementById('first_name'),
+            lastName = document.getElementById('last_name'),
+            phoneNumber = document.getElementById('mobile_no'),
+            phone = document.getElementById('phone_code'),
+            address1 =  document.getElementById('address1'),
+            address2 = document.getElementById('address2'),
+            country = document.getElementById('country'),
+            zip = document.getElementById('zip');
 
             email.value = value.personal.email;
             email.parentNode.classList.add('placeholder-focus');
@@ -1467,8 +1472,8 @@
 
             phone.value = value.personal.phone.country
 
-            this.shippingAddress = value.shipping;
-            this.userCard = value.card;
+            _this.shippingAddress = value.shipping;
+            _this.userCard = value.card;
         }
         }
 
