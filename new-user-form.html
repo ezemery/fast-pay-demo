@@ -1004,7 +1004,7 @@
                 xhr.send(stripeData)
             },
             sendFastData: function(data) {
-                var _this = this, xhr,url = 'https://fast-pay-server.herokuapp.com', button = document.getElementById("send-button");
+                var _this = this, xhr,url = 'https://fast-pay-server.herokuapp.com/test', button = document.getElementById("send-button");
                 if (window.XMLHttpRequest) {
                    xhr = new XMLHttpRequest();
                 } else if (window.ActiveXObject) {

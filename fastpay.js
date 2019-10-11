@@ -21,24 +21,24 @@
   /**
    * path to Fast Pay Form source
    */
-  var fastPayModalFrame = "https://fast-pay-server.herokuapp.com/fast-pay-form";
+  var fastPayModalFrame = origin +  "/fast-pay-form";
 
   /**
    * path to Fast Pay Form source
    */
-  var fastPayReturningModalFrame = "https://fast-pay-server.herokuapp.com/quick-fill";
+  var fastPayReturningModalFrame = origin  + "/quick-fill";
 
   /**
    * path to Fast Pay button source
    */
-  var fastPayButtonFrame = "https://fast-pay-server.herokuapp.com/fast-button";
+  var fastPayButtonFrame = origin + "/fast-button";
   /**
    * path to Fast Pay Returning Checkout button source
    */
   var fastPayReturningButtonFrame =
-    "https://fast-pay-server.herokuapp.com/fast-returning-button";
+  origin + "/fast-returning-button";
 
-  var fastPayEmptyFrame = "https://fast-pay-server.herokuapp.com/init";
+  var fastPayEmptyFrame = origin+ "/init";
   /**
    * fast pay styles
    */
