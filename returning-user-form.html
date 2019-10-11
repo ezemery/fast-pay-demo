@@ -625,23 +625,6 @@
                     </div>
                 </div>
             </div>
-            <p class="mt-3" style="font-size: 14px;">For quick fill, enter the 4-digit pin sent to your email address</p>
-            <div class="new__form-set">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="input-email">
-                            <div class="email-code">
-                                <form action="#" id="code_form">
-                                    <input id="email-code" class="form-control email-code-input none-ipt-right" type="tel" placeholder="-" pattern="(\d{1})" required maxlength="1" name="pincode1">
-                                    <input id="email-code" class="form-control email-code-input none-ipt-right" type="tel" placeholder="-" pattern="(\d{1})" required maxlength="1" name="pincode2">
-                                    <input id="email-code " class="form-control email-code-input none-ipt-right" type="tel" placeholder="-" pattern="(\d{1})" required maxlength="1" name="pincode3">
-                                    <input id="email-code " class="form-control email-code-input none-ipt-right" type="tel" placeholder="-" pattern="(\d{1})" required maxlength="1" name="pincode4">
-                                </form>
-                                    
-                            </div>
-                    </div>
-                </div>
-            </div>
             <div class="new__form-set">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
@@ -1191,29 +1174,15 @@
             var _this = this;
             var open_shipping_button = document.getElementById('add-shipping-address'), shipping_button = document.getElementById('add-shipping-det');
             
-            function addShippingDetails() {
-                var address1 = document.getElementById('address1').value,
-                address2 = document.getElementById('address2').value,
-                country = document.getElementById('country').value,
-                zip = document.getElementById('zip').value,
-                newShippingAddress = [];
-                // console.log(_this.shippingAddress)
-                if(address1 && address2 && country && zip){
-                     newShippingAddress.unshift(..._this.shippingAddress,{address2, address1,  country, zip})
-                     _this.shippingAddress = newShippingAddress
-                     address1,address2,country,zip = ''
-                      _this.getShippingAddress()
-                }
-               
-               
-            }
+
             open_shipping_button.addEventListener("click", function(){
                 open_shipping_button.classList.toggle("rotate_3d")
                 _this.initiateForm(document.getElementById("shipping-form"))
             });
-            shipping_button.addEventListener("click", addShippingDetails);
+            // shipping_button.addEventListener("click", _this.addNewShippingDetails);
 
         },
+
         addCardDetials:function(){
             var _this = this;
             var open_card_button = document.getElementById('add-card-details');
@@ -1278,8 +1247,8 @@
             for(i in address){
                 output += `
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" value="">
-                                  <label class="custom-control-label" for="customRadio">nbsp;&nbsp;${address[i].address2},${address[i].address1}, ${address[i].country} ${address[i].zip}</label>
+                                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" value="" >
+                                  <label class="custom-control-label" for="customRadio">${address[i].address1}, ${address[i].address2}, ${address[i].country} ${address[i].zip}</label>
                                 </div>`
             }
             document.getElementById('shipping_address_output').innerHTML = output
@@ -1287,7 +1256,6 @@
         getCardDetials: function(){
             var _this = this;
             var card = _this.userCard
-            console.log({card})
             var output = ''
             for(i in card){
                 output += `<option value="${card[i].last4}">XXXX ${card[i].last4}</option>`
@@ -1511,8 +1479,11 @@
                     "last4": number.toString().slice(-4),
                     "cardNumber": number,
                 }
-                _this.userCard.unshift(card);
-                _this.getCardDetials();
+                if(cvv && month_expiry && year_expiry && number) {
+
+                    _this.userCard.unshift(card);
+                    _this.getCardDetials();
+                }
 
         },
         addNewShippingDetails: function () {
@@ -1521,14 +1492,18 @@
                 country= document.getElementById('country').value,
                 zip= document.getElementById('zip').value,
                 _this = this;
+
                 const shippingDetails =     {
                     address1,
                     country,
                     zip,
                     address2
                 };
-                _this.shippingAddress.unshift(shippingDetails);
-                // _this.getShippingAddress();
+                if(address1 && address2 && country && zip) {
+
+                    _this.shippingAddress.unshift(shippingDetails);
+                    _this.getShippingAddress()
+                }
         }
         }
 
