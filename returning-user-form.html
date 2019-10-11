@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <script src="./assets/js/utils.js"></script>
+    <script src="/assets/js/utils.js"></script>
 
     <style>
      /*!
@@ -664,7 +664,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                     <label for="address1">Street Address, P.O Box, Company</label>
-                                    <input id="address1" type="text" name="address1" class="form-control radius" title="enter your street address" placeholder="" required>
+                                    <input id="address1" type="text" name="address1" class="form-control radius" title="enter your street address" placeholder="">
                                     <div class="invalid-feedback">Please enter your street address</div>
                                 </div>
                                 
@@ -676,7 +676,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                     <label for="address2">Apartment, suite, unit, building or address2</label>
-                                    <input id="address2" type="text" name="address1" class="form-control radius" title="enter your street address"  placeholder="" required>
+                                    <input id="address2" type="text" name="address1" class="form-control radius" title="enter your street address"  placeholder="">
                                     <div class="invalid-feedback">Please enter your street address</div>
                                 </div>
                                 
@@ -686,16 +686,16 @@
                     <div class="new__form-set">
                         <div class="row">
                             <div class="col-md-3 col-sm-3">
-                                <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2" required>
+                                <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2">
                             </div>
                             <div class="col-md-9 col-sm-9">
                                 <div class="input-group">
                                     <label for="zip">Zip, or City</label>
-                                    <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip, or City" placeholder="" required>
+                                    <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip, or City" placeholder="">
                                     <div class="invalid-feedback">Please select country zip</div>
                                 </div>
                             </div>
-                            <button class="btn btn-add mt-3" id="add-shipping-det" onclick="masking.addNewShippingDetails()">Add New Address</button>
+                            <p class="btn btn-add mt-3" id="add-new-address">Add New Address</p>
                         </div>
                     </div>
                 </div>
@@ -746,29 +746,29 @@
                     <div class="row">
                          <div class="col-md-6 co-6" style="margin-bottom: .6rem">
                             <div class="input-group">
-                                <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" title="16-digit number" required>
+                                <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" title="16-digit number" >
                                 <div class="invalid-feedback">Please enter the correct number</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="input-group">
                                 <div class="expiry left">
-                                    <input id="month_expiry" class="form-control masked expiry-input" type="tel" placeholder="MM" maxlength="2" pattern="(\d{2})" data-valid-example="11" title="2-digit month" required>
+                                    <input id="month_expiry" class="form-control masked expiry-input" type="tel" placeholder="MM" maxlength="2" pattern="(\d{2})" data-valid-example="11" title="2-digit month">
                                 </div>
                                 
                                 <div class="expiry right">
-                                    <input id="year_expiry"  class="form-control masked expiry-input" maxlength="2" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" title="2-digit year" required>
+                                    <input id="year_expiry"  class="form-control masked expiry-input" maxlength="2" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" title="2-digit year">
                                 </div>
                             </div>
                             <div class="invalid-feedback">Please enter the correct expiry month</div>
                         </div>
                         <div class="col-md-3 col-sm-3">
-                            <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" required>
+                            <input id="cvv" name="ccv" type="tel" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number">
                             <div class="invalid-feedback">
                                     Please enter the correct cvv
                             </div>
                         </div>
-                        <submit class="btn btn-add mt-3" id="add-shipping-det" onclick="masking.addNewCardDetails()">Add New Card</submit>
+                        <p class="btn btn-add mt-3" id="add-new-card" >Add New Card</p>
                     </div>
                 </div>
             </div>
@@ -778,7 +778,7 @@
                              
                         <p class="secure-text">
                         <img class="secure-img" src="./assets/img/card-lock.svg"/> Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
-                        <button id="send-button" type="submit" class="btn btn-green">Pay <span class="data-amount">$120</span> Now</button>
+                        <button id="send-button" type="submit" class="btn btn-green"></button>
                     </div>   
                 </div>
                 
@@ -796,7 +796,8 @@
         origin: '*',
         shippingAddress: [],
         userCard: [],
-        apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
+        amount: '',
+        apiKey: '',
         stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
         zip:{"11101":"Lekki", "110111": "Ajah","112333":"VI","11124":"Ikoyi", "1234":"Maruwa", "12356":"Eti Osa"},
         countries : {"BD": "880", "BE": "32", "BF": "226", "BG": "359", "BA": "387", "BB": "1-246", "WF": "681", "BL": "590", "BM": "1-441", "BN": "673", "BO": "591", "BH": "973", "BI": "257", "BJ": "229", "BT": "975", "JM": "1-876", "BV": "", "BW": "267", "WS": "685", "BQ": "599", "BR": "55", "BS": "1-242", "JE": "44-1534", "BY": "375", "BZ": "501", "RU": "7", "RW": "250", "RS": "381", "TL": "670", "RE": "262", "TM": "993", "TJ": "992", "RO": "40", "TK": "690", "GW": "245", "GU": "1-671", "GT": "502", "GS": "", "GR": "30", "GQ": "240", "GP": "590", "JP": "81", "GY": "592", "GG": "44-1481", "GF": "594", "GE": "995", "GD": "1-473", "GB": "44", "GA": "241", "SV": "503", "GN": "224", "GM": "220", "GL": "299", "GI": "350", "GH": "233", "OM": "968", "TN": "216", "JO": "962", "HR": "385", "HT": "509", "HU": "36", "HK": "852", "HN": "504", "HM": " ", "VE": "58", "PR": "1-787","PR": "1-939", "PS": "970", "PW": "680", "PT": "351", "SJ": "47", "PY": "595", "IQ": "964", "PA": "507", "PF": "689", "PG": "675", "PE": "51", "PK": "92", "PH": "63", "PN": "870", "PL": "48", "PM": "508", "ZM": "260", "EH": "212", "EE": "372", "EG": "20", "ZA": "27", "EC": "593", "IT": "39", "VN": "84", "SB": "677", "ET": "251", "SO": "252", "ZW": "263", "SA": "966", "ES": "34", "ER": "291", "ME": "382", "MD": "373", "MG": "261", "MF": "590", "MA": "212", "MC": "377", "UZ": "998", "MM": "95", "ML": "223", "MO": "853", "MN": "976", "MH": "692", "MK": "389", "MU": "230", "MT": "356", "MW": "265", "MV": "960", "MQ": "596", "MP": "1-670", "MS": "1-664", "MR": "222", "IM": "44-1624", "UG": "256", "TZ": "255", "MY": "60", "MX": "52", "IL": "972", "FR": "33", "IO": "246", "SH": "290", "FI": "358", "FJ": "679", "FK": "500", "FM": "691", "FO": "298", "NI": "505", "NL": "31", "NO": "47", "NA": "264", "VU": "678", "NC": "687", "NE": "227", "NF": "672", "NG": "234", "NZ": "64", "NP": "977", "NR": "674", "NU": "683", "CK": "682", "XK": "", "CI": "225", "CH": "41", "CO": "57", "CN": "86", "CM": "237", "CL": "56", "CC": "61", "CA": "1", "CG": "242", "CF": "236", "CD": "243", "CZ": "420", "CY": "357", "CX": "61", "CR": "506", "CW": "599", "CV": "238", "CU": "53", "SZ": "268", "SY": "963", "SX": "599", "KG": "996", "KE": "254", "SS": "211", "SR": "597", "KI": "686", "KH": "855", "KN": "1-869", "KM": "269", "ST": "239", "SK": "421", "KR": "82", "SI": "386", "KP": "850", "KW": "965", "SN": "221", "SM": "378", "SL": "232", "SC": "248", "KZ": "7", "KY": "1-345", "SG": "65", "SE": "46", "SD": "249", "DO": "1-809","DO": "1-829", "DM": "1-767", "DJ": "253", "DK": "45", "VG": "1-284", "DE": "49", "YE": "967", "DZ": "213", "US": "1", "UY": "598", "YT": "262", "UM": "1", "LB": "961", "LC": "1-758", "LA": "856", "TV": "688", "TW": "886", "TT": "1-868", "TR": "90", "LK": "94", "LI": "423", "LV": "371", "TO": "676", "LT": "370", "LU": "352", "LR": "231", "LS": "266", "TH": "66", "TF": "", "TG": "228", "TD": "235", "TC": "1-649", "LY": "218", "VA": "379", "VC": "1-784", "AE": "971", "AD": "376", "AG": "1-268", "AF": "93", "AI": "1-264", "VI": "1-340", "IS": "354", "IR": "98", "AM": "374", "AL": "355", "AO": "244", "AQ": "", "AS": "1-684", "AR": "54", "AU": "61", "AT": "43", "AW": "297", "IN": "91", "AX": "358-18", "AZ": "994", "IE": "353", "ID": "62", "UA": "380", "QA": "974", "MZ": "258"},
@@ -820,10 +821,8 @@
             _this.autocomplete(document.getElementById("country"), _this.countries, "country");
             _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
             _this.autocomplete(document.getElementById("email"), _this.domains, "email");
-            // document.getElementById("add-shipping-det").addEventListener('click', function () {
-            //     console.log('clicked')
-            //     _this.addNewCardDetails();
-            // })
+            _this.addNewShippingDetails();
+            _this.addNewCardDetails();
 		},
 
         setUpMasks: function (inputs) {
@@ -842,7 +841,6 @@
         // add event listeners
         activateMasking : function (inputs) {
         var i, l,_this = this;
-
 
         for (i = 0, l = inputs.length; i < l; i++) {
             if (_this.maskedInputs[i].addEventListener) { // remove "if" after death of IE 8
@@ -1005,7 +1003,6 @@
                 form[i].addEventListener("focusin", function(){
 							form[i].parentElement.classList.add("placeholder-focus");
 							if(form[i].classList.contains('animate')){
-								// console.log(form[i].parentElement.nextElementSibling);
 								form[i].parentElement.classList.add("expand");
 								form[i].parentElement.nextElementSibling.classList.add("none");
 							}
@@ -1074,7 +1071,7 @@
         },
 
         sendFastData: function(data) {
-            var _this = this, xhr,url = 'https://389df815.ngrok.io/test', button = document.getElementById("send-button");
+            var _this = this, xhr,url = 'https://fast-pay-server.herokuapp.com/return-form-test', button = document.getElementById("send-button");
 
             if (window.XMLHttpRequest) {
                xhr = new XMLHttpRequest();
@@ -1109,11 +1106,11 @@
             lastName = document.getElementById('last_name').value,
             phoneNumber = document.getElementById('mobile_no').value,
             phone = document.getElementById('phone_code').value,
-            address1 = document.getElementById('address1').value,
-            address2 = document.getElementById('address2').value,
-            country = document.getElementById('country').value,
-            zip = document.getElementById('zip').value,
             _this = this;
+
+            // shippind address
+            var shippingAddressIndex = document.querySelector('input[name="shippingAddress"]:checked').value
+            var shippingAddress = _this.shippingAddress[shippingAddressIndex];
 				 
 
             var payload =   {
@@ -1131,12 +1128,7 @@
 										"phone": phoneNumber
 									}
                       },
-                      shipping: {
-                          address1,
-                          address2,
-                          country,
-                          zip,
-                      },
+                      shipping: shippingAddress,
                       card,
                       "order": {
                           "total": 99,
@@ -1151,36 +1143,34 @@
                                 "description": "Next Day Delivery",
                                 "carrier": "USPS",
                                 "rrp": 29,
-                                "amount": 29
+                                "amount": _this.amount
                             }
                         ]
-				 };
-				 console.log(JSON.stringify(payload));
-				 //alert(JSON.stringify(payload));
+				 };	
 				 return payload
         },
         sendFormData: function () {
-            var cvv= document.getElementById('cvv').value,
-            month_expiry= document.getElementById('month_expiry').value,
-            year_expiry= document.getElementById('year_expiry').value,
-            number= document.getElementById('ccnumber').value,
-            _this = this;
+            var _this = this;
+            var card = document.getElementById("card__select");
+            var currentCard =  _this.userCard[card.selectedIndex];
 
-            stripeData = "card[number]="+ number+ "&" + "card[cvc]=" + cvv + "&" + "card[exp_month]="  + month_expiry + "&" + "card[exp_year]=" + year_expiry;
+            if(currentCard.new_card) {
+                stripeData = "card[number]="+ currentCard.cardNumber+ "&" + "card[cvc]=" + currentCard.cvv + "&" + "card[exp_month]="  + currentCard.exp_month + "&" + "card[exp_year]=" + currentCard.exp_year;
+                return _this.sendSTripeData(stripeData); 
+            }
 
-            _this.sendSTripeData(stripeData); 
+            const fastData = _this.getData(currentCard);
+           return  _this.sendFastData(fastData);
+    
         },
         addShippingAddress: function(){
             var _this = this;
-            var open_shipping_button = document.getElementById('add-shipping-address'), shipping_button = document.getElementById('add-shipping-det');
+            var open_shipping_button = document.getElementById('add-shipping-address');
             
-
             open_shipping_button.addEventListener("click", function(){
                 open_shipping_button.classList.toggle("rotate_3d")
                 _this.initiateForm(document.getElementById("shipping-form"))
             });
-            // shipping_button.addEventListener("click", _this.addNewShippingDetails);
-
         },
 
         addCardDetials:function(){
@@ -1196,7 +1186,6 @@
             var email_input = getAutoTab
             for (let i = 0; i < email_input.length; i++) {
                  email_input[i].addEventListener("keyup", function () {
-                    console.log(this)
                     if (email_input[i].value.length == email_input[i].maxLength) {
                       email_input[i].nextElementSibling.focus();
                     }else{
@@ -1204,12 +1193,10 @@
                     }
                 });
              }
-            var auto_refresh = setInterval(function() { callback(); }, 10000);
-            // function submitform()
-            // {
-            //   // alert('test');
-            // //   document.getElementById("code_form").submit();
-            // }
+             if(typeof callback === 'function') {
+
+                 setInterval(function() { callback(); }, 10000);
+             }
             
         },
         serialize: function (form) {
@@ -1247,7 +1234,7 @@
             for(i in address){
                 output += `
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="radio" value="" ${i === '0' && 'checked=checked'}>
+                                  <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="shippingAddress" value=${i} ${i === '0' && 'checked=checked'}>
                                   <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address1}, ${address[i].address2}, ${address[i].country} ${address[i].zip}</label>
                                 </div>`
             }
@@ -1338,7 +1325,6 @@
 						}else if(type === "email"){
 							if (val.indexOf("@") != -1) {
 								val = val.split("@")[0];
-								console.log("has @ symbol");
 								addEmailDatalist(val); 
 							} else {
                                 inp.classList.remove("is-valid");
@@ -1468,30 +1454,38 @@
             this.userCard = value.card;
         },
         addNewCardDetails: function () {
+            var _this = this;
+            document.getElementById("add-new-card").addEventListener('click', function () {
                 var cvv= document.getElementById('cvv').value,
                 month_expiry= document.getElementById('month_expiry').value,
                 year_expiry= document.getElementById('year_expiry').value,
-                number= document.getElementById('ccnumber').value,
-                _this = this;
+                number= document.getElementById('ccnumber').value;
+    
                 const card = {
                     "exp_month": month_expiry,
                     "exp_year": year_expiry,
                     "last4": number.toString().slice(-4),
                     "cardNumber": number,
+                    'cvv': cvv,
+                    "new_card": true,
                 }
                 if(cvv && month_expiry && year_expiry && number) {
-
+    
                     _this.userCard.unshift(card);
                     _this.getCardDetials();
                 }
+            })
+
 
         },
         addNewShippingDetails: function () {
+            var _this = this;
+            document.getElementById("add-new-address").addEventListener('click', function () {   
+
                 var address1= document.getElementById('address1').value,
                 address2= document.getElementById('address2').value,
                 country= document.getElementById('country').value,
-                zip= document.getElementById('zip').value,
-                _this = this;
+                zip= document.getElementById('zip').value;
 
                 const shippingDetails =     {
                     address1,
@@ -1504,19 +1498,26 @@
                     _this.shippingAddress.unshift(shippingDetails);
                     _this.getShippingAddress()
                 }
+            })
         }
         }
 
         var message_handlers = {};
 
 message_handlers.clickreport = function(message) {
+    const currencySymbol = window.getCurrency(message.data.config.currency);
+    masking.amount = message.data.config.amount;
+
     
+    document.getElementById('send-button').innerText = "Pay " + currencySymbol + masking.amount + " Now"
   masking.user = window.parsed(window.matchCookie(
     window.getCookie("fast-pay")
   ));
-masking.setValue( window.parsed(window.matchCookie(
+  masking.apiKey = message.data.config.key;
+  masking.setValue( window.parsed(window.matchCookie(
     window.getCookie("fast-pay")
   )))
+
   masking.init();
 
 };
