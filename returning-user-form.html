@@ -710,12 +710,12 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="checkbox">
                                <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" value="">
-                                  <label class="custom-control-label" for="customRadio">Free Shipping - $0.00</label>
+                                  <input type="radio" class="custom-control-input" id="free-delivery" name="shipping-method" value="" checked="checked">
+                                  <label class="custom-control-label" for="free-delivery">Free Shipping - $0.00</label>
                                 </div>
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id="customRadio1" name="radio" value="">
-                                  <label class="custom-control-label" for="customRadio1">Express Shipping - $10.91</label>
+                                  <input type="radio" class="custom-control-input" id="express-delivery" name="shipping-method" value="">
+                                  <label class="custom-control-label" for="express-delivery">Express Shipping - $10.91</label>
                                 </div>
                             </div>
                         </div>         
@@ -1247,8 +1247,8 @@
             for(i in address){
                 output += `
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" value="" >
-                                  <label class="custom-control-label" for="customRadio">${address[i].address1}, ${address[i].address2}, ${address[i].country} ${address[i].zip}</label>
+                                  <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="radio" value="" ${i === '0' && 'checked=checked'}>
+                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address1}, ${address[i].address2}, ${address[i].country} ${address[i].zip}</label>
                                 </div>`
             }
             document.getElementById('shipping_address_output').innerHTML = output
