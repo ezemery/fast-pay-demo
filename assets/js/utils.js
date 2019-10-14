@@ -24,11 +24,12 @@ function getCurrency(currency) {
   }
 }
 
-
 function matchCookie(cookie) {
+  if (cookie) {
     return cookie.match(/^s:j:(.*)\..*$/)[1];
+  }
 }
 
 function parsed(text, option = null) {
-  return JSON.parse(text, option)
+  return JSON.parse(text, option);
 }
