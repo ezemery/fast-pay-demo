@@ -17,7 +17,7 @@
    * server origin
    */
    // https://fast-pay-server.herokuapp.com
-  var origin = "https://fast-pay-server.herokuapp.com";
+  var origin = " https://fast-pay-server.herokuapp.com";
   /**
    * path to Fast Pay Form source
    */
@@ -26,12 +26,12 @@
   /**
    * path to Fast Pay Form source
    */
-  var fastPayReturningModalFrame = origin  + "/quick-fill";
+  var fastPayReturningModalFrame = origin  + "/fast-returning-form";
 
   /**
    * path to Fast Pay button source
    */
-  var fastPayButtonFrame = origin + "/fast-button";
+  var fastPayButtonFrame = origin + "/fast-pay-button";
   /**
    * path to Fast Pay Returning Checkout button source
    */

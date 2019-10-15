@@ -607,6 +607,10 @@
 
         payReturningUsersButton.buttonElement.textContent =
           "FAST CHECKOUT - " + currencySymbol + message.data.config.amount;
+
+        if(message.data.config.color){
+            payReturningUsersButton.buttonElement.style.backgroundColor = message.data.config.color;
+        }
       };
 
       window.addEventListener(

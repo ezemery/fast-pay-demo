@@ -1534,16 +1534,21 @@
         }
 
         var message_handlers = {};
+        var buttonElement = document.getElementById('send-button')
 
         message_handlers.clickreport = function(message) {
             const currencySymbol = window.getCurrency(message.data.config.currency);
             masking.amount = message.data.config.amount;
 
             
-            document.getElementById('send-button').innerText = "Pay " + currencySymbol + masking.amount + " Now"
+            buttonElement.innerText = "Pay " + currencySymbol + masking.amount + " Now"
                 masking.user = window.parsed(window.matchCookie(
                 window.getCookie("fast-pay")
             ));
+
+            if(message.data.config.color){
+                buttonElement.style.backgroundColor = message.data.config.color;
+            }
               masking.apiKey = message.data.config.key;
               masking.setValue( window.parsed(window.matchCookie(
               window.getCookie("fast-pay")
@@ -1553,30 +1558,30 @@
 
     };
 
-window.addEventListener(
-  "message",
-  function(message) {
-    if (
-      message &&
-      message.data &&
-      message.data.action &&
-      message_handlers[message.data.action]
-    ) {
-      message_handlers[message.data.action](message);
-    }
-  },
-  false
-);
-        window.addEventListener("click", function(e){
-                if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
-                    parent.postMessage({action: 'closeModal'}, "*");
-                }
-            })
+    window.addEventListener(
+    "message",
+    function(message) {
+        if (
+        message &&
+        message.data &&
+        message.data.action &&
+        message_handlers[message.data.action]
+        ) {
+        message_handlers[message.data.action](message);
+        }
+    },
+    false
+    );
+    window.addEventListener("click", function(e){
+            if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
+                parent.postMessage({action: 'closeModal'}, "*");
+            }
+        })
 
-        window.addEventListener("DOMContentLoaded", function(){
-                window.parent.postMessage({action: 'allcontentloaded'}, masking.origin);
+    window.addEventListener("DOMContentLoaded", function(){
+            window.parent.postMessage({action: 'allcontentloaded'}, masking.origin);
 
-            })
+    })
 
 </script>
  <script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="/assets/js/utils.js"></script>
     <style>
     /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -1347,16 +1348,11 @@
             var buttonElement = window.document.getElementById("send-button");
 
             message_handlers.clickreport = function(message){
-                var currency ;
-                switch(message.data.config.currency.toLowerCase()){
-                    case "usd":
-                        currency = "$";
-                        break;
-                    default:
-                    currency = undefined;
-                }
+                var currency = window.getCurrency(message.data.config.currency)
                 buttonElement.innerText = "Pay " + currency + message.data.config.amount + " Now";
-            //Todo: same origin for post message
+                if(message.data.config.color){
+                    buttonElement.style.backgroundColor = message.data.config.color;
+                }
             };
 
             window.addEventListener("click", function(e){

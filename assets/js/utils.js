@@ -15,7 +15,7 @@ function getCookie(cname) {
 }
 
 function getCurrency(currency) {
-  switch (currency) {
+  switch (currency.toLowerCase()) {
     case "usd":
       return "$";
     default:
