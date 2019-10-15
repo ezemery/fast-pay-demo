@@ -814,7 +814,7 @@
             _this.addCardDetials();
             _this.getCardDetials();
             _this.autoTab(document.querySelectorAll(".email-code-input"),null);
-            _this.autoTab(document.querySelectorAll(".expiry-input"), null);
+            _this.autoTabExpiry(document.querySelectorAll(".expiry"), null);
             _this.formFocus();
             _this.mobileToggle();
             _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
@@ -997,6 +997,25 @@
                     })
                 })
         },
+        autoTabExpiry: function(getAutoTab,callback){
+              var _this = this;
+              var email_input = getAutoTab
+              for (let i = 0; i < email_input.length; i++) {
+                  // console.log(email_input[i].children[0].maxLength)
+                   email_input[i].children[0].addEventListener("keyup", function () {
+                      if (email_input[i].children[0].value.length == email_input[i].children[0].maxLength) {
+                        email_input[i].nextElementSibling.children[0].focus();
+                      }else if(email_input[i].children[0].value.length == 0){
+                          email_input[i].previousElementSibling.children[0].focus();
+                      }
+                  });
+               }
+               if(typeof callback === 'function') {
+
+                   setInterval(function() { callback(); }, 10000);
+               }
+              
+          },
         formFocus: function(){
             var form = document.querySelectorAll(".form-control");
             form.forEach(function(element, i){
@@ -1227,6 +1246,9 @@
         initiateForm: function (id){
             id.classList.toggle("open-form");
         },
+        closeForm: function(id){
+            id.classList.remove('open-form')
+        }
         getShippingAddress: function(){
             var _this = this;
             var address = _this.shippingAddress
@@ -1460,7 +1482,9 @@
                 month_expiry= document.getElementById('month_expiry').value,
                 year_expiry= document.getElementById('year_expiry').value,
                 number= document.getElementById('ccnumber').value;
-    
+                function clearCard (){
+                    cvv = ''; month_expiry= ""; year_expiry=""; number=""
+                }
                 const card = {
                     "exp_month": month_expiry,
                     "exp_year": year_expiry,
@@ -1469,9 +1493,12 @@
                     'cvv': cvv,
                     "new_card": true,
                 }
+                
                 if(cvv && month_expiry && year_expiry && number) {
     
                     _this.userCard.unshift(card);
+                    _this.closeForm(document.getElementById("card-form-button"))
+                    clearCard()
                     _this.getCardDetials();
                 }
             })
@@ -1486,7 +1513,9 @@
                 address2= document.getElementById('address2').value,
                 country= document.getElementById('country').value,
                 zip= document.getElementById('zip').value;
-
+                function clearCard(){
+                    address1="";address2 =""; country=""; zip=""
+                }
                 const shippingDetails =     {
                     address1,
                     country,
@@ -1496,6 +1525,8 @@
                 if(address1 && address2 && country && zip) {
 
                     _this.shippingAddress.unshift(shippingDetails);
+                     _this.closeForm(document.getElementById("shipping-form"))
+                    clearCard()
                     _this.getShippingAddress()
                 }
             })
@@ -1504,23 +1535,23 @@
 
         var message_handlers = {};
 
-message_handlers.clickreport = function(message) {
-    const currencySymbol = window.getCurrency(message.data.config.currency);
-    masking.amount = message.data.config.amount;
+        message_handlers.clickreport = function(message) {
+            const currencySymbol = window.getCurrency(message.data.config.currency);
+            masking.amount = message.data.config.amount;
 
-    
-    document.getElementById('send-button').innerText = "Pay " + currencySymbol + masking.amount + " Now"
-  masking.user = window.parsed(window.matchCookie(
-    window.getCookie("fast-pay")
-  ));
-  masking.apiKey = message.data.config.key;
-  masking.setValue( window.parsed(window.matchCookie(
-    window.getCookie("fast-pay")
-  )))
+            
+            document.getElementById('send-button').innerText = "Pay " + currencySymbol + masking.amount + " Now"
+                masking.user = window.parsed(window.matchCookie(
+                window.getCookie("fast-pay")
+            ));
+              masking.apiKey = message.data.config.key;
+              masking.setValue( window.parsed(window.matchCookie(
+              window.getCookie("fast-pay")
+        )))
 
-  masking.init();
+          masking.init();
 
-};
+    };
 
 window.addEventListener(
   "message",
