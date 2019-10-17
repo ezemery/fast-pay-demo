@@ -858,6 +858,8 @@
             maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
             maskedNumber : '0MMYY1234',
             maskedLetter : '_',
+            last4: "",
+            returningUserCard: "",
             queryURL : location.href.split("?")[1],
             apiKey: 'fwxtJPp1i9t1fDwFDhfrz9qh1colC1Fv',
             stripePublishKey: 'pk_test_n2mnpTPiBf87M8LmyhaK7e6Z00CsarrgUC',
@@ -1035,10 +1037,16 @@
               for (let i = 0; i < email_input.length; i++) {
                    email_input[i].addEventListener("keyup", function () {
                       if (email_input[i].value.length == email_input[i].maxLength) {
-                        email_input[i].nextElementSibling.focus();
+                        if (email_input[i].nextElementSibling !== null) {
+                          email_input[i].nextElementSibling.focus();
+                        }                      
                       }else{
                           email_input[i].previousElementSibling.focus();
                       }
+                                    //initiate quick fill form for returning user
+              if (email_input[i].id === "pincode4") {
+                _this.initiateQuickFill();
+              }
                   });
                }
                if(typeof callback === 'function') {
@@ -1051,7 +1059,6 @@
               var _this = this;
               var email_input = getAutoTab
               for (let i = 0; i < email_input.length; i++) {
-                  // console.log(email_input[i].children[0].maxLength)
                    email_input[i].children[0].addEventListener("keyup", function () {
                       if (email_input[i].children[0].value.length == email_input[i].children[0].maxLength) {
                         email_input[i].nextElementSibling.children[0].focus();
@@ -1083,7 +1090,6 @@
                     form[i].addEventListener("focusin", function(){
                                 form[i].parentElement.classList.add("placeholder-focus");
                                 if(form[i].classList.contains('animate')){
-                                    // console.log(form[i].parentElement.nextElementSibling);
                                     form[i].parentElement.classList.add("expand");
                                     form[i].parentElement.nextElementSibling.classList.add("none");
                                 }
@@ -1143,28 +1149,23 @@
                      };
                 xhr.send(stripeData)
             },
+            cleanData: function(){
+              document.getElementById('email').value = "";
+              document.getElementById('first_name').value ="";
+              document.getElementById('last_name').value = "";
+              document.getElementById('mobile_no').value = "";
+              document.getElementById('phone_code').value = "";
+              document.getElementById('address1').value = "";
+              document.getElementById('address2').value = "";
+              document.getElementById('country').value = "";
+              document.getElementById('zip').value = "";            
+            },
             sendFastData: function(data) {
               // testserver: http://69897ae1.ngrok.io
               // liveServer : https://fast-pay-server.herokuapp.com/test
-                function cleanData(){
-                  document.getElementById('email').value = "";
-                  document.getElementById('first_name').value ="";
-                  document.getElementById('last_name').value = "";
-                  document.getElementById('mobile_no').value = "";
-                  document.getElementById('phone_code').value = "";
-                  document.getElementById('address1').value = "";
-                  document.getElementById('address2').value = "";
-                  document.getElementById('country').value = "";
-                  document.getElementById('zip').value = "";
-
-                    
-                }
                 var _this = this, xhr,url = _this.origin + '/test', button = document.getElementById("send-button");
-                if (window.XMLHttpRequest) {
-                   xhr = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                }
+                var xhr = _this.getXHR();
+
                 xhr.open("POST", url,true);
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.setRequestHeader('Fast-Access-Key', _this.apiKey);
@@ -1175,7 +1176,7 @@
                                      response = xhr.responseText;
                                      button.innerText = "Done";
                                      button.style.backgroundColor = "green";
-                                     cleanData()
+                                     _this.cleanData()
                                      parent.postMessage({action: 'closeModal'}, "*");
                             return response;
                        }else{
@@ -1240,15 +1241,33 @@
                      //alert(JSON.stringify(payload));
                      return payload
             },
-            sendFormData: function () {
-                var cvv= document.getElementById('cvv').value,
-                month_expiry= document.getElementById('month_expiry').value,
-                year_expiry= document.getElementById('year_expiry').value,
-                number= document.getElementById('ccnumber').value,
+            sendFormData: function() {
+                var cvv = document.getElementById("cvv").value,
+                month_expiry = document.getElementById("month_expiry").value,
+                year_expiry = document.getElementById("year_expiry").value,
+                number = document.getElementById("ccnumber").value,
                 _this = this;
-                stripeData = "card[number]="+ number+ "&" + "card[cvc]=" + cvv + "&" + "card[exp_month]="  + month_expiry + "&" + "card[exp_year]=" + year_expiry;
-                _this.sendSTripeData(stripeData); 
-            },
+               var currentCard = _this.sanitizeCard(number);
+
+               if (_this.compare(currentCard,  _this.last4)) {
+                const fastData = _this.getData(_this.returningUserCard);
+                _this.sendFastData(fastData);
+                return _this.clearQuickFill();
+              }
+              stripeData =
+                "card[number]=" +
+                number +
+               "&" +
+               "card[cvc]=" +
+               cvv +
+               "&" +
+               "card[exp_month]=" +
+               month_expiry +
+               "&" +
+               "card[exp_year]=" +
+               year_expiry;
+               _this.sendSTripeData(stripeData);
+          },
             
             submitForm: function (){
                 
@@ -1428,62 +1447,79 @@
           }  
           return xhr; 
         },
-        showQuickFill: function(show){
-            const el = document.getElementById('quick-fill');
-            if(show) {
-                el.classList.remove('hide-quick-fill');
-            }
-        },
-        submitCode: function(code){
-            var _this = this;
-            var xhr = _this.getXHR();
-            var url = _this.origin + '/checkout/auth/verify';
-            try {             
-              xhr.open("POST", url, true);
-              xhr.setRequestHeader("Content-type", "application/json");
-              xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
-              xhr.onload = function() {
-                if (xhr.readyState === xhr.DONE) {
-                  if (xhr.status === 200) {
-                    response = JSON.parse(xhr.responseText);
-    
-                    return response;
-                  } 
-                }
-              };
-              xhr.send({code, code_identifier: _this.codeIdentifier});
-          } catch (error) {
-            console.error('Ajax error communicating witht he server\n', error);
+        showQuickFill: function(show) {
+          const el = document.getElementById("quick-fill");
+          
+          if (show) {
+            el.classList.remove("hide-quick-fill");
+          } else {
+            el.classList.add("hide-quick-fill");
           }
-        }, 
-        verifyEmail: function(email) {
-            var _this = this;
-            var xhr = _this.getXHR();
-            var url = _this.origin + '/checkout/' + email + '/auth';
-            try {             
-              xhr.open("GET", url, true);
-              xhr.setRequestHeader("Content-type", "application/json");
-              xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
-              xhr.onload = function() {
-                if (xhr.readyState === xhr.DONE) {
-                  if (xhr.status === 200) {
-                    response = JSON.parse(xhr.responseText);
-                    if(!response.error) {
-                      const show = response.data.identifier_exists;
-                      console.log(response.data)
-  
-                      _this.codeIdentifier = response.data.code_identifier;
-  
-                      _this.showQuickFill(show);
-        
-                      return response;
-                    }
-                  } 
+        },
+        submitCode: function(code) {
+          var _this = this;
+          var xhr = _this.getXHR();
+          var url = _this.origin + "/checkout/auth/verify";
+          try {
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
+            xhr.onload = function() {
+              if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                  response = JSON.parse(xhr.responseText);
+                  if (response.error) {
+                    // clear form and show again if the code submitted was wrong
+                    _this.clearQuickFill();
+                    return _this.showQuickFill(true);
+                  } else {
+                    // hide quick to prevent user action
+                    _this.showQuickFill(false);
+                    // remove pattern property on ccnumber and cvv to allow submission
+                    document
+                      .getElementById("ccnumber")
+                      .removeAttribute("pattern");
+                    document.getElementById("cvv").removeAttribute("pattern");
+                    // set value to pre fill form
+                    return _this.setValue(response.data);
+                  }
                 }
-              };
-              xhr.send(JSON.stringify(email));
+              }
+            };
+            xhr.send(JSON.stringify({ code, code_identifier: _this.codeIdentifier }));
           } catch (error) {
-            console.error('Ajax error communicating witht he server\n', error);
+            console.error("Ajax error communicating witht he server\n", error);
+          }
+        },
+        //verify user email by sending it to the server
+        verifyEmail: function(email) {
+          var _this = this;
+          var xhr = _this.getXHR();
+          var url = _this.origin + "/checkout/" + email + "/auth";
+          try {
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
+            xhr.onload = function() {
+              if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                  response = JSON.parse(xhr.responseText);
+                  console.log({response})
+                  if (!response.error) {
+                    const show = response.data.identifier_exists;
+                    // show quick fill for if user already exist else do nothing
+                    if(show) {
+                      _this.codeIdentifier = response.data.code_identifier;
+                      _this.showQuickFill(show);
+                    }
+                    return response;
+                  }
+                }
+              }
+            };
+            xhr.send(JSON.stringify(email));
+          } catch (error) {
+            console.error("Ajax error communicating witht he server\n", error);
           }
         },
         getQuickFill: function () {
@@ -1496,39 +1532,101 @@
             _this.submitCode(code)
           }
         },
+        clearQuickFill: function() {
+          var _this = this;
+          document.getElementById("pincode1").value = "";
+          document.getElementById("pincode2").value = "";
+          document.getElementById("pincode3").value = "";
+          document.getElementById("pincode4").value = "";
+        },
         getEmail: function() {
-            var _this = this;
-            oldEmail = _this.oldEmail;
-            var email = document.getElementById('email');
-            email.addEventListener('blur', function() {
-                if(_this.isValidEmail(email.value)) {
-                  if(!_this.compare(oldEmail, email.value)) {
-                    // track email to limit server calls
-                    _this.oldEmail = email.value;
-                    var handler = _this.verifyEmail.bind(_this);
-                    _this.delayCall(handler, email.value);
-                    
-                       
-                  }
-                }
-            })
+          var _this = this;
+          oldEmail = _this.oldEmail;
+          var email = document.getElementById("email");
+          email.addEventListener("blur", function() {
+            if (_this.isValidEmail(email.value)) {
+              if (!_this.compare(oldEmail, email.value)) {
+                // track email to limit server calls
+                var handler = _this.verifyEmail.bind(_this);
+                _this.delayCall(handler, email.value);
+              }
+              _this.oldEmail = email.value;
+            }
+          });
         },
         compare: function (a, b) {
           return a === b;
         },
-        delayCall: function(handler, value){
-          if(typeof handler === 'function') {
-            setTimeout(function(){
-              if(value) {
-                handler(value);
+        delayCall: function(handler, value) {
+          if (typeof handler === "function") {
+            setTimeout(function() {
+              if (value) {
+                return handler(value);
               }
-              handler();
+              return handler();
             }, 1000);
           }
         },
         isValidEmail: function(email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(email).toLowerCase());
+        },
+        initiateQuickFill: function() {
+          var _this = this;
+          const pincode1 = document.getElementById("pincode1").value;
+          const pincode2 = document.getElementById("pincode2").value;
+          const pincode3 = document.getElementById("pincode3").value;
+          const pincode4 = document.getElementById("pincode4").value;
+          if (pincode1 && pincode2 && pincode3 && pincode4) {
+            var code = pincode1 + pincode2 + pincode3 + pincode4;
+            _this.submitCode(code);
+            _this.showQuickFill(false);
+          }
+        },
+        setValue: function(data) {
+          var _this = this;
+          var email = document.getElementById("email"),
+            firstName = document.getElementById("first_name"),
+            lastName = document.getElementById("last_name"),
+            phoneNumber = document.getElementById("mobile_no"),
+            phone = document.getElementById("phone_code"),
+            address1 = document.getElementById("address1"),
+            address2 = document.getElementById("address2"),
+            country = document.getElementById("country"),
+            zip = document.getElementById("zip"),
+            ccnumber = document.getElementById("ccnumber"),
+            monthExpiry = document.getElementById("month_expiry"),
+            yearExpiry = document.getElementById("year_expiry"),
+            cvv = document.getElementById("cvv");
+          email.value = data.personal.email;
+          email.parentNode.classList.add("placeholder-focus");
+          firstName.value = data.personal.firstName;
+          firstName.parentNode.classList.add("placeholder-focus");
+          lastName.value = data.personal.lastName;
+          lastName.parentNode.classList.add("placeholder-focus");
+          phoneNumber.value = data.personal.phone.phone;
+          phoneNumber.parentNode.classList.add("placeholder-focus");
+          phone.value = data.personal.phone.country;
+          address1.value = data.shipping[0].address1;
+          address1.parentNode.classList.add("placeholder-focus");
+          address2.value = data.shipping[0].address2;
+          address2.parentNode.classList.add("placeholder-focus");
+          zip.value = data.shipping[0].zip;
+          zip.parentNode.classList.add("placeholder-focus");
+          country.value = data.shipping[0].country;
+          _this.returningUserCard = data.card[0];
+          _this.last4 = data.card[0].last4;
+          ccnumber.value = "XXXX " + data.card[0].last4;
+          ccnumber.parentNode.classList.add("placeholder-focus");
+          monthExpiry.value = data.card[0].exp_month;
+          monthExpiry.parentNode.classList.add("placeholder-focus");
+          yearExpiry.value = data.card[0].exp_year.toString().slice(-2);
+          yearExpiry.parentNode.classList.add("placeholder-focus");
+          cvv.value = "XXXX";
+          cvv.parentNode.classList.add("placeholder-focus");
+        },
+        sanitizeCard: function(card) {
+          return card.replace(/X/gi, "").trim();
         }
           
             }
