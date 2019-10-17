@@ -9,6 +9,7 @@
        #       #     # #     #    #    #       #     #    #    
        #       #     #  #####     #    #       #     #    # 
   */
+
   var globalFastData;
   var iframe;
   var div;
@@ -17,7 +18,7 @@
    * server origin
    */
    // https://fast-pay-server.herokuapp.com
-  var origin = " https://fast-pay-server.herokuapp.com";
+  var origin = "https://fast-pay-server.herokuapp.com";
   /**
    * path to Fast Pay Form source
    */
@@ -432,3 +433,13 @@
 
   init();
 })(window);
+
+  console.log(`
+      ########   #     #####  ####### ######     #    #     #
+       #         # #   #     #    #    #     #   # #    #   #  
+       #        #   #  #          #    #     #  #   #    # #   
+       #####   #     #  #####     #    ######  #     #    #    
+       #       #######       #    #    #       #######    #    
+       #       #     # #     #    #    #       #     #    #    
+       #       #     #  #####     #    #       #     #    # 
+    `)
