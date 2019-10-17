@@ -357,7 +357,7 @@
      */
 	 function createInitButton( num, data) {
       var iframe = createFastFrame(num, "init-frame", "init-frame");
-      loadIframe(iframe, data, fastPayEmptyFrame);
+      loadIframe(iframe, data.key, fastPayEmptyFrame);
 	 };
 	 
 	 /**
