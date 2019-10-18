@@ -43,7 +43,9 @@
           opacity: 1;
         }
      }
-
+     a {
+        text-decoration: none;
+     }
      p,.form-control, .custom-select, label{
       font-family: Graphik !important;
     }
@@ -886,7 +888,7 @@
                                       <path d="M8.65625 12.5018C8.8386 12.5018 8.95257 12.5018 9.06085 12.5018C13.4829 12.5018 17.9107 12.5018 22.3327 12.5018C22.7145 12.5018 22.7088 12.5018 22.572 12.8665C22.27 13.6643 21.968 14.4621 21.666 15.2599C21.2956 16.2515 20.1217 16.7814 19.039 16.3882C15.6312 15.1345 12.2292 13.8638 8.82721 12.593C8.79301 12.5816 8.75882 12.5588 8.65625 12.5018Z" fill="white"/>
                                       <path d="M10.2021 16.6848C11.376 16.6848 12.5044 16.6848 13.6327 16.6848C14.402 16.6848 15.1713 16.7019 15.9406 16.7019C16.1229 16.7019 16.197 16.719 16.1115 16.9299C15.9064 17.4313 15.7297 17.9385 15.5246 18.44C15.2168 19.1922 14.1626 19.6253 13.4104 19.0497C12.4189 18.2861 11.3931 17.5681 10.3788 16.8273C10.3332 16.7931 10.2819 16.7532 10.2021 16.6848Z" fill="white"/>
                                       </svg>
-                                    </span> Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
+                                    </span> Another easy & secure payment by Fast <a href="https://fast.co/terms" target="_blank"><b class="color-fast">Terms and conditions</b></a></p>
                                 <button id="send-button" type="submit" class="btn btn-green"></button>
                             </div>   
                         </div>
@@ -1724,10 +1726,11 @@
     false
     );
     window.addEventListener("click", function(e){
-            if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
+            if(e.target.nodeName === "BODY" || e.target.nodeName === "HTML" || e.target.id === "fast-close_form"){
                 parent.postMessage({action: 'closeModal'}, "*");
             }
         })
+
      window.document.onkeydown = function(evt) {
         evt = evt || window.event;
         var isEscape = false;
