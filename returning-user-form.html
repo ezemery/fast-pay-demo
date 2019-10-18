@@ -1386,8 +1386,8 @@
                 <div class="col-md-4 col-4 col-sm-4">
                     <div class="card">
                         <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="express-delivery" name="shipping-method" value="">
-                          <label class="custom-control-label" for="express-delivery"><span><img src="assets/img/visa.svg" alt=""></span><span> ${card[i].last4}</span></label>
+                          <input type="radio" class="custom-control-input" id="express-card-${i}" name="card-value" value=${i} ${i === '0' && 'checked=checked'}>
+                          <label class="custom-control-label" for="express-card-${i}"><span><img src="assets/img/visa.svg" alt=""></span><span> ${card[i].last4}</span></label>
                         </div>
                     </div>
                 </div>`
@@ -1658,7 +1658,7 @@
 
         var message_handlers = {};
         var buttonElement = document.getElementById('send-button')
-        var footer_message = window.document.querySelector('.secure-text > .color-fast');
+        var footer_message = window.document.querySelector('.secure-text .color-fast');
         var fast_logo = window.document.querySelector('.svg-image > svg > path:nth-child(1)');
         var footer_svg = window.document.querySelectorAll('.color__effect > svg > path');
         var addButton = window.document.querySelectorAll('.btn-add');
