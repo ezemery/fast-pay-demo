@@ -1665,6 +1665,7 @@
             var message_handlers = {};
             var buttonElement = window.document.getElementById("send-button");
             var footer_message = window.document.querySelector('.secure-text .color-fast');
+            var apartment = window.document.querySelector(".new__form-set .toggle-apartment");
             var footer_svg = window.document.querySelector('.svg-image > svg > path:nth-child(1)');
             var close_form = window.document.querySelector('.fast-close__form');
             var fast_pay_form = document.querySelector('.fast-pay')
@@ -1675,6 +1676,7 @@
                   let newColor = message.data.config.color;
                     buttonElement.style.backgroundColor = newColor;
                     footer_message.style.color = newColor;
+                    apartment.style.color = newColor;
                     footer_svg.style.fill = newColor;
                     close_form.style.color = newColor;
                     fast_pay_form.style.border = `1px solid ${newColor}`
@@ -1694,13 +1696,7 @@
 
             window.addEventListener("click", function(e){
                 if( e.target.className === "toggle-apartment"){
-                    if(document.getElementsByClassName("apartment")[0].style.display === "none"){
-                        document.getElementsByClassName("apartment")[0].style.display = "block";
-                    }else{
-                        document.getElementsByClassName("apartment")[0].style.display = "none"; 
-                    }
-                    
-
+                        document.getElementsByClassName("apartment")[0].classList.toggle("open-form");;
                 }
             })
 
