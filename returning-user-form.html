@@ -908,7 +908,7 @@
         maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
         maskedNumber : '0MMYY1234',
         maskedLetter : '_',
-        origin: '*',
+        origin: 'https://fast-pay-server.herokuapp.com',
         shippingAddress: [],
         userCard: [],
         amount: '',
@@ -1116,7 +1116,6 @@
               var _this = this;
               var email_input = getAutoTab
               for (let i = 0; i < email_input.length; i++) {
-                  // console.log(email_input[i].children[0].maxLength)
                    email_input[i].children[0].addEventListener("keyup", function () {
                       if (email_input[i].children[0].value.length == email_input[i].children[0].maxLength) {
                         email_input[i].nextElementSibling.children[0].focus();
@@ -1164,12 +1163,8 @@
         },
         sendSTripeData: function(stripeData) {
             var _this = this, xhr,cardToken, button = document.getElementById("send-button"), url = 'https://api.stripe.com/v1/tokens';
-
-            if (window.XMLHttpRequest) {
-               xhr = new XMLHttpRequest();
-            } else if (window.ActiveXObject) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
+            
+            xhr = _this.getXHR();
             xhr.withCredentials = true;
 
 
@@ -1205,13 +1200,9 @@
         },
 
         sendFastData: function(data) {
-            var _this = this, xhr,url = 'https://fast-pay-server.herokuapp.com/return-form-test', button = document.getElementById("send-button");
+            var _this = this, xhr,url = _this.origin + '/return-form-test', button = document.getElementById("send-button");
 
-            if (window.XMLHttpRequest) {
-               xhr = new XMLHttpRequest();
-            } else if (window.ActiveXObject) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
+            xhr = _this.getXHR();
 
             xhr.open("POST", url,true);
 
@@ -1243,7 +1234,7 @@
             _this = this;
 
             // shippind address
-            var shippingAddressIndex = document.querySelector('input[name="shippingAddress"]:checked').value
+            var shippingAddressIndex = _this.getCheckedValue('shippingAddress');
             var shippingAddress = _this.shippingAddress[shippingAddressIndex];
 				 
 
@@ -1285,8 +1276,8 @@
         },
         sendFormData: function () {
             var _this = this;
-            var card = document.getElementById("card__select");
-            var currentCard =  _this.userCard[card.selectedIndex];
+            var cardIndex = _this.getCheckedValue('card-value');
+            var currentCard =  _this.userCard[cardIndex];
 
             if(currentCard.new_card) {
                 stripeData = "card[number]="+ currentCard.cardNumber+ "&" + "card[cvc]=" + currentCard.cvv + "&" + "card[exp_month]="  + currentCard.exp_month + "&" + "card[exp_year]=" + currentCard.exp_year;
@@ -1382,7 +1373,13 @@
             var card = _this.userCard
             var output = ''
             for(i in card){
-                output += ` 
+                // var checked, last4;
+                // if(i === '0') {
+                //     checked = 'checked';
+                //     last4= card[i].last4;
+                // }
+
+                output += `
                 <div class="col-md-4 col-4 col-sm-4">
                     <div class="card">
                         <div class="custom-control custom-radio">
@@ -1391,6 +1388,8 @@
                         </div>
                     </div>
                 </div>`
+
+                // output += '<div class=col-md-4 col-4 col-sm-4><div class=card><div class=custom-control custom-radio><input type=radio class=custom-control-input id=express-card-' + i + ' name=card-value value=' + i + ' checked=' + checked + ' ><label class=custom-control-label for=express-card-' + i + ' ><span><img src=assets/img/visa.svg alt=></span><span> ' + last4 + ' </span></label></div></div></div>'
             }
             document.getElementById('card__select').innerHTML = output
         },
@@ -1598,6 +1597,9 @@
             this.shippingAddress = value.shipping;
             this.userCard = value.card;
         },
+        clearCard: function (){
+            document.getElementById('cvv').value = ''; document.getElementById('month_expiry').value= ""; document.getElementById('year_expiry').value=""; document.getElementById('ccnumber').value=""
+        },
         addNewCardDetails: function () {
             var _this = this;
             document.getElementById("add-new-card").addEventListener('click', function () {
@@ -1605,9 +1607,6 @@
                 month_expiry= document.getElementById('month_expiry').value,
                 year_expiry= document.getElementById('year_expiry').value,
                 number= document.getElementById('ccnumber').value;
-                function clearCard (){
-                    document.getElementById('cvv').value = ''; document.getElementById('month_expiry').value= ""; document.getElementById('year_expiry').value=""; document.getElementById('ccnumber').value=""
-                }
                 const card = {
                     "exp_month": month_expiry,
                     "exp_year": year_expiry,
@@ -1616,17 +1615,19 @@
                     'cvv': cvv,
                     "new_card": true,
                 }
-                
                 if(cvv && month_expiry && year_expiry && number) {
     
                     _this.userCard.unshift(card);
                     _this.closeForm(document.getElementById("card-form-button"))
-                    clearCard()
+                    _this.clearCard()
                     _this.getCardDetials();
                 }
             })
 
 
+        },
+        clearAddress: function(){
+            document.getElementById('address1').value =""; document.getElementById('address2').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
         },
         addNewShippingDetails: function () {
             var _this = this;
@@ -1636,9 +1637,6 @@
                 address2= document.getElementById('address2').value,
                 country= document.getElementById('country').value,
                 zip= document.getElementById('zip').value;
-                function clearCard(){
-                    document.getElementById('address1').value =""; document.getElementById('address2').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
-                }
                 const shippingDetails =     {
                     address1,
                     country,
@@ -1649,11 +1647,23 @@
 
                     _this.shippingAddress.unshift(shippingDetails);
                      _this.closeForm(document.getElementById("shipping-form"))
-                    clearCard()
+                    _this.clearAddress();
                     _this.getShippingAddress()
                 }
             })
-        }
+        },
+        getCheckedValue: function(name) {
+            return document.querySelector('input[name=' + name+ ']:checked').value;
+        },
+        getXHR: function() {
+            var xhr;
+          if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+          } else if (window.ActiveXObject) {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }  
+          return xhr; 
+        },
         }
 
         var message_handlers = {};
@@ -1688,7 +1698,6 @@
                     footer_svg[i].style.fill = newColor;
                     if(footer_svg[i].parentElement.parentElement.classList.contains('svg-image')){
                         // footer_svg[0].children[0].style.fill = newColor;
-                         // console.log(footer_svg[0])
                         // footer_svg[i].childNodes.style.fill = newColor;
                     }
                    
@@ -1744,7 +1753,7 @@
         }
     };
     window.addEventListener("DOMContentLoaded", function(){
-            window.parent.postMessage({action: 'allcontentloaded'}, masking.origin);
+            window.parent.postMessage({action: 'allcontentloaded'}, '*');
 
     })
 
