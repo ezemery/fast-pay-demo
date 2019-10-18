@@ -1178,6 +1178,7 @@
                                      button.style.backgroundColor = "green";
                                      _this.cleanData()
                                      parent.postMessage({action: 'closeModal'}, "*");
+                                     parent.postMessage({action: 'reload'}, '*')
                             return response;
                        }else{
                                     button.innerText = "There was an error, try again";

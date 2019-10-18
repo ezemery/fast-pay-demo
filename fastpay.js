@@ -82,8 +82,15 @@
 	 * @params message object
 	 */
   message_handlers.closeModal = function(data){
-      toggleFastFormModalVisibility()
-	}
+      toggleFastFormModalVisibility();
+  }
+  /**
+	 * message handler for reloading parent page
+	 * @params message object
+	 */
+  message_handlers.reload = function(data){
+    parent.location.reload(true);
+}
 	/**
 	 * message handler for loadCookie
 	 * @params message object
