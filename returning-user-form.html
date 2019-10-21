@@ -1441,9 +1441,10 @@
 								b.innerHTML += " " + country_code;
 
 								b.innerHTML += "<input type='hidden' value='+" + country_phone + "'>";
-									b.addEventListener("click", function(e) {
+								b.addEventListener("click", function(e) {
 									inp.value = this.getElementsByTagName("input")[0].value;
-									inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+									var country =  this.getElementsByTagName("img")[0].src ;
+                                    inp.style.backgroundImage = "url("+country+")";
 									closeAllLists();
 								});
 								a.appendChild(b);
@@ -1459,9 +1460,10 @@
 
 								b.innerHTML += "<input type='hidden' value='" + country_code + "'>";
 								b.addEventListener("click", function(e) {
-								inp.value = this.getElementsByTagName("input")[0].value;
-								inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
-								closeAllLists();
+                                    inp.value = this.getElementsByTagName("input")[0].value;
+                                    var country =  this.getElementsByTagName("img")[0].src ;
+                                    inp.style.backgroundImage = "url("+country+")";
+                                    closeAllLists();
 								});
 								a.appendChild(b);
 								}
