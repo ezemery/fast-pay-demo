@@ -42,18 +42,21 @@
           opacity: 1;
         }
      }
-
+     a {
+        text-decoration: none;
+     }
      p,.form-control, .custom-select, label{
       font-family: Graphik !important;
     }
-    .svg-image {
+   .svg-image {
         float: left;
-        margin-top: -5px;
+        margin-top: -4px;
+        margin-right:8px;
     }
      .fast-pay{
          margin: 2rem auto;
-         width:60%;
          min-height: 100vh;
+         width:75%;
          padding: 2rem 20px;
          background-color: #fff;
          /*overflow-x: hidden;*/
@@ -113,6 +116,17 @@
     }
     .new__form-set.apartment {
         display: none;
+    }
+
+    .new__form-set .toggle-apartment {
+        font-size: 13px;
+        font-weight: 300;
+        text-transform: lowercase;
+        color: #88D20F;
+        position: absolute;
+        right: 10px;
+        text-align: right;
+        cursor: pointer;
     }
      .form-control:focus{
         background:#fff;
@@ -245,6 +259,7 @@
     .input-email{
         display: flex;
     }
+  
     .input-group-text.prepend{
         width: 43px;
         height: calc(1.5em + .75rem + 15px);
@@ -552,6 +567,22 @@
   }
 
 }
+@media only screen 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
+    and (-webkit-device-pixel-ratio: 3) {
+        .fast-pay{
+             margin: 2rem auto;
+             min-height: 110vh !important;
+             width:75%;
+             padding: 2rem 20px;
+             background-color: #fff;
+             /*overflow-x: hidden;*/
+             border: 2px solid #EEEEEE;
+             box-sizing: border-box;
+             position: relative;
+         }
+     }
 @media( max-width : 220px ){
  body{
         padding: 0rem !important;
@@ -745,7 +776,8 @@
                     </div>
                 </div>
                 <div class="new__form-set">
-                <h4 class="fast-pay-title">Shipping Details</h4>
+                <h4 class="fast-pay-title">Shipping Details <span class="toggle-apartment">+ unit/suite/company name</span></h4>
+                
                 <div class="new__form-set">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -855,7 +887,7 @@
                               <path d="M10.2021 16.6848C11.376 16.6848 12.5044 16.6848 13.6327 16.6848C14.402 16.6848 15.1713 16.7019 15.9406 16.7019C16.1229 16.7019 16.197 16.719 16.1115 16.9299C15.9064 17.4313 15.7297 17.9385 15.5246 18.44C15.2168 19.1922 14.1626 19.6253 13.4104 19.0497C12.4189 18.2861 11.3931 17.5681 10.3788 16.8273C10.3332 16.7931 10.2819 16.7532 10.2021 16.6848Z" fill="white"/>
                               </svg>
                             </span> 
-                            Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
+                            Another easy & secure payment by Fast <a href="https://fast.co/terms" target="_blank"><b class="color-fast">Terms and conditions</b></a></p>
                             <button id="send-button" type="submit" class="btn btn-green">Pay <span class="data-amount">$120</span> Now</button>
                         </div>   
                     </div>
@@ -1194,6 +1226,7 @@
                                      button.style.backgroundColor = "green";
                                      _this.cleanData()
                                      parent.postMessage({action: 'closeModal'}, "*");
+                                     parent.postMessage({action: 'reload'}, '*')
                             return response;
                        }else{
                                     button.innerText = "There was an error, try again";
@@ -1333,7 +1366,8 @@
                                     b.innerHTML += "<input type='hidden' value='+" + country_phone + "'>";
                                         b.addEventListener("click", function(e) {
                                         inp.value = this.getElementsByTagName("input")[0].value;
-                                        inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+                                        var country =  this.getElementsByTagName("img")[0].src;
+                                        inp.style.backgroundImage = "url("+country+")";
                                         closeAllLists();
                                     });
                                     a.appendChild(b);
@@ -1348,8 +1382,9 @@
                                     b.innerHTML += country_code.substr(val.length);
                                     b.innerHTML += "<input type='hidden' value='" + country_code + "'>";
                                     b.addEventListener("click", function(e) {
-                                    inp.value = this.getElementsByTagName("input")[0].value;
-                                    inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+                                        inp.value = this.getElementsByTagName("input")[0].value;
+                                        var country =  this.getElementsByTagName("img")[0].src;
+                                        inp.style.backgroundImage = "url("+country+")";
                                     closeAllLists();
                                     });
                                     a.appendChild(b);
@@ -1649,7 +1684,8 @@
             var  origin  = "*";
             var message_handlers = {};
             var buttonElement = window.document.getElementById("send-button");
-            var footer_message = window.document.querySelector('.secure-text > .color-fast');
+            var footer_message = window.document.querySelector('.secure-text .color-fast');
+            var apartment = window.document.querySelector(".new__form-set .toggle-apartment");
             var footer_svg = window.document.querySelector('.svg-image > svg > path:nth-child(1)');
             var close_form = window.document.querySelector('.fast-close__form');
             var fast_pay_form = document.querySelector('.fast-pay')
@@ -1660,6 +1696,7 @@
                   let newColor = message.data.config.color;
                     buttonElement.style.backgroundColor = newColor;
                     footer_message.style.color = newColor;
+                    apartment.style.color = newColor;
                     footer_svg.style.fill = newColor;
                     close_form.style.color = newColor;
                     fast_pay_form.style.border = `1px solid ${newColor}`
@@ -1672,10 +1709,17 @@
             };
 
             window.addEventListener("click", function(e){
-                if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
+                if(e.target.nodeName === "BODY" || e.target.nodeName === "HTML" || e.target.id === "fast-close_form"){
                     parent.postMessage({action: 'closeModal'}, "*");
                 }
             })
+
+            window.addEventListener("click", function(e){
+                if( e.target.className === "toggle-apartment"){
+                        document.getElementsByClassName("apartment")[0].classList.toggle("open-form");;
+                }
+            })
+
             window.document.onkeydown = function(evt) {
                 evt = evt || window.event;
                 var isEscape = false;
@@ -1688,6 +1732,7 @@
                     parent.postMessage({action: 'closeModal'}, "*");
                 }
             };
+
             window.addEventListener(
                 "message",
                 function(message) {

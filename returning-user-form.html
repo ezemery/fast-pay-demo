@@ -43,7 +43,9 @@
           opacity: 1;
         }
      }
-
+     a {
+        text-decoration: none;
+     }
      p,.form-control, .custom-select, label{
       font-family: Graphik !important;
     }
@@ -54,8 +56,8 @@
     }
        .fast-pay{
          margin: 2rem auto;
-         width:60%;
          min-height: 100vh;
+         width:75%;
          padding: 2rem 20px;
          background-color: #fff;
          /*overflow-x: hidden;*/
@@ -889,7 +891,7 @@
                                       <path d="M8.65625 12.5018C8.8386 12.5018 8.95257 12.5018 9.06085 12.5018C13.4829 12.5018 17.9107 12.5018 22.3327 12.5018C22.7145 12.5018 22.7088 12.5018 22.572 12.8665C22.27 13.6643 21.968 14.4621 21.666 15.2599C21.2956 16.2515 20.1217 16.7814 19.039 16.3882C15.6312 15.1345 12.2292 13.8638 8.82721 12.593C8.79301 12.5816 8.75882 12.5588 8.65625 12.5018Z" fill="white"/>
                                       <path d="M10.2021 16.6848C11.376 16.6848 12.5044 16.6848 13.6327 16.6848C14.402 16.6848 15.1713 16.7019 15.9406 16.7019C16.1229 16.7019 16.197 16.719 16.1115 16.9299C15.9064 17.4313 15.7297 17.9385 15.5246 18.44C15.2168 19.1922 14.1626 19.6253 13.4104 19.0497C12.4189 18.2861 11.3931 17.5681 10.3788 16.8273C10.3332 16.7931 10.2819 16.7532 10.2021 16.6848Z" fill="white"/>
                                       </svg>
-                                    </span> Another easy & secure payment by Fast <b class="color-fast">Terms and conditions</b></p>
+                                    </span> Another easy & secure payment by Fast <a href="https://fast.co/terms" target="_blank"><b class="color-fast">Terms and conditions</b></a></p>
                                 <button id="send-button" type="submit" class="btn btn-green"></button>
                             </div>   
                         </div>
@@ -909,7 +911,7 @@
         maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
         maskedNumber : '0MMYY1234',
         maskedLetter : '_',
-        origin: '*',
+        origin: 'https://fast-pay-server.herokuapp.com',
         shippingAddress: [],
         userCard: [],
         amount: '',
@@ -1117,7 +1119,6 @@
               var _this = this;
               var email_input = getAutoTab
               for (let i = 0; i < email_input.length; i++) {
-                  // console.log(email_input[i].children[0].maxLength)
                    email_input[i].children[0].addEventListener("keyup", function () {
                       if (email_input[i].children[0].value.length == email_input[i].children[0].maxLength) {
                         email_input[i].nextElementSibling.children[0].focus();
@@ -1165,12 +1166,8 @@
         },
         sendSTripeData: function(stripeData) {
             var _this = this, xhr,cardToken, button = document.getElementById("send-button"), url = 'https://api.stripe.com/v1/tokens';
-
-            if (window.XMLHttpRequest) {
-               xhr = new XMLHttpRequest();
-            } else if (window.ActiveXObject) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
+            
+            xhr = _this.getXHR();
             xhr.withCredentials = true;
 
 
@@ -1206,13 +1203,9 @@
         },
 
         sendFastData: function(data) {
-            var _this = this, xhr,url = 'https://fast-pay-server.herokuapp.com/return-form-test', button = document.getElementById("send-button");
+            var _this = this, xhr,url = _this.origin + '/return-form-test', button = document.getElementById("send-button");
 
-            if (window.XMLHttpRequest) {
-               xhr = new XMLHttpRequest();
-            } else if (window.ActiveXObject) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
+            xhr = _this.getXHR();
 
             xhr.open("POST", url,true);
 
@@ -1244,7 +1237,7 @@
             _this = this;
 
             // shippind address
-            var shippingAddressIndex = document.querySelector('input[name="shippingAddress"]:checked').value
+            var shippingAddressIndex = _this.getCheckedValue('shippingAddress');
             var shippingAddress = _this.shippingAddress[shippingAddressIndex];
 				 
 
@@ -1286,8 +1279,8 @@
         },
         sendFormData: function () {
             var _this = this;
-            var card = document.getElementById("card__select");
-            var currentCard =  _this.userCard[card.selectedIndex];
+            var cardIndex = _this.getCheckedValue('card-value');
+            var currentCard =  _this.userCard[cardIndex];
 
             if(currentCard.new_card) {
                 stripeData = "card[number]="+ currentCard.cardNumber+ "&" + "card[cvc]=" + currentCard.cvv + "&" + "card[exp_month]="  + currentCard.exp_month + "&" + "card[exp_year]=" + currentCard.exp_year;
@@ -1383,15 +1376,23 @@
             var card = _this.userCard
             var output = ''
             for(i in card){
-                output += ` 
+                // var checked, last4;
+                // if(i === '0') {
+                //     checked = 'checked';
+                //     last4= card[i].last4;
+                // }
+
+                output += `
                 <div class="col-md-4 col-4 col-sm-4">
                     <div class="card">
                         <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="express-delivery" name="shipping-method" value="">
-                          <label class="custom-control-label" for="express-delivery"><span><img src="assets/img/visa.svg" alt=""></span><span> ${card[i].last4}</span></label>
+                          <input type="radio" class="custom-control-input" id="express-card-${i}" name="card-value" value=${i} ${i === '0' && 'checked=checked'}>
+                          <label class="custom-control-label" for="express-card-${i}"><span><img src="assets/img/visa.svg" alt=""></span><span> ${card[i].last4}</span></label>
                         </div>
                     </div>
                 </div>`
+
+                // output += '<div class=col-md-4 col-4 col-sm-4><div class=card><div class=custom-control custom-radio><input type=radio class=custom-control-input id=express-card-' + i + ' name=card-value value=' + i + ' checked=' + checked + ' ><label class=custom-control-label for=express-card-' + i + ' ><span><img src=assets/img/visa.svg alt=></span><span> ' + last4 + ' </span></label></div></div></div>'
             }
             document.getElementById('card__select').innerHTML = output
         },
@@ -1443,9 +1444,10 @@
 								b.innerHTML += " " + country_code;
 
 								b.innerHTML += "<input type='hidden' value='+" + country_phone + "'>";
-									b.addEventListener("click", function(e) {
+								b.addEventListener("click", function(e) {
 									inp.value = this.getElementsByTagName("input")[0].value;
-									inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
+									var country =  this.getElementsByTagName("img")[0].src ;
+                                    inp.style.backgroundImage = "url("+country+")";
 									closeAllLists();
 								});
 								a.appendChild(b);
@@ -1461,9 +1463,10 @@
 
 								b.innerHTML += "<input type='hidden' value='" + country_code + "'>";
 								b.addEventListener("click", function(e) {
-								inp.value = this.getElementsByTagName("input")[0].value;
-								inp.style.backgroundImage = "url('https://www.countryflags.io/"+country_code+"/flat/16.png')";
-								closeAllLists();
+                                    inp.value = this.getElementsByTagName("input")[0].value;
+                                    var country =  this.getElementsByTagName("img")[0].src ;
+                                    inp.style.backgroundImage = "url("+country+")";
+                                    closeAllLists();
 								});
 								a.appendChild(b);
 								}
@@ -1599,6 +1602,9 @@
             this.shippingAddress = value.shipping;
             this.userCard = value.card;
         },
+        clearCard: function (){
+            document.getElementById('cvv').value = ''; document.getElementById('month_expiry').value= ""; document.getElementById('year_expiry').value=""; document.getElementById('ccnumber').value=""
+        },
         addNewCardDetails: function () {
             var _this = this;
             document.getElementById("add-new-card").addEventListener('click', function () {
@@ -1606,9 +1612,6 @@
                 month_expiry= document.getElementById('month_expiry').value,
                 year_expiry= document.getElementById('year_expiry').value,
                 number= document.getElementById('ccnumber').value;
-                function clearCard (){
-                    document.getElementById('cvv').value = ''; document.getElementById('month_expiry').value= ""; document.getElementById('year_expiry').value=""; document.getElementById('ccnumber').value=""
-                }
                 const card = {
                     "exp_month": month_expiry,
                     "exp_year": year_expiry,
@@ -1617,17 +1620,19 @@
                     'cvv': cvv,
                     "new_card": true,
                 }
-                
                 if(cvv && month_expiry && year_expiry && number) {
     
                     _this.userCard.unshift(card);
                     _this.closeForm(document.getElementById("card-form-button"))
-                    clearCard()
+                    _this.clearCard()
                     _this.getCardDetials();
                 }
             })
 
 
+        },
+        clearAddress: function(){
+            document.getElementById('address1').value =""; document.getElementById('address2').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
         },
         addNewShippingDetails: function () {
             var _this = this;
@@ -1637,9 +1642,6 @@
                 address2= document.getElementById('address2').value,
                 country= document.getElementById('country').value,
                 zip= document.getElementById('zip').value;
-                function clearCard(){
-                    document.getElementById('address1').value =""; document.getElementById('address2').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
-                }
                 const shippingDetails =     {
                     address1,
                     country,
@@ -1650,16 +1652,28 @@
 
                     _this.shippingAddress.unshift(shippingDetails);
                      _this.closeForm(document.getElementById("shipping-form"))
-                    clearCard()
+                    _this.clearAddress();
                     _this.getShippingAddress()
                 }
             })
-        }
+        },
+        getCheckedValue: function(name) {
+            return document.querySelector('input[name=' + name+ ']:checked').value;
+        },
+        getXHR: function() {
+            var xhr;
+          if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+          } else if (window.ActiveXObject) {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }  
+          return xhr; 
+        },
         }
 
         var message_handlers = {};
         var buttonElement = document.getElementById('send-button')
-        var footer_message = window.document.querySelector('.secure-text > .color-fast');
+        var footer_message = window.document.querySelector('.secure-text .color-fast');
         var fast_logo = window.document.querySelector('.svg-image > svg > path:nth-child(1)');
         var footer_svg = window.document.querySelectorAll('.color__effect > svg > path');
         var addButton = window.document.querySelectorAll('.btn-add');
@@ -1689,7 +1703,6 @@
                     footer_svg[i].style.fill = newColor;
                     if(footer_svg[i].parentElement.parentElement.classList.contains('svg-image')){
                         // footer_svg[0].children[0].style.fill = newColor;
-                         // console.log(footer_svg[0])
                         // footer_svg[i].childNodes.style.fill = newColor;
                     }
                    
@@ -1727,10 +1740,11 @@
     false
     );
     window.addEventListener("click", function(e){
-            if(e.target.nodeName === "BODY" || e.target.id === "fast-close_form"){
+            if(e.target.nodeName === "BODY" || e.target.nodeName === "HTML" || e.target.id === "fast-close_form"){
                 parent.postMessage({action: 'closeModal'}, "*");
             }
         })
+
      window.document.onkeydown = function(evt) {
         evt = evt || window.event;
         var isEscape = false;
@@ -1744,7 +1758,7 @@
         }
     };
     window.addEventListener("DOMContentLoaded", function(){
-            window.parent.postMessage({action: 'allcontentloaded'}, masking.origin);
+            window.parent.postMessage({action: 'allcontentloaded'}, '*');
 
     })
 
