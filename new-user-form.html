@@ -48,12 +48,14 @@
      p,.form-control, .custom-select, label{
       font-family: Graphik !important;
     }
-    .svg-image {
+   .svg-image {
         float: left;
-        margin-top: -5px;
+        margin-top: -4px;
+        margin-right:8px;
     }
      .fast-pay{
          margin: 2rem auto;
+         min-height: 100vh;
          width:75%;
          padding: 2rem 20px;
          background-color: #fff;
@@ -71,7 +73,7 @@
         vertical-align: middle;
         position: absolute;
         cursor: pointer;
-        right: -5px;
+        right: 0px;
         z-index: 9999;
         text-align: center;
      }
@@ -565,6 +567,22 @@
   }
 
 }
+@media only screen 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
+    and (-webkit-device-pixel-ratio: 3) {
+        .fast-pay{
+             margin: 2rem auto;
+             min-height: 110vh !important;
+             width:75%;
+             padding: 2rem 20px;
+             background-color: #fff;
+             /*overflow-x: hidden;*/
+             border: 2px solid #EEEEEE;
+             box-sizing: border-box;
+             position: relative;
+         }
+     }
 @media( max-width : 220px ){
  body{
         padding: 0rem !important;
@@ -758,7 +776,7 @@
                     </div>
                 </div>
                 <div class="new__form-set">
-                <h4 class="fast-pay-title">Shipping Details <span class="toggle-apartment">+ unit/suite/company name</span></h4>
+                <h4 class="fast-pay-title">Shipping Details <span class="toggle-apartment">+ unit/building name</span></h4>
                 
                 <div class="new__form-set">
                     <div class="row">
