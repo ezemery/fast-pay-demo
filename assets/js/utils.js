@@ -33,3 +33,11 @@ function matchCookie(cookie) {
 function parsed(text, option = null) {
   return JSON.parse(text, option);
 }
+
+function reduceIdentifier(identifier) {
+  return identifier.identifiers.reduce((accum, currVal) => {
+    accum[currVal.identifier_type] = currVal
+    return accum
+  }, {})
+ 
+}

@@ -524,7 +524,7 @@
          * get instanc of the edit icon
          */
         editImageElement: document.getElementById("edit-details"),
-        origin: "*",
+        origin: "https://fast-pay-server.herokuapp.com",
         cookie: "",currency: "",
         currency: '',
         init: function init() {
@@ -541,13 +541,29 @@
         },
         showReturningUserForm: function showForm() {
           var _this = this;
-          parent.postMessage({ action: "editIconClick" }, _this.origin);
+          parent.postMessage({ action: "editIconClick" }, "*");
+        },
+        transformData: function(data) {
+          var identifiers = window.reduceIdentifier(JSON.parse(data));
+          return {
+            personal: {
+              email: identifiers.email.identifier,
+              firstName: data.first_name,
+              lastName: data.last_name,
+              phone: {
+                country: identifiers.phone.country,
+                phone: identifiers.phone.identifier
+              }
+            },
+            shipping: data.addresses,
+            cards: data.cards
+          }
         },
         sendFastData: function(data) {
           var _this = this,
-            xhr,
-            url = "https://dev.api.fast.co/api/m/pay",
-            button = _this.buttonElement;
+          xhr,
+          url = "https://dev.api.fast.co/api/m/pay",
+          button = _this.buttonElement;
 
           if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
@@ -573,7 +589,7 @@
               }
             }
           };
-          xhr.send(data);
+          xhr.send(_this.transformData(JSON.stringify(data)));
         }
       };
 
@@ -586,8 +602,9 @@
           window.getCookie("fast-pay")
         );
         const userDetails = window.parsed(payReturningUsersButton.cookie);
-        const shipping = userDetails.shipping[0]
-        const card = userDetails.card[0]
+        const shipping = userDetails.addresses[0]
+        const card = userDetails.cards[0]
+        console.log({shipping, card})
 
 
         const last4 = card.last4;
@@ -599,9 +616,9 @@
 
         const address = document.getElementById("address");
         address.textContent =
-          shipping.address1 +
+          shipping.address_line1 +
           ", " +
-          shipping.address2 +
+          shipping.address_line +
           " " +
           shipping.zip;
 
@@ -631,7 +648,7 @@
       window.addEventListener("DOMContentLoaded", function() {
         window.parent.postMessage(
           { action: "allcontentloaded" },
-          payReturningUsersButton.origin
+          "*"
         );
       });
       payReturningUsersButton.init();

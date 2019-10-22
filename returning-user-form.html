@@ -768,8 +768,8 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="input-group">
-                                            <label for="address1">Street Address, P.O Box</label>
-                                            <input id="address1" type="text" name="address1" class="form-control radius" title="enter your street address" placeholder="">
+                                            <label for="address_line1">Street Address, P.O Box</label>
+                                            <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" placeholder="">
                                             <div class="invalid-feedback">Please enter your street address</div>
                                         </div>
                                         
@@ -780,8 +780,8 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="input-group">
-                                            <label for="address2">Apartment, suite, unit, Company or address2</label>
-                                            <input id="address2" type="text" name="address1" class="form-control radius" title="enter your street address"  placeholder="">
+                                            <label for="address_line">Apartment, suite, unit, Company or address_line</label>
+                                            <input id="address_line" type="text" name="address_line1" class="form-control radius" title="enter your street address"  placeholder="">
                                             <div class="invalid-feedback">Please enter your street address</div>
                                         </div>
                                         
@@ -1265,7 +1265,6 @@
             phoneNumber = document.getElementById('mobile_no').value,
             phone = document.getElementById('phone_code').value,
             _this = this;
-
             // shippind address
             var shippingAddressIndex = _this.getCheckedValue('shippingAddress');
             var shippingAddress = _this.shippingAddress[shippingAddressIndex];
@@ -1396,7 +1395,7 @@
                 output += `
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
                                   <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="shippingAddress" value=${i} ${i === '0' && 'checked=checked'}>
-                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address1}, ${address[i].address2}, ${address[i].country} ${address[i].zip}</label>
+                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address_line1}, ${address[i].address_line}, ${address[i].country} ${address[i].zip}</label>
                                 </div>`
             }
             document.getElementById('shipping_address_output').innerHTML = output
@@ -1604,33 +1603,35 @@
         
         },
         setValue: function(value) {
+            var identifiers = window.reduceIdentifier(value);
+
             var _this = this;
             var email = document.getElementById('email_input'),
             firstName = document.getElementById('first_name'),
             lastName = document.getElementById('last_name'),
             phoneNumber = document.getElementById('mobile_no'),
             phone = document.getElementById('phone_code'),
-            address1 =  document.getElementById('address1'),
-            address2 = document.getElementById('address2'),
+            address_line1 =  document.getElementById('address_line1'),
+            address_line = document.getElementById('address_line'),
             country = document.getElementById('country'),
             zip = document.getElementById('zip');
 
-            email.value = value.personal.email;
+            email.value = identifiers.email.identifier;
             email.parentNode.classList.add('placeholder-focus');
 
-            firstName.value = value.personal.firstName;
+            firstName.value = value.first_name;
             firstName.parentNode.classList.add('placeholder-focus');
 
-            lastName.value = value.personal.lastName;
+            lastName.value = value.last_name;
             lastName.parentNode.classList.add('placeholder-focus');
 
-            phoneNumber.value = value.personal.phone.phone;
+            phoneNumber.value = identifiers.phone.identifier;
             phoneNumber.parentNode.classList.add('placeholder-focus');
 
-            phone.value = value.personal.phone.country
+            phone.value = identifiers.phone.country
 
-            this.shippingAddress = value.shipping;
-            this.userCard = value.card;
+            this.shippingAddress = value.addresses;
+            this.userCard = value.cards;
         },
         clearCard: function (){
             document.getElementById('cvv').value = ''; document.getElementById('month_expiry').value= ""; document.getElementById('year_expiry').value=""; document.getElementById('ccnumber').value=""
@@ -1662,23 +1663,23 @@
 
         },
         clearAddress: function(){
-            document.getElementById('address1').value =""; document.getElementById('address2').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
+            document.getElementById('address_line1').value =""; document.getElementById('address_line').valuȩ =""; document.getElementById('country').value=""; document.getElementById('zip').value=""
         },
         addNewShippingDetails: function () {
             var _this = this;
             document.getElementById("add-new-address").addEventListener('click', function () {   
 
-                var address1= document.getElementById('address1').value,
-                address2= document.getElementById('address2').value,
+                var address_line1= document.getElementById('address_line1').value,
+                address_line= document.getElementById('address_line').value,
                 country= document.getElementById('country').value,
                 zip= document.getElementById('zip').value;
                 const shippingDetails =     {
-                    address1,
+                    address_line1,
                     country,
                     zip,
-                    address2
+                    address_line
                 };
-                if(address1 && address2 && country && zip) {
+                if(address_line1 && address_line && country && zip) {
 
                     _this.shippingAddress.unshift(shippingDetails);
                      _this.closeForm(document.getElementById("shipping-form"))

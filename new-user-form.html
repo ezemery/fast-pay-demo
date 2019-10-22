@@ -1226,7 +1226,7 @@
                                      button.style.backgroundColor = "green";
                                      _this.cleanData()
                                      parent.postMessage({action: 'closeModal'}, "*");
-                                     parent.postMessage({action: 'reload'}, '*')
+                                    //  parent.postMessage({action: 'reload'}, '*')
                             return response;
                        }else{
                                     button.innerText = "There was an error, try again";
@@ -1548,6 +1548,7 @@
           var xhr = _this.getXHR();
           var url = _this.origin + "/checkout/" + email + "/auth";
           try {
+            xhr.withCredentials = true;
             xhr.open("GET", url, true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
@@ -1634,7 +1635,9 @@
             _this.showQuickFill(false);
           }
         },
-        setValue: function(data) {
+        setValue: function(value) {
+            var identifiers = window.reduceIdentifier(value);
+
           var _this = this;
           var email = document.getElementById("email"),
             firstName = document.getElementById("first_name"),
@@ -1649,29 +1652,39 @@
             monthExpiry = document.getElementById("month_expiry"),
             yearExpiry = document.getElementById("year_expiry"),
             cvv = document.getElementById("cvv");
-          email.value = data.personal.email;
+
+          email.value = identifiers.email.identifier;
           email.parentNode.classList.add("placeholder-focus");
-          firstName.value = data.personal.firstName;
+          firstName.value = value.first_name;
           firstName.parentNode.classList.add("placeholder-focus");
-          lastName.value = data.personal.lastName;
+
+          lastName.value = value.last_name;
           lastName.parentNode.classList.add("placeholder-focus");
-          phoneNumber.value = data.personal.phone.phone;
+
+          phoneNumber.value = identifiers.phone.identifier;
           phoneNumber.parentNode.classList.add("placeholder-focus");
-          phone.value = data.personal.phone.country;
-          address1.value = data.shipping[0].address1;
+
+          phone.value = identifiers.phone.country;
+
+          address1.value = value.addresses[0].address_line1;
           address1.parentNode.classList.add("placeholder-focus");
-          address2.value = data.shipping[0].address2;
+
+          //optional field
+          address2.value = value.addresses[0].address_line;
           address2.parentNode.classList.add("placeholder-focus");
-          zip.value = data.shipping[0].zip;
+
+          zip.value = value.addresses[0].zip;
           zip.parentNode.classList.add("placeholder-focus");
-          country.value = data.shipping[0].country;
-          _this.returningUserCard = data.card[0];
-          _this.last4 = data.card[0].last4;
-          ccnumber.value = "XXXX " + data.card[0].last4;
+
+          country.value = value.addresses[0].country;
+
+          _this.returningUserCard = value.cards[0];
+          _this.last4 = value.cards[0].last4;
+          ccnumber.value = "XXXX " + value.cards[0].last4;
           ccnumber.parentNode.classList.add("placeholder-focus");
-          monthExpiry.value = data.card[0].exp_month;
+          monthExpiry.value = value.cards[0].exp_month;
           monthExpiry.parentNode.classList.add("placeholder-focus");
-          yearExpiry.value = data.card[0].exp_year.toString().slice(-2);
+          yearExpiry.value = value.cards[0].exp_year.toString().slice(-2);
           yearExpiry.parentNode.classList.add("placeholder-focus");
           cvv.value = "XXXX";
           cvv.parentNode.classList.add("placeholder-focus");
