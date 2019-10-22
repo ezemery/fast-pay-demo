@@ -85,6 +85,23 @@
       toggleFastFormModalVisibility();
   }
   /**
+   * message handler for closeModal with esc key
+   * @params message object
+   */
+  window.document.onkeydown = function(evt) {
+      evt = evt || window.event;
+      var isEscape = false;
+      if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc");
+      } else {
+          isEscape = (evt.keyCode === 27);
+      }
+      if (isEscape) {
+          // console.log('key clicked')
+          closeFastFormModalVisibility();
+      }
+  };
+  /**
 	 * message handler for reloading parent page
 	 * @params message object
 	 */
