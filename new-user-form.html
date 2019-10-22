@@ -55,8 +55,8 @@
     }
      .fast-pay{
          margin: 2rem auto;
-         min-height: 100vh;
-         width:75%;
+        
+         width:70%;
          padding: 2rem 20px;
          background-color: #fff;
          /*overflow-x: hidden;*/
@@ -571,16 +571,14 @@
     and (device-width: 375px) 
     and (device-height: 812px) 
     and (-webkit-device-pixel-ratio: 3) {
+        body{
+        padding: 0rem !important;
+    }
         .fast-pay{
-             margin: 2rem auto;
+              margin: 0 auto !important;
              min-height: 110vh !important;
-             width:75%;
-             padding: 2rem 20px;
-             background-color: #fff;
-             /*overflow-x: hidden;*/
-             border: 2px solid #EEEEEE;
-             box-sizing: border-box;
-             position: relative;
+             width:100% !important;
+              border: none;
          }
      }
 @media( max-width : 220px ){
@@ -591,6 +589,7 @@
  {  
      margin: 0 auto !important;
       width: 100%;
+    min-height: 100vh;
       border: none;
  
   }
@@ -602,8 +601,9 @@
             .fast-pay 
            {    
              margin: 0 auto !important;
-                width: 100%;
-                border: none;
+              width: 100%;
+            min-height: 100vh;
+              border: none;
            
             }
             .form-control{
