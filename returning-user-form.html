@@ -56,8 +56,7 @@
     }
        .fast-pay{
          margin: 2rem auto;
-         min-height: 100vh;
-         width:75%;
+         width:70%;
          padding: 2rem 20px;
          background-color: #fff;
          /*overflow-x: hidden;*/
@@ -563,6 +562,20 @@
   }
 
 }
+@media only screen 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
+    and (-webkit-device-pixel-ratio: 3) {
+        body{
+        padding: 0rem !important;
+    }
+        .fast-pay{
+              margin: 0 auto !important;
+             min-height: 110vh !important;
+             width:100% !important;
+              border: none;
+         }
+     }
 @media( max-width : 220px ){
  body{
         padding: 0rem !important;
@@ -571,23 +584,23 @@
  {  
      margin: 0 auto !important;
       width: 100%;
-
+    min-height: 100vh;
+      border: none;
  
   }
 }
 @media only screen and (max-width: 585px){
-         body{
-            padding: 0rem !important;
-        }
-
-        .fast-pay 
-       {    
-         margin: 0 auto !important;
-            width: 100%;
+             body{
+                padding: 0rem !important;
+            }
+            .fast-pay 
+           {    
+             margin: 0 auto !important;
+              width: 100%;
             min-height: 100vh;
-
-       
-        }
+              border: none;
+           
+            }
         .form-control{
             font-size: 16px; 
         }
