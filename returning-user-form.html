@@ -791,12 +791,12 @@
                             <div class="new__form-set">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-3">
-                                        <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2" required>
+                                        <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2">
                                     </div>
                                     <div class="col-md-9 col-sm-9">
                                         <div class="input-group">
                                             <label for="zip">Zip</label>
-                                            <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="" required>
+                                            <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="">
                                             <div class="invalid-feedback">Please select country zip</div>
                                         </div>
                                     </div>
@@ -807,17 +807,18 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                                 <label for="state">State</label>
-                                                <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" placeholder="" required>
+                                                <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" placeholder="">
                                                 <div class="invalid-feedback">Please select country State</div>
                                          </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                             <label for="city"> City</label>
-                                            <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="" required>
+                                            <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="">
                                             <div class="invalid-feedback">Please select country city</div>
                                         </div>
                                     </div>
+                                    <p class="btn btn-add mt-3" id="add-new-address">Add New Address</p>
                                 </div>
                             </div>
                             <p class="btn btn-add mt-3" id="add-new-address">Add New Address</p>
@@ -1318,7 +1319,7 @@
                 return _this.sendSTripeData(stripeData); 
             }
 
-            const fastData = _this.getData(currentCard);
+            var fastData = _this.getData(currentCard);
            return  _this.sendFastData(fastData);
     
         },
@@ -1397,7 +1398,7 @@
                 output += `
                                 <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
                                   <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="shippingAddress" value=${i} ${i === '0' && 'checked=checked'}>
-                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address_line1}, ${address[i].address_line}, ${address[i].country} ${address[i].zip}</label>
+                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address_line}, ${address[i].address_line1} ,${address[i].state},  ${address[i].zip} ${address[i].country}</label>
                                 </div>`
             }
             document.getElementById('shipping_address_output').innerHTML = output
@@ -1641,11 +1642,12 @@
         addNewCardDetails: function () {
             var _this = this;
             document.getElementById("add-new-card").addEventListener('click', function () {
+                console.log('o click')
                 var cvv= document.getElementById('cvv').value,
                 month_expiry= document.getElementById('month_expiry').value,
                 year_expiry= document.getElementById('year_expiry').value,
                 number= document.getElementById('ccnumber').value;
-                const card = {
+                var card = {
                     "exp_month": month_expiry,
                     "exp_year": year_expiry,
                     "last4": number.toString().slice(-4),
@@ -1654,7 +1656,6 @@
                     "new_card": true,
                 }
                 if(cvv && month_expiry && year_expiry && number) {
-    
                     _this.userCard.unshift(card);
                     _this.closeForm(document.getElementById("card-form-button"))
                     _this.clearCard()
@@ -1674,15 +1675,19 @@
                 var address_line1= document.getElementById('address_line1').value,
                 address_line= document.getElementById('address_line').value,
                 country= document.getElementById('country').value,
-                zip= document.getElementById('zip').value;
-                const shippingDetails =     {
+                zip = document.getElementById('zip').value;
+                city = document.getElementById('city').value;
+                state = document.getElementById('state').value;
+
+                var shippingDetails =     {
                     address_line1,
                     country,
                     zip,
-                    address_line
+                    address_line,
+                    city,
+                    state,
                 };
                 if(address_line1 && address_line && country && zip) {
-
                     _this.shippingAddress.unshift(shippingDetails);
                      _this.closeForm(document.getElementById("shipping-form"))
                     _this.clearAddress();
@@ -1713,7 +1718,7 @@
         var fast_pay_form = document.querySelector('.fast-pay');
         var close_form = window.document.querySelector('.fast-close__form');
         message_handlers.clickreport = function(message) {
-            const currencySymbol = window.getCurrency(message.data.config.currency);
+            var currencySymbol = window.getCurrency(message.data.config.currency);
             masking.amount = message.data.config.amount;
 
             
