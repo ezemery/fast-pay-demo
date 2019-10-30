@@ -535,7 +535,7 @@
           this.buttonElement.addEventListener("click", function(e) {
             //read from fast pay data from cookie
             // send to fast api
-            const cookie = payReturningUsersButton.cookie;
+            var cookie = payReturningUsersButton.cookie;
             payReturningUsersButton.sendFastData(cookie);
           });
         },
@@ -601,20 +601,19 @@
         payReturningUsersButton.cookie = window.matchCookie(
           window.getCookie("fast-pay")
         );
-        const userDetails = window.parsed(payReturningUsersButton.cookie);
-        const shipping = userDetails.addresses[0]
-        const card = userDetails.cards[0]
-        console.log({shipping, card})
+        var userDetails = window.parsed(payReturningUsersButton.cookie);
+        var shipping = userDetails.addresses[0]
+        var card = userDetails.cards[0]
 
 
-        const last4 = card.last4;
-        const cardNumber = document.getElementById("card-number");
+        var last4 = card.last4;
+        var cardNumber = document.getElementById("card-number");
         var currencySymbol = window.getCurrency(payReturningUsersButton.currency)
 
 
         cardNumber.textContent = "* " + last4 + "";
 
-        const address = document.getElementById("address");
+        var address = document.getElementById("address");
         address.textContent =
           shipping.address_line1 +
           ", " +

@@ -1046,14 +1046,37 @@
 
             if ((matchesNumber && isInt) || (isCharsetPresent && matchesLetter && isLetter)) {
                     newValue += strippedValue[j++];
-							card = _this.ValidateCreditCardNumber();
-                    card === "Visa" ?  icon.style.backgroundImage = "url('./assets/img/visa.svg')": 
-                    card === "Mastercard" ? icon.style.backgroundImage = "url('./assets/img/mastercard.svg')": 
-                    card === "JCB" ? icon.style.backgroundImage = "url('./assets/img/jcb.svg')": 
-                    card === "AMEX" ? icon.style.backgroundImage = "url('./assets/img/amex.svg')":
-                    card === "Discover" ? icon.style.backgroundImage = "url('./assets/img/discover.svg')":
-                    card === "Diners" ? icon.style.backgroundImage = "url('./assets/img/diners.svg')":
-                    icon.style.backgroundImage = "url('./assets/img/cc.svg')";                         
+                    card = _this.ValidateCreditCardNumber();
+                    switch(card){
+                            case "Visa":
+                                icon.style.backgroundImage = "url('./assets/img/visa.svg')";
+                                break;
+                            case "Mastercard":
+                                icon.style.backgroundImage = "url('./assets/img/mastercard.svg')";
+                                break;
+                            case "JCB":
+                                icon.style.backgroundImage = "url('./assets/img/jcb.svg')";
+                                break;
+                            case "AMEX":
+                                icon.style.backgroundImage = "url('./assets/img/amex.svg')";
+                                break;
+                            case "Discover":
+                                icon.style.backgroundImage = "url('./assets/img/discover.svg')";
+                                break;
+                            case "Diners":
+                                icon.style.backgroundImage = "url('./assets/img/diners.svg')"; 
+                                break;
+                            default:
+                             icon.style.backgroundImage = "url('./assets/img/cc.svg')"
+
+                        }
+                    // card === "Visa" ?  icon.style.backgroundImage = "url('./assets/img/visa.svg')": 
+                    // card === "Mastercard" ? icon.style.backgroundImage = "url('./assets/img/mastercard.svg')": 
+                    // card === "JCB" ? icon.style.backgroundImage = "url('./assets/img/jcb.svg')": 
+                    // card === "AMEX" ? icon.style.backgroundImage = "url('./assets/img/amex.svg')":
+                    // card === "Discover" ? icon.style.backgroundImage = "url('./assets/img/discover.svg')":
+                    // card === "Diners" ? icon.style.backgroundImage = "url('./assets/img/diners.svg')":
+                    // icon.style.backgroundImage = "url('./assets/img/cc.svg')";                         
 
                 } else if ((!isCharsetPresent && !isInt && matchesNumber) || (isCharsetPresent && ((matchesLetter && !isLetter) || (matchesNumber && !isInt)))) {
                     // masking.errorOnKeyEntry(); // write your own error handling function
