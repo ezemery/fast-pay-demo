@@ -18,7 +18,7 @@
    * server origin
    */
    // https://fast-pay-server.herokuapp.com
-  var origin = "https://071e2d1e.ngrok.io";
+  var origin = "https://fast-pay-server.herokuapp.com";
   /**
    * path to Fast Pay Form source
    */
