@@ -545,10 +545,6 @@
     max-width: 100% !important;
     flex: 0 0 100%;
   }
-.card__section .col-md-3{
-    max-width: 35% !important;
-    flex: 0 0 35%;
-  }
 }
 @media( max-width : 1400px ) {
     body{
@@ -590,17 +586,17 @@
   }
 }
 @media only screen and (max-width: 585px){
-             body{
-                padding: 0rem !important;
-            }
-            .fast-pay 
-           {    
-             margin: 0 auto !important;
-              width: 100%;
-            min-height: 100vh;
-              border: none;
-           
-            }
+        body{
+            padding: 0rem !important;
+        }
+        .fast-pay 
+        {    
+            margin: 0 auto !important;
+            width: 100%;
+        min-height: 100vh;
+            border: none;
+        
+        }
         .form-control{
             font-size: 16px; 
         }
@@ -621,6 +617,12 @@
 			-webkit-transition: max-width .5s; /* For Safari 3.1 to 6.0 */
 			transition: max-width .5s;
 		}
+        .card.col-sm-3{
+            max-width: calc(100% / 2);
+            -webkit-transition: max-width .5s; /* For Safari 3.1 to 6.0 */
+            transition: max-width .5s;
+            flex: 0 0 50%;
+        }
 		label{
 			font-size: 13px;
 		}
@@ -640,26 +642,26 @@
             text-align: left;
             font-size: 14px;
         }
-		  #country{
-				background-position: center left 5px;
-				background-size: 20px 15px;
-			}
-			#phone_code{
-				background-position: center left 5px;
-				background-size: 20px 15px;
-			}
-			#ccnumber{
-			background-image: none !important;
-			}
-			label.left-50 {
-				left: 33px;
-			}
-			.form-control.pad{
-				padding-left: 33px;
-			}
-			.form-control.masked{
-				padding: 25px 7px;
-			}
+        #country{
+            background-position: center left 5px;
+            background-size: 20px 15px;
+        }
+        #phone_code{
+            background-position: center left 5px;
+            background-size: 20px 15px;
+        }
+        #ccnumber{
+        background-image: none !important;
+        }
+        label.left-50 {
+            left: 33px;
+        }
+        .form-control.pad{
+            padding-left: 33px;
+        }
+        .form-control.masked{
+            padding: 25px 7px;
+        }
     }
         /*** iPhone and iOS Form Input Zoom Fixes ***/
     /* Fix Input Zoom on devices older than iPhone 5: */
@@ -886,7 +888,7 @@
                                         <div class="invalid-feedback">Please enter the correct number</div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-3">
+                                <div class="card col-md-3 col-sm-3">
                                     <div class="input-group">
                                         <div class="expiry left">
                                             <input id="month_expiry" class="form-control masked expiry-input" type="tel" placeholder="MM" maxlength="2" pattern="(\d{2})" data-valid-example="11" title="2-digit month">
@@ -898,7 +900,7 @@
                                     </div>
                                     <div class="invalid-feedback">Please enter the correct expiry month</div>
                                 </div>
-                                <div class="col-md-3 col-sm-3">
+                                <div class="card col-md-3 col-sm-3">
                                     <input id="cvv" name="ccv" type="password" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number">
                                     <div class="invalid-feedback">
                                             Please enter the correct cvv
@@ -1160,6 +1162,25 @@
         return value;
         },
         mobileToggle: function(){
+            var nua = window.navigator.userAgent;
+            var elmnt = document.getElementById("payment-form")
+            var is_android = (nua.indexOf('Android') > -1);
+            if(is_android){
+            var form = document.querySelectorAll(".masked");
+            form.forEach(function(element, i){
+                form[i].addEventListener("focusin", function(){
+                    var y = elmnt.scrollHeight;
+                    window.scrollBy(0, y); 
+                })
+            })
+            form.forEach(function(element, i){
+                form[i].addEventListener("input", function(){
+                    var y = elmnt.scrollHeight;
+                    window.scrollBy(0, y);
+                })
+            })
+            }
+
             var card = document.querySelectorAll(".card");
             card.forEach(function(element, i){
                 element.addEventListener("click", function(e){
