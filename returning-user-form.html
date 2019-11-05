@@ -971,7 +971,7 @@
             _this.formFocus();
             _this.mobileToggle();
             // _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
-            _this.autocomplete(document.getElementById("country"), _this.countries, "country");
+            _this.autocomplete(document.getElementById("country"), _this.countryName, "country");
             _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
             _this.autocomplete(document.getElementById("email"), _this.domains, "email");
             _this.addNewShippingDetails();
@@ -1572,10 +1572,10 @@
                     case 'country': 
                         {
                             for (var [country_code, country_phone] of entries) {
-                                if(country_code.substr(0, val.length).toUpperCase() == val.toUpperCase() || _this.countryName[country_code].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                if(_this.countryName[country_code].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                                     b = document.createElement("DIV");
                                     b.innerHTML = "<img src='https://www.countryflags.io/"+country_code+"/flat/16.png'>  ";
-                                    b.innerHTML += "<strong>" + country_code.substr(0, val.length) + "</strong>";
+                                    b.innerHTML += "<strong> +" + country_code.substr(0, val.length) + "</strong>";
                                     b.innerHTML += country_code.substr(val.length) + " - "
                                     b.innerHTML += "<strong>" + _this.countryName[country_code].substr(0, val.length) + "</strong>";
                                     b.innerHTML +=  _this.countryName[country_code].substr(val.length);
