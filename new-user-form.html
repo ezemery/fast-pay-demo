@@ -30,7 +30,7 @@
      body{
       background: transparent;
       animation-duration: .4s;
-      height: 100vh;
+      min-height: 100vh;
       animation-name: scales;
       animation-iteration-count: 1;
      }
@@ -60,6 +60,7 @@
          padding: 2rem 20px;
          background-color: #fff;
          /*overflow-x: hidden;*/
+         
          border: 2px solid #EEEEEE;
          box-sizing: border-box;
          position: relative;
@@ -574,6 +575,8 @@
               margin: 0 auto !important;
              min-height: 130vh !important;
              width:100% !important;
+             -webkit-overflow-scrolling: touch;
+             overflow: scroll;
               border: none;
          }
      }
@@ -584,7 +587,9 @@
   .fast-pay 
  {  
      margin: 0 auto !important;
-      width: 100%;
+     width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow: scroll;
     min-height: 100vh;
       border: none;
  
@@ -600,6 +605,8 @@
             width: 100%;
             min-height: 100vh;
             border: none;
+            -webkit-overflow-scrolling: touch;
+             overflow: scroll;
         
         }
         .form-control{

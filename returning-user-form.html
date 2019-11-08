@@ -31,8 +31,8 @@
      body{
       background: transparent;
       animation-duration: .4s;
+      min-height: 100vh;
       animation-name: scales;
-      height:100vh;
       animation-iteration-count: 1;
      }
      @keyframes scales {
@@ -569,6 +569,8 @@
               margin: 0 auto !important;
              min-height: 130vh !important;
              width:100% !important;
+             -webkit-overflow-scrolling: touch;
+             overflow: scroll;
               border: none;
          }
      }
@@ -581,6 +583,8 @@
      margin: 0 auto !important;
       width: 100%;
     min-height: 100vh;
+    -webkit-overflow-scrolling: touch;
+             overflow: scroll;
       border: none;
  
   }
@@ -594,6 +598,8 @@
             margin: 0 auto !important;
             width: 100%;
         min-height: 100vh;
+        -webkit-overflow-scrolling: touch;
+             overflow: scroll;
             border: none;
         
         }
