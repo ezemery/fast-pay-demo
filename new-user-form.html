@@ -1763,8 +1763,8 @@
                     apartment.style.color = newColor;
                     footer_svg.style.fill = newColor;
                     close_form.style.color = newColor;
-                    fast_pay_form.style.border = `1px solid ${newColor}`
-                    document.styleSheets[0].insertRule(`#pwr_css .custom-control-input:checked~.custom-control-label::before { background-color: ${newColor}; border-color: ${newColor}}`, 0);
+                    fast_pay_form.style.border = "1px solid " + newColor
+                    document.styleSheets[0].insertRule("#pwr_css .custom-control-input:checked~.custom-control-label::before { background-color:" + newColor + "; border-color:" + newColor, 0);
                     document.styleSheets[0].cssRules[0].style.backgroundColor= newColor
 
                     //noticed pretty reacted a bit bad on IE

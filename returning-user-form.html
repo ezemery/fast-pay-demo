@@ -1446,11 +1446,19 @@
             var address = _this.shippingAddress
             var output = ''
             for(i in address){
-                output += `
-                                <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                  <input type="radio" class="custom-control-input" id=shippingAddress-${i} name="shippingAddress" value=${i} ${i === '0' && 'checked=checked'}>
-                                  <label class="custom-control-label" for=shippingAddress-${i}>${address[i].address_line}, ${address[i].address_line1} ,${address[i].state},  ${address[i].zip} ${address[i].country}</label>
-                                </div>`
+                var checked= "";
+                if(i === '0') {
+                    checked = "checked=checked"
+                }
+
+                output += "<div class=\"custom-control custom-radio\" style=\"margin-bottom: .7rem;\">"
+                          + "<input type=\"radio\" class=\"custom-control-input\" id=shippingAddress-" + i 
+                          + " name=\"shippingAddress\" value=" + i  + " " + checked + ">" 
+                          + "<label class=\"custom-control-label\" for=shippingAddress-" +  i + ">"
+                          + address[i].address_line + ", " + address[i].address_line1 + ", " + address[i].state + ", "
+                          + address[i].zip + " " + address[i].country + " </label>"
+                          + "</div>"
+                          
             }
             document.getElementById('shipping_address_output').innerHTML = output
         },
@@ -1459,23 +1467,19 @@
             var card = _this.userCard
             var output = ''
             for(i in card){
-                // var checked, last4;
-                // if(i === '0') {
-                //     checked = 'checked';
-                //     last4= card[i].last4;
-                // }
+                var checked= "";
+                if(i === '0') {
+                    checked = "checked=checked"
+                }
 
-                output += `
-                <div class="col-md-4 col-4 col-sm-4">
-                    <div class="card">
-                        <div class="custom-control custom-radio">
-                          <input type="radio" class="custom-control-input" id="express-card-${i}" name="card-value" value=${i} ${i === '0' && 'checked=checked'}>
-                          <label class="custom-control-label" for="express-card-${i}"><span><img src="assets/img/visa.svg" alt=""></span><span> ${card[i].last4}</span></label>
-                        </div>
-                    </div>
-                </div>`
-
-                // output += '<div class=col-md-4 col-4 col-sm-4><div class=card><div class=custom-control custom-radio><input type=radio class=custom-control-input id=express-card-' + i + ' name=card-value value=' + i + ' checked=' + checked + ' ><label class=custom-control-label for=express-card-' + i + ' ><span><img src=assets/img/visa.svg alt=></span><span> ' + last4 + ' </span></label></div></div></div>'
+                output += "<div class=\"col-md-4 col-4 col-sm-4\">"
+                         + "<div class=\"card\">"
+                        +  "<div class=\"custom-control custom-radio\">"
+                        + "<input type=\"radio\" class=\"custom-control-input\" id=express-card-" + i
+                        + " name=\"card-value\" value=" + i  + " " + checked + ">"
+                        + "<label class=\"custom-control-label\" for=express-card-" + i + ">"
+                        + "<span><img src=\"assets/img/visa.svg\" alt=\"\"></span><span>" +  card[i].last4 + "</span>"
+                        + "</label></div></div></div>"
             }
             document.getElementById('card__select').innerHTML = output
         },
@@ -1753,8 +1757,8 @@
                 }
                 
                 close_form.style.color = newColor;
-                fast_pay_form.style.border = `1px solid ${newColor}`
-                document.styleSheets[0].insertRule(`#payment-form .custom-control-input:checked~.custom-control-label::before { background-color: ${newColor}; border-color: ${newColor}}`, 0);
+                fast_pay_form.style.border = "1px solid " + newColor
+                document.styleSheets[0].insertRule("#payment-form .custom-control-input:checked~.custom-control-label::before { background-color: " + newColor + "; border-color: " + newColor, 0);
                 document.styleSheets[0].cssRules[0].style.backgroundColor= newColor
 
                 //noticed pretty reacted a bit bad on IE
