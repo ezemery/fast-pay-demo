@@ -92,12 +92,12 @@
 		.none{
 			display: none;
 		}
-        .expand{
+        /* .expand{
             position: relative;
             max-width: 100% !important;
             flex: 0 0 100% !important;
             z-index: 99;
-        }
+        } */
 		
     .form-control{
         padding: 25px 15px;
@@ -284,9 +284,10 @@
         box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
         width: 98%;
         background: #fff;
-        height: 120px;
+        height: 100px;
         overflow-y: scroll;
         top: 50px;
+        font-size:14px;
 
     }
     .input-email{
@@ -639,11 +640,11 @@
 		label{
 			font-size: 13px;
 		}
-		.col-sm-3.expand{
+		/* .col-sm-3.expand{
 			max-width: 100% !important;
             z-index: 10;
             flex: 0 0 100%;
-		}
+		} */
         
         .sm-12{
             width: 100%
@@ -759,10 +760,10 @@
                     </div>
                     <div class="new__form-set">
                         <div class="row">
-                            <div class="col-md-3 col-sm-3">
-                                <input id="phone_code" type="text" name="phone_code" class="form-control animate pad" placeholder="1" maxlength="4" title="enter phone number" required>
-                            </div>
-                            <div class="col-md-9 col-sm-9">
+                            <div class="col-md-6 col-sm-6">
+                                <input id="phone_code" type="text" name="phone_code" class="form-control animate pad" placeholder="+1" maxlength="4" value="+" title="enter phone number" required>
+                        </div>
+                            <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <label for="mobile_no">Mobile number</label>
                                     <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number"  required>       
@@ -806,10 +807,10 @@
                             </div>
                             <div class="new__form-set">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-3">
-                                        <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="2">
+                                    <div class="col-md-6 col-sm-6">
+                                        <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country">
                                     </div>
-                                    <div class="col-md-9 col-sm-9">
+                                    <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                             <label for="zip">Zip</label>
                                             <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="">
@@ -1240,33 +1241,33 @@
           },
         formFocus: function(){
             var form = document.querySelectorAll(".form-control");
-            form.forEach(function(element, i){
-                form[i].addEventListener("focusin", function(){
-							form[i].parentElement.classList.add("placeholder-focus");
-							if(form[i].classList.contains('animate')){
-								form[i].parentElement.classList.add("expand");
-								form[i].parentElement.nextElementSibling.classList.add("none");
-							}
-                })
-            })
+            // form.forEach(function(element, i){
+            //     form[i].addEventListener("focusin", function(){
+			// 				form[i].parentElement.classList.add("placeholder-focus");
+			// 				if(form[i].classList.contains('animate')){
+			// 					form[i].parentElement.classList.add("expand");
+			// 					form[i].parentElement.nextElementSibling.classList.add("none");
+			// 				}
+            //     })
+            // })
             form.forEach(function(element, i){
                 form[i].addEventListener("input", function(){
 							form[i].parentElement.classList.add("placeholder-focus");
                 })
 				 })
-            form.forEach(function(element, i){ 
-                form[i].addEventListener("focusout", function(){
-                    if(form[i].value.length === 0 ){
-								 form[i].parentElement.classList.remove("placeholder-focus");
-							}
-							if(form[i].classList.contains('animate')){
-										form[i].parentElement.classList.remove("expand");
-										form[i].parentElement.nextElementSibling.classList.remove("none");
-									}
+            // form.forEach(function(element, i){ 
+            //     form[i].addEventListener("focusout", function(){
+            //         if(form[i].value.length === 0 ){
+			// 					 form[i].parentElement.classList.remove("placeholder-focus");
+			// 				}
+			// 				if(form[i].classList.contains('animate')){
+			// 							form[i].parentElement.classList.remove("expand");
+			// 							form[i].parentElement.nextElementSibling.classList.remove("none");
+			// 						}
                     
-                })
+            //     })
 
-            })
+            // })
             
         },
         sendSTripeData: function(stripeData) {
@@ -1587,7 +1588,7 @@
                                     b.innerHTML += "<strong>" + country_phone.substr(0, val.length) + "</strong>";
                                     b.innerHTML += country_phone.substr(val.length);
                                     b.innerHTML += " " + country_code + " - " + _this.countryName[country_code];
-                                    b.innerHTML += "<input type='hidden' value='+" + country_phone + "'>";
+                                    b.innerHTML += "<input type='hidden' value='" + country_phone + "'>";
                                         b.addEventListener("click", function(e) {
                                         inp.value = this.getElementsByTagName("input")[0].value;
                                         var country =  this.getElementsByTagName("img")[0].src;
@@ -1610,7 +1611,7 @@
                                 if(_this.countryName[country_code].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                                     b = document.createElement("DIV");
                                     b.innerHTML = "<img src='https://www.countryflags.io/"+country_code+"/flat/16.png'>  ";
-                                    b.innerHTML += "<strong> +" + country_code.substr(0, val.length) + "</strong>";
+                                    b.innerHTML += "<strong>" + country_code.substr(0, val.length) + "</strong>";
                                     b.innerHTML += country_code.substr(val.length) + " - "
                                     b.innerHTML += "<strong>" + _this.countryName[country_code].substr(0, val.length) + "</strong>";
                                     b.innerHTML +=  _this.countryName[country_code].substr(val.length);
@@ -1619,7 +1620,7 @@
                                         inp.value = this.getElementsByTagName("input")[0].value;
                                         var country =  this.getElementsByTagName("img")[0].src;
                                         inp.style.backgroundImage = "url("+country+")";
-                                    closeAllLists();
+                                        closeAllLists();
                                     });
                                     a.appendChild(b);
                                 }
