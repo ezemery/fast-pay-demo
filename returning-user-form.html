@@ -16,28 +16,17 @@
 /*# sourceMappingURL=bootstrap.min.css.map */
    </style>
     <style>
-    body{
-        font-family: Helvetica, sans-serif;
-    }
-    /* @font-face {
-        font-family: Graphik;
-        font-weight: 400;
-        font-display: swap;
-        src: url("./assets/fonts/Graphik-Light.otf");
-     }
-    @font-face {
-        font-family: Graphik;
-        font-display: swap;
-        font-weight: 600;
-        src: url("./assets/fonts/Graphik-Medium.otf");
-     } */
+        
+
      body{
+      font-family: Helvetica, sans-serif;
       background: transparent;
       animation-duration: .4s;
       min-height: 100vh;
       animation-name: scales;
       animation-iteration-count: 1;
      }
+
      @keyframes scales {
         from{
           opacity: 0.3;
@@ -53,14 +42,8 @@
       /* font-family: Graphik !important; */
       font-weight: 400;
     }
-    .secure-text .bullet{
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        background-color:#88D20F;
-    }
-       .fast-pay{
+   
+    .fast-pay{
          margin: 2rem auto;
          width:70%;
          padding: 2rem 20px;
@@ -71,7 +54,7 @@
          position: relative;
      }
      
-     .fast-close__form{
+    .fast-close__form{
         display: inline-block;
         width: 100px;
         color: #7CB342;
@@ -83,21 +66,15 @@
         z-index: 9999;
         text-align: center;
      }
-	  .col-md-3{
-			max-width: calc(100% / 4);
-			flex: 0 0 25%;
-			-webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
-			transition: max-width .5s;
-		}
-		.none{
-			display: none;
-		}
-        /* .expand{
-            position: relative;
-            max-width: 100% !important;
-            flex: 0 0 100% !important;
-            z-index: 99;
-        } */
+    .col-md-3{
+        max-width: calc(100% / 4);
+        flex: 0 0 25%;
+        -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+        transition: max-width .5s;
+    }
+    .none{
+        display: none;
+    }
 		
     .form-control{
         padding: 25px 15px;
@@ -105,8 +82,8 @@
         border: 1px solid #363636;
         box-sizing: border-box;
         font-size: 14px;
-		  border-top-right-radius: 3px !important;
-    	  border-bottom-right-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
 		
     }
     .row{
@@ -155,7 +132,7 @@
     .custom-select {
         height: calc(1.5em + 0.75rem + 15px);
         background-color: #fff !important;
-		  border: 0.5px solid #DADADA;
+		border: 0.5px solid #DADADA;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -185,7 +162,7 @@
         z-index: 5;
         color: rgba(132, 140, 153, 0.8);
         font-size: 14px;
-		  transition: bottom .1s linear;
+		transition: bottom .1s linear;
     }
 	 
 	 label.left-50{
@@ -196,13 +173,13 @@
         bottom: 30px;
         width: 10px;
         display: table;
-		  width: intrinsic; 
+		width: intrinsic; 
         width: -webkit-fit-content;
         width: -moz-fit-content;
         width: fit-content;
         padding: 2px;
         background: #fff;
-		  transition: all .2s ease-in;
+		transition: all .2s ease-in;
     }
 
     .suggest-p{
@@ -297,45 +274,6 @@
     .email-code input:focus{
         border:none !important;
     }
-    /*.email-code input{
-        border:none !important;
-    }
-    .code-left::before{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:-8px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }
-    .code-left::after{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:48px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }
-    .code-right::after{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:48px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }*/
     
     .input-group-text.append{
         width: 43px;
@@ -343,8 +281,8 @@
         border-radius: 0;
         border-left: 0px;
         padding: .37rem .6rem;
-		  border-top-right-radius: 3px !important;
-    	  border-bottom-right-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         background: #fafafa !important;
     }
 	 .expiry{
@@ -415,22 +353,18 @@
 		background-size: 25px 20px;
 		background-position: center left 10px;
 		transition: all .3s ease-in-out;
+        background-image: url("./assets/img/flag.svg");
+	
 	 }
+   
 
-	 #country{
-    background-image: url("./assets/img/flag.svg");
-	}
-
-	#phone_code{
+	/* #phone_code{
 		background-repeat: no-repeat;
 		background-size: 25px 20px;
 		background-position: center left 10px;
 		transition: all .3s ease-in-out;
-	}
-
-	#phone_code{
-    background-image: url("./assets/img/flag.svg");
-	}
+        background-image: url("./assets/img/flag.svg");
+	} */
 
 	 #ccnumber {
 		background-repeat: no-repeat;
@@ -488,17 +422,17 @@
         margin-left: 4px;
     }
 	#ccnumber{
-    background-image: url("./assets/img/cc.svg");
+        background-image: url("./assets/img/cc.svg");
 	}
     .card-icon{
-	     display: block;
-    	  margin: auto;
+	    display: block;
+    	margin: auto;
         width: 15px;
         height: calc(1.5em + .75rem + 2px);
     }
     .secure-text{
 		 margin-top: 10px;
-       text-align: left;
+         text-align: left;
 		 font-size: 14px;
     }
     .secure-img{
@@ -513,9 +447,9 @@
 
     }
     .pay_card .card img {
-            width: 38px;
-            margin-left: -5px;
-            margin-right: 8px;
+        width: 38px;
+        margin-left: -5px;
+        margin-right: 8px;
 
     }
     .pay_card span{
@@ -526,6 +460,15 @@
         display: block;
         min-height: 1.5rem;
     }
+
+    .secure-text .bullet{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        background-color:#88D20F;
+    }
+
     .btn.btn-green{
 		/* font-family: Graphik; */
         text-transform: uppercase;
@@ -587,15 +530,15 @@
         padding: 0rem !important;
     }
   .fast-pay 
- {  
-     margin: 0 auto !important;
-      width: 100%;
-    min-height: 100vh;
-    -webkit-overflow-scrolling: touch;
-             overflow: scroll;
-      border: none;
- 
-  }
+    {  
+        margin: 0 auto !important;
+        width: 100%;
+        min-height: 100vh;
+        -webkit-overflow-scrolling: touch;
+        overflow: scroll;
+        border: none;
+    
+    }
 }
 @media only screen and (max-width: 585px){
         body{
@@ -605,9 +548,9 @@
         {    
             margin: 0 auto !important;
             width: 100%;
-        min-height: 100vh;
-        -webkit-overflow-scrolling: touch;
-             overflow: scroll;
+            min-height: 100vh;
+            -webkit-overflow-scrolling: touch;
+            overflow: scroll;
             border: none;
         
         }
@@ -640,11 +583,6 @@
 		label{
 			font-size: 13px;
 		}
-		/* .col-sm-3.expand{
-			max-width: 100% !important;
-            z-index: 10;
-            flex: 0 0 100%;
-		} */
         
         .sm-12{
             width: 100%
@@ -661,10 +599,10 @@
             background-position: center left 5px;
             background-size: 20px 15px;
         }
-        #phone_code{
+        /* #phone_code{
             background-position: center left 5px;
             background-size: 20px 15px;
-        }
+        } */
         #ccnumber{
         background-image: none !important;
         }
@@ -719,8 +657,8 @@
 </head>
 <body>
     <div class="fast-pay">
-        <div id="fast-close_form" class="fast-close__form">&lt; Back</div>
-        <form class="form" id="payment-form">
+        <div id="fast-close_form" class="fast-pay__form fast-close__form">&lt; Back</div>
+        <form class="fast-pay__form form" id="payment-form">
             <div class="row">
                 <div class="col-md-6 col-12">
                    <h4 class="fast-pay-title mt-0">Personal Info</h4>
@@ -760,10 +698,10 @@
                     </div>
                     <div class="new__form-set">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <input id="phone_code" type="text" name="phone_code" class="form-control animate pad" placeholder="+1" maxlength="4" value="+" title="enter phone number" required>
+                            <div class="col-md-3 col-sm-3">
+                                <input id="phone_code" type="text" name="phone_code" class="form-control animate" placeholder="+1" maxlength="4" value="+1" title="enter phone number" required>
                         </div>
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-9 col-sm-9">
                                 <div class="input-group">
                                     <label for="mobile_no">Mobile number</label>
                                     <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number"  required>       
@@ -1001,7 +939,7 @@
             _this.mobileToggle();
             // _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
             _this.autocomplete(document.getElementById("country"), _this.countryName, "country");
-            _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
+           // _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
             _this.autocomplete(document.getElementById("email"), _this.domains, "email");
             _this.addNewShippingDetails();
             _this.addNewCardDetails();
