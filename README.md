@@ -1,1 +1,1 @@
-# button.js
+# FastPay.js
