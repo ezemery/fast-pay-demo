@@ -98,7 +98,7 @@
       }
       if (isEscape) {
           // console.log('key clicked')
-          toggleFastFormModalVisibility();
+          closeFastFormModalVisibility();
       }
   };
   /**
