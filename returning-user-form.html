@@ -53,6 +53,10 @@
          box-sizing: border-box;
          position: relative;
      }
+
+     .safari-toolbars-overlap{
+        padding-bottom: 100px;
+    }
      
     .fast-close__form{
         display: inline-block;
@@ -912,8 +916,8 @@
         maskedInputs : document.querySelectorAll('.masked'), // kill with IE 8's death
         maskedNumber : '0MMYY1234',
         maskedLetter : '_',
-        // origin: 'https://fast-pay-server.herokuapp.com',
-        origin: 'https://c505f525.ngrok.io',
+        origin: 'https://fast-pay-server.herokuapp.com',
+        // origin: 'https://c505f525.ngrok.io',
         shippingAddress: [],
         userCard: [],
         amount: '',
@@ -1728,6 +1732,12 @@
                 //noticed pretty reacted a bit bad on IE
                 
             }
+
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    var form = window.document.querySelector(".fast-pay");
+                    form.classList.add("safari-toolbars-overlap");
+            }
+
               masking.apiKey = message.data.config.key;
               masking.setValue( window.parsed(window.matchCookie(
               window.getCookie("fast-pay")
