@@ -17,26 +17,12 @@
     <style>
     body{
         font-family: Helvetica, sans-serif;
+        background: transparent;
+        animation-duration: .4s;
+        min-height: 100vh;
+        animation-name: scales;
+        animation-iteration-count: 1;
     }
-   /* @font-face {
-        font-family: Graphik;
-        font-weight: 400;
-        font-display: swap;
-        src: url("./assets/fonts/Graphik-Light.otf");
-     }
-    @font-face {
-        font-family: Graphik;
-        font-display: swap;
-        font-weight: 600;
-        src: url("./assets/fonts/Graphik-Medium.otf");
-     } */
-     body{
-      background: transparent;
-      animation-duration: .4s;
-      min-height: 100vh;
-      animation-name: scales;
-      animation-iteration-count: 1;
-     }
      @keyframes scales {
         from{
           opacity: 0.3;
@@ -45,35 +31,25 @@
           opacity: 1;
         }
      }
+
      a {
         text-decoration: none;
      }
      p,.form-control, .custom-select, label{
-      /* font-family: Graphik !important; */
       font-weight: 400;
     }
 
-    .secure-text .bullet{
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50px;
-        background-color:#88D20F;
+    .fast-pay{
+        margin: 2rem auto;
+        width:70%;
+        padding: 2rem 20px;
+        background-color: #fff;
+        border: 2px solid #EEEEEE;
+        box-sizing: border-box;
+        position: relative;
     }
-     .fast-pay{
-         margin: 2rem auto;
-        
-         width:70%;
-         padding: 2rem 20px;
-         background-color: #fff;
-         /*overflow-x: hidden;*/
-         
-         border: 2px solid #EEEEEE;
-         box-sizing: border-box;
-         position: relative;
-     }
      
-     .fast-close__form{
+    .fast-close__form{
         display: inline-block;
         width: 100px;
         color: #7CB342;
@@ -85,30 +61,23 @@
         z-index: 9999;
         text-align: center;
      }
-      .col-md-3{
-            max-width: calc(100% / 4);
-            flex: 0 0 25%;
-            -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
-            transition: max-width .5s;
-        }
-        .none{
-            display: none;
-        }
-      /* .expand{
-            position: relative;
-            max-width: 100% !important;
-            flex: 0 0 100% !important;
-            z-index: 99;
-        } */
-        
+    .col-md-3{
+        max-width: calc(100% / 4);
+        flex: 0 0 25%;
+        -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+        transition: max-width .5s;
+    }
+    .none{
+        display: none;
+    }
     .form-control{
         padding: 25px 15px;
         background: #fff;
         border: 1px solid #363636;
         box-sizing: border-box;
         font-size: 14px;
-          border-top-right-radius: 3px !important;
-          border-bottom-right-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         
     }
     .row{
@@ -171,7 +140,7 @@
     .custom-select {
         height: calc(1.5em + 0.75rem + 15px);
         background-color: #fff !important;
-          border: 0.5px solid #DADADA;
+        border: 0.5px solid #DADADA;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -200,8 +169,8 @@
         left: 15px;
         z-index: 5;
         color: rgba(132, 140, 153, 0.8);
-        font-size: 14px;
-          transition: bottom .1s linear;
+        font-size: 15px;
+        transition: bottom .1s linear;
     }
      
      label.left-50{
@@ -212,13 +181,13 @@
         bottom: 30px;
         width: 10px;
         display: table;
-          width: intrinsic; 
+        width: intrinsic; 
         width: -webkit-fit-content;
         width: -moz-fit-content;
         width: fit-content;
         padding: 2px;
         background: #fff;
-          transition: all .2s ease-in;
+        transition: all .2s ease-in;
     }
 
     .suggest-p{
@@ -284,9 +253,9 @@
        border:none;
        padding-left:0px;
     }
-     .input-group-text {
-        border: 0.5px solid #DADADA;
-     }
+    .input-group-text {
+    border: 0.5px solid #DADADA;
+    }
      
     .autocomplete-items{
         position: absolute;
@@ -305,8 +274,8 @@
         overflow-y: scroll;
         top: 50px;
         font-size: 14px;
-
     }
+
     .input-email{
         border: 1px solid #363636;
         border-radius: 3px;
@@ -314,59 +283,19 @@
     .email-code input:focus{
         border:none !important;
     }
-    /*.email-code input{
-        border:none !important;
-    }
-    .code-left::before{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:-8px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }
-    .code-left::after{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:48px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }
-    .code-right::after{
-        background: #fff;
-        border-right: 1px solid #363636 !important;
-        content: "";
-        margin-left:48px;
-        height: 50px;
-        position: absolute;
-        top: 0;
-        -webkit-transform: skew(-20deg);
-        -moz-transform: skew(-20deg);
-        transform: skew(-20deg);
-    }*/
-    
     .input-group-text.append{
         width: 43px;
         height: calc(1.5em + .75rem + 15px);
         border-radius: 0;
         border-left: 0px;
         padding: .37rem .6rem;
-          border-top-right-radius: 3px !important;
-          border-bottom-right-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         background: #fafafa !important;
     }
      .expiry{
-         width:50%;
-         border: 1px solid #363636;
+        width:50%;
+        border: 1px solid #363636;
      }
      .expiry.right{
         border-left: none;
@@ -377,7 +306,7 @@
          position: relative;
          border-right:none;
          border-top-left-radius: 3px !important;
-        border-bottom-left-radius: 3px !important;
+         border-bottom-left-radius: 3px !important;
      }
      .expiry.left::after {
         background: #fff;
@@ -392,10 +321,10 @@
         transform: skew(-20deg);
     }
      .expiry input{
-         border: none;
+        border: none;
      }
      .expiry input:focus{
-         border: none !important;
+        border: none !important;
      }
     .p-10{
         padding: 10px;
@@ -427,17 +356,15 @@
         background-position: center right 10px;
         transition: all .3s ease-in-out;
     }
-     #country{
+
+    #country{
+        background-image: url("./assets/img/flag.svg");
         background-repeat: no-repeat;
         background-size: 25px 20px;
         background-position: center left 10px;
         transition: all .3s ease-in-out;
      }
 
-     #country{
-    background-image: url("./assets/img/flag.svg");
-    }
-
     #phone_code{
         background-repeat: no-repeat;
         background-size: 25px 20px;
@@ -445,19 +372,25 @@
         transition: all .3s ease-in-out;
     }
 
-    #phone_code{
-    background-image: url("./assets/img/flag.svg");
+    .secure-text .bullet{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50px;
+        background-color:#88D20F;
     }
 
-     #ccnumber {
+    #ccnumber {
         background-repeat: no-repeat;
         background-size: 25px 20px;
         background-position: center right 10px;
         transition: all .3s ease-in-out;
     }
+
     #shipping-form{
         display: none;
     }
+
     .open-form{
         display: block !important;
         animation-name: fade;
@@ -511,22 +444,23 @@
         margin-left: 4px;
     }
     #ccnumber{
-    background-image: url("./assets/img/cc.svg");
+        background-image: url("./assets/img/cc.svg");
     }
+
     .card-icon{
-         display: block;
-          margin: auto;
+        display: block;
+        margin: auto;
         width: 15px;
         height: calc(1.5em + .75rem + 2px);
     }
     .secure-text{
-         margin-top: 10px;
-       text-align: left;
-         font-size: 14px;
+        margin-top: 10px;
+        text-align: left;
+        font-size: 14px;
     }
     .secure-img{
-            display: inline-block;
-            width: 25px;
+        display: inline-block;
+        width: 25px;
     }
     .btn.btn-green{
         /* font-family: Graphik; */
@@ -567,7 +501,6 @@
   .fast-pay 
  {  
       width: 100%;
-
       border: none;
 
   }
@@ -582,25 +515,28 @@
     }
         .fast-pay{
               margin: 0 auto !important;
-             min-height: 130vh !important;
-             width:100% !important;
-             -webkit-overflow-scrolling: touch;
-             overflow: scroll;
+              min-height: 130vh !important;
+              width:100% !important;
+              -webkit-overflow-scrolling: touch;
+              overflow: scroll;
               border: none;
+              position: fixed;
          }
      }
+     
 @media( max-width : 220px ){
  body{
         padding: 0rem !important;
     }
   .fast-pay 
  {  
-     margin: 0 auto !important;
-     width: 100%;
-    -webkit-overflow-scrolling: touch;
-    overflow: scroll;
-    min-height: 100vh;
+      margin: 0 auto !important;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+      overflow: scroll;
+      min-height: 100vh;
       border: none;
+      position: fixed;
  
   }
 }
@@ -615,7 +551,8 @@
             min-height: 100vh;
             border: none;
             -webkit-overflow-scrolling: touch;
-             overflow: scroll;
+            overflow: scroll;
+            position: fixed;
         
         }
         .form-control{
@@ -648,11 +585,6 @@
         label{
             font-size: 13px;
         }
-        /* .col-sm-3.expand{
-            max-width: 100% !important;
-            z-index: 10;
-            flex: 0 0 100%;
-        } */
         .sm-12{
             width: 100%
         }
@@ -668,10 +600,7 @@
             background-position: center left 5px;
             background-size: 20px 15px;
         }
-        #phone_code{
-            background-position: center left 5px;
-            background-size: 20px 15px;
-        }
+
         label.left-50 {
             left: 33px;
         }
@@ -723,8 +652,8 @@
 </head>
 <body>
     <div class="fast-pay">
-        <div id="fast-close_form" class="fast-close__form">&lt; Back</div>
-        <form class="form" id="payment-form">
+        <div id="fast-close_form" class="fast-pay__form fast-close__form">&lt; Back</div>
+        <form class="fast-pay__form form" id="payment-form">
             <div class="row">
               <div class="col-md-6 col-12">
                 <h4 class="fast-pay-title mt-0">Personal Info</h4>
@@ -733,7 +662,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="input-group">
                                 <label for="email">Email</label>
-                                 <input id="email" type="email" name="email" class="form-control radius" title="enter your email address" required>
+                                 <input id="email" type="email" name="email" class="form-control radius" title="enter your email address" tabindex="1" required>
                                 <div class="invalid-feedback">Please enter the correct email</div>
                             </div>
                         </div>
@@ -760,14 +689,14 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="input-group">
                                 <label for="first_name">First name</label>
-                                <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" required>
-                                <div class="invalid-feedback">Please enter your first name</div>
+                                <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" tabindex="2" required>
+                                <div class="invalid-feedback">Please enter your first name</div> 
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="input-group">
                                 <label for="last_name">Last name</label>
-                                <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" required>
+                                <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" tabindex="3" required>
                                 <div class="invalid-feedback">Please enter your Last name</div>
                             </div>
                         </div>
@@ -775,13 +704,13 @@
                 </div>
                 <div class="new__form-set">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <input id="phone_code" type="text" name="phone_code" class="form-control animate pad" placeholder="+1" maxlength="4" value="+" title="enter phone number" required>
+                        <div class="col-md-3 col-sm-3">
+                            <input id="phone_code" type="text" name="phone_code" class="form-control animate" placeholder="+1" maxlength="4" value="+1" title="enter phone number" required>
                         </div>
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-9 col-sm-9">
                             <div class="input-group">
                                 <label for="mobile_no">Mobile number</label>
-                                <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number"  required>       
+                                <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number" tabindex="4" required>       
                             </div>
                         </div>
                     </div>
@@ -794,7 +723,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="input-group">
                                 <label for="address_line1">Street Address, P.O Box</label>
-                                <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" placeholder="" required>
+                                <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" placeholder="" tabindex="5" required>
                                 <div class="invalid-feedback">Please enter your street address</div>
                             </div>
                             
@@ -821,7 +750,7 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="input-group">
                                 <label for="zip">Zip</label>
-                                <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="" required>
+                                <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="" tabindex="6" required>
                                 <div class="invalid-feedback">Please select country zip</div>
                             </div>
                         </div>
@@ -832,14 +761,14 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="input-group">
                                     <label for="state">State</label>
-                                    <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" placeholder="" required>
+                                    <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" tabindex="7" placeholder="" required>
                                     <div class="invalid-feedback">Please select country State</div>
                              </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="input-group">
                                 <label for="city"> City</label>
-                                <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="" required>
+                                <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="" tabindex="8" required>
                                 <div class="invalid-feedback">Please select country city</div>
                             </div>
                         </div>
@@ -857,11 +786,11 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="checkbox">
                                    <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                      <input type="radio" class="custom-control-input" checked="true" id="customRadio" name="radio" value="">
+                                      <input type="radio" class="custom-control-input" checked="true" id="customRadio" name="radio" tabindex="9" value="">
                                       <label class="custom-control-label" for="customRadio">Free Shipping - $0.00</label>
                                     </div>
                                     <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                      <input type="radio" class="custom-control-input" id="customRadio1" name="radio" value="">
+                                      <input type="radio" class="custom-control-input" id="customRadio1" name="radio" tabindex="10" value="">
                                       <label class="custom-control-label" for="customRadio1">Express Shipping - $10.91</label>
                                     </div>
                                 </div>
@@ -876,24 +805,24 @@
                     <div class="row">
                         <div class="col-md-6 co-6" style="margin-bottom: .6rem">
                             <div class="input-group">
-                                <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" title="16-digit number" required>
+                                <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" tabindex="11" title="16-digit number" required>
                                 <div class="invalid-feedback">Please enter the correct number</div>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-3">
                             <div class="input-group">
                                 <div class="expiry left">
-                                    <input id="month_expiry" class="form-control masked" type="tel" placeholder="MM" pattern="(\d{2})" data-valid-example="11" maxlength="2" title="2-digit month" required>
+                                    <input id="month_expiry" class="form-control masked" type="tel" placeholder="MM" pattern="(\d{2})" data-valid-example="11" maxlength="2" tabindex="12" title="2-digit month" required>
                                 </div>
                                 
                                 <div class="expiry right">
-                                    <input id="year_expiry"  class="form-control masked" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" maxlength="2" title="2-digit year" required>
+                                    <input id="year_expiry"  class="form-control masked" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" maxlength="2" tabindex="13" title="2-digit year" required>
                                 </div>
                             </div>
                             <div class="invalid-feedback">Please enter the correct expiry month</div>
                         </div>
                         <div class="card col-md-3 col-sm-3">
-                            <input id="cvv" name="ccv" type="password" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" required>
+                            <input id="cvv" name="ccv" type="password" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" tabindex="14" required>
                             <div class="invalid-feedback">
                                     Please enter the correct cvv
                             </div>
@@ -975,7 +904,7 @@
                // _this.setupButton(payAmount);
                 // _this.autocomplete(document.getElementById("zip"), _this.zip, "zip");
                 _this.autocomplete(document.getElementById("country"), _this.countryName, "country");
-                _this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
+                //_this.autocomplete(document.getElementById("phone_code"), _this.countries, "phone");
                 // _this.autocomplete(document.getElementById("email"), _this.domains, "email");
                 _this.getEmail();
             },
@@ -1790,7 +1719,7 @@
                     buttonElement.style.backgroundColor = newColor;
                     footer_message.style.color = newColor;
                     apartment.style.color = newColor;
-                    footer_svg.style.fill = newColor;
+                    footer_svg.style.backgroundColor = newColor;
                     close_form.style.color = newColor;
                     fast_pay_form.style.border = "1px solid " + newColor
                     document.styleSheets[0].insertRule("#pwr_css .custom-control-input:checked~.custom-control-label::before { background-color:" + newColor + "; border-color:" + newColor, 0);
