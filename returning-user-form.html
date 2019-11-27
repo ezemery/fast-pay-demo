@@ -161,7 +161,7 @@
         left: 15px;
         z-index: 5;
         color: rgba(132, 140, 153, 0.8);
-        font-size: 14px;
+        font-size: 15px;
 		transition: bottom .1s linear;
     }
 	 
@@ -667,7 +667,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="input-group">
                                     <label for="email">Email</label>
-                                    <input list="email" type="email" name="email" id="email_input" class="form-control radius" title="enter your email address" required>
+                                    <input list="email" type="email" name="email" id="email_input" class="form-control radius" title="enter your email address" tabindex="1" required>
                                     <datalist id="email">
                                       <option value="fast@gmail.com">
                                       <option value="here@yahoo.com">
@@ -683,14 +683,14 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <label for="first_name">First name</label>
-                                    <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" required>
+                                    <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" tabindex="2" required>
                                     <div class="invalid-feedback">Please enter your first name</div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="input-group">
                                     <label for="last_name">Last name</label>
-                                    <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" required>
+                                    <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" tabindex="3" required>
                                     <div class="invalid-feedback">Please enter your Last name</div>
                                 </div>
                             </div>
@@ -704,7 +704,7 @@
                             <div class="col-md-9 col-sm-9">
                                 <div class="input-group">
                                     <label for="mobile_no">Mobile number</label>
-                                    <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number"  required>       
+                                    <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number" tabindex="4" required>       
                                 </div>
                             </div>
                         </div>
@@ -724,7 +724,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="input-group">
                                             <label for="address_line1">Street Address, P.O Box</label>
-                                            <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" placeholder="">
+                                            <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" tabindex="5" placeholder="">
                                             <div class="invalid-feedback">Please enter your street address</div>
                                         </div>
                                         
@@ -736,7 +736,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="input-group">
                                             <label for="address_line">Apartment, suite, unit, Company or address_line</label>
-                                            <input id="address_line" type="text" name="address_line1" class="form-control radius" title="enter your street address"  placeholder="">
+                                            <input id="address_line" type="text" name="address_line1" class="form-control radius" title="enter your street address"  tabindex="6" placeholder="">
                                             <div class="invalid-feedback">Please enter your street address</div>
                                         </div>
                                         
@@ -751,7 +751,7 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                             <label for="zip">Zip</label>
-                                            <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="">
+                                            <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" tabindex="7" placeholder="">
                                             <div class="invalid-feedback">Please select country zip</div>
                                         </div>
                                     </div>
@@ -762,14 +762,14 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                                 <label for="state">State</label>
-                                                <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" placeholder="">
+                                                <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" tabindex="8" placeholder="">
                                                 <div class="invalid-feedback">Please select country State</div>
                                          </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="input-group">
                                             <label for="city"> City</label>
-                                            <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="">
+                                            <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" tabindex="9" placeholder="">
                                             <div class="invalid-feedback">Please select country city</div>
                                         </div>
                                     </div>
@@ -1769,7 +1769,7 @@
         }
     };
     window.addEventListener("DOMContentLoaded", function(){
-            window.parent.postMessage({action: 'allcontentloaded'}, '*');
+        window.parent.postMessage({action: 'allcontentloaded'}, '*');
 
     })
 
