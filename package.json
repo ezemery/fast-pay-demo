@@ -1,8 +1,8 @@
 {
   "name": "fast-pay-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Fast Pay Mock server",
+  "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
