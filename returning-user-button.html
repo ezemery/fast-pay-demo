@@ -501,132 +501,114 @@
   </head>
   <body>
     <div class="fast-pay-returning">
-      <form action="">
+      <form action="https://dev.api.fast.co/api/m/pay">
         <div class="row m-3">
           <div class="col-md-6 card-type pb-3 pb-md-0 col-sm-6 col-12">
             <img src="assets/img/visa.svg" alt="" id="card-type" />
-            <p id="card-number" class="card-number"></p>
+            <p id="card-number" class="card-number"> * 4242</p>
           </div>
+
           <div class="col-md-6 card-address col-sm-6 col-6">
-            <p
-              style="font-size: 16px; line-height: 18px;color: #696969;"
-              id="address"
-            ></p>
+            <p style="font-size: 16px; line-height: 18px;color: #696969;"
+              id="address"> San Francisco, San Francisco 94107</p>
             <img src="assets/img/edit.svg" alt="" id="edit-details" />
           </div>
         </div>
-        <button class="btn btn-pay-fast" id="fast-pay"></button>
+        <input type="submit" class="btn btn-pay-fast" id="fast-pay"></button>
       </form>
     </div>
     <script>
       var payReturningUsersButton = {
-        /**
-         * get instanc of the button
-         */
+        apiKey:"",
         buttonElement: document.getElementById("fast-pay"),
-        /**
-         * get instanc of the edit icon
-         */
         editImageElement: document.getElementById("edit-details"),
         origin: "https://fast-pay-server.herokuapp.com",
-        cookie: "",currency: "",
-        currency: '',
         init: function init() {
           this.editImageElement.addEventListener("click", function(e) {
             payReturningUsersButton.showReturningUserForm();
           });
 
-          this.buttonElement.addEventListener("click", function(e) {
-            //read from fast pay data from cookie
-            // send to fast api
-            var cookie = payReturningUsersButton.cookie;
-            payReturningUsersButton.sendFastData(cookie);
-          });
+          // this.buttonElement.addEventListener("click", function(e) {
+          //   //read from fast pay data from cookie
+          //   // send to fast api
+          //   var cookie = payReturningUsersButton.cookie;
+          //   payReturningUsersButton.sendFastData(cookie);
+          // });
         },
         showReturningUserForm: function showForm() {
           var _this = this;
           parent.postMessage({ action: "editIconClick" }, "*");
         },
-        transformData: function(data) {
-          var identifiers = window.reduceIdentifier(JSON.parse(data));
-          return {
-            personal: {
-              email: identifiers.email.identifier,
-              firstName: data.first_name,
-              lastName: data.last_name,
-              phone: {
-                country: identifiers.phone.country,
-                phone: identifiers.phone.identifier
-              }
-            },
-            shipping: data.addresses,
-            cards: data.cards
-          }
-        },
-        sendFastData: function(data) {
-          var _this = this,
-          xhr,
-          url = "https://dev.api.fast.co/api/m/pay",
-          button = _this.buttonElement;
 
-          if (window.XMLHttpRequest) {
-            xhr = new XMLHttpRequest();
-          } else if (window.ActiveXObject) {
-            xhr = new ActiveXObject("Microsoft.XMLHTTP");
-          }
+        // transformData: function(data) {
+        //   var identifiers = window.reduceIdentifier(JSON.parse(data));
+        //   return {
+        //     personal: {
+        //       email: identifiers.email.identifier,
+        //       firstName: data.first_name,
+        //       lastName: data.last_name,
+        //       phone: {
+        //         country: identifiers.phone.country,
+        //         phone: identifiers.phone.identifier
+        //       }
+        //     },
+        //     shipping: data.addresses,
+        //     cards: data.cards
+        //   }
+        // },
 
-          xhr.open("POST", url, true);
+        // sendFastData: function(data) {
+        //   var _this = this,
+        //   xhr,
+        //   url = "https://dev.api.fast.co/api/m/pay",
+        //   button = _this.buttonElement;
 
-          xhr.setRequestHeader("Content-type", "application/json");
-          xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
+        //   if (window.XMLHttpRequest) {
+        //     xhr = new XMLHttpRequest();
+        //   } else if (window.ActiveXObject) {
+        //     xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        //   }
 
-          xhr.onload = function() {
-            if (xhr.readyState === xhr.DONE) {
-              if (xhr.status === 200) {
-                response = xhr.responseText;
-                button.innerText = "Done";
-                button.style.backgroundColor = "green";
-                return response;
-              } else {
-                button.innerText = "There was an error, try again";
-                button.style.backgroundColor = "red";
-              }
-            }
-          };
-          xhr.send(_this.transformData(JSON.stringify(data)));
-        }
+        //   xhr.open("POST", url, true);
+
+        //   xhr.setRequestHeader("Content-type", "application/json");
+        //   xhr.setRequestHeader("Fast-Access-Key", _this.apiKey);
+
+        //   xhr.onload = function() {
+        //     if (xhr.readyState === xhr.DONE) {
+        //       if (xhr.status === 200) {
+        //         response = xhr.responseText;
+        //         button.innerText = "Done";
+        //         button.style.backgroundColor = "green";
+        //         return response;
+        //       } else {
+        //         button.innerText = "There was an error, try again";
+        //         button.style.backgroundColor = "red";
+        //       }
+        //     }
+        //   };
+        //   xhr.send(_this.transformData(JSON.stringify(data)));
+        // }
+
       };
 
       var message_handlers = {};
+      var getCurrency = function(currency) {
+            switch (currency.toLowerCase()) {
+                case "usd":
+                return "$";
+                default:
+                // default to dollar
+                return "$";
+            }
+        }
 
       message_handlers.clickreport = function(message) {
         payReturningUsersButton.apiKey = message.data.config.key;
-        payReturningUsersButton.currency = message.data.config.currency;
-        payReturningUsersButton.cookie = window.matchCookie(
-          window.getCookie("fast-pay")
-        );
-        var userDetails = window.parsed(payReturningUsersButton.cookie);
-        var shipping = userDetails.addresses[0]
-        var card = userDetails.cards[0]
-
-
-        var last4 = card.last4;
-        var cardNumber = document.getElementById("card-number");
-        var currencySymbol = window.getCurrency(payReturningUsersButton.currency)
-
-
-        cardNumber.textContent = "* " + last4 + "";
-
-        var address = document.getElementById("address");
-        address.textContent =
-          shipping.address_line1 +
-          ", " +
-          shipping.address_line +
-          " " +
-          shipping.zip;
+        var currency = getCurrency(message.data.config.currency)
 
         payReturningUsersButton.buttonElement.textContent =
-          "FAST CHECKOUT - " + currencySymbol + message.data.config.amount;
+          "FAST CHECKOUT - " + currency + message.data.config.amount;
 
         if(message.data.config.color){
             payReturningUsersButton.buttonElement.style.backgroundColor = message.data.config.color;
