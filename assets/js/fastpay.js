@@ -17,7 +17,7 @@
   /**
    * server origin
    */
-   // https://fast-pay-server.herokuapp.com
+   // 
   var origin = "https://fast-pay-server.herokuapp.com";
   /**
    * path to Fast Pay Form source
@@ -98,7 +98,7 @@
       }
       if (isEscape) {
           // console.log('key clicked')
-          closeFastFormModalVisibility();
+          toggleFastFormModalVisibility();
       }
   };
   /**
