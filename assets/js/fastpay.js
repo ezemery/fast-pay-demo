@@ -18,7 +18,7 @@
    * server origin
    */
    // 
-  var origin = "https://fast-pay-server.herokuapp.com";
+  var origin = "http://localhost:3000";
   /**
    * path to Fast Pay Form source
    */
