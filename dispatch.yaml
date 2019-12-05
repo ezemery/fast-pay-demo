@@ -1,0 +1,16 @@
+dispatch:
+  # Default service serves the typical web resources and all static resources.
+  - url: "*/fast-pay-chkt.appspot.com"
+    service: default
+
+  # Default service serves simple hostname request.
+  - url: "fast-pay-chkt.appspot.com/"
+    service: default
+
+  # Send all  web traffic to the frontend.
+  - url: "*/fast-pay-chkt.appspot.com/*"
+    service: web-frontend
+
+  # Send all work to the one static backend.
+  - url: "*/fast-pay-chkt.appspot.com/*"
+    service: node-backend
