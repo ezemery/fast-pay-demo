@@ -12,7 +12,7 @@
 # limitations under the License.
 
 # [START gae_flex_quickstart_yaml]
-runtime: custom
+runtime: nodejs
 env: flex
 
 # This sample incurs costs to run on the App Engine flexible environment.
@@ -27,11 +27,5 @@ resources:
   disk_size_gb: 10
 handlers:
   # Serve all static files with urls ending with a file extension
-- url: /(.*\..+)$
-  static_files: build/\1
-  upload: build/(.*\..+)$
-  # catch all handler to index.html
-- url: /.*
-  static_files: build/index.html
-  upload: build/index.html
+
 # [END gae_flex_quickstart_yaml]
