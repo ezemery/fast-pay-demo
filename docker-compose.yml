@@ -4,21 +4,16 @@ services:
   #view the frontend from localhost:3001
   web:
     build:
-      context: .
+      context: ./docker
       dockerfile: nginx.dockerfile
     ports:
       - 3001:80
-    networks: 
-      - backend_network
+      - 8080:80
   backend:
     build:
-      context: .
+      context: ./docker
       dockerfile: node.dockerfile
     working_dir: /var/www
     ports:
       - 3000:3000
-    networks: 
-      - backend_network
-networks: 
-  backend_network:
-    driver: bridge
+
