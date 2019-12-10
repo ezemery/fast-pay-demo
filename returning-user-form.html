@@ -442,6 +442,13 @@
         display: inline-block;
         width: 25px;
     }
+    /* .shipping_card .card {
+        padding: 7px;
+        border: 1px solid #363636;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+
+    } */
     .pay_card .card {
         padding: 7px;
         border: 1px solid #363636;
@@ -798,16 +805,24 @@
                         <div class="fast_shipping-method">
                             <h4 class="fast-pay-title">Shipping Method</h4>
                             <div class="row">
-                                <div class="col-md-12 col-sm-12">
+                                <div class="col-md-12 col-sm-12 shipping_card">
                                     <div class="checkbox">
-                                       <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                          <input type="radio" class="custom-control-input" id="free-delivery" name="shipping-method" value="" checked="checked">
-                                          <label class="custom-control-label" for="free-delivery">Free Shipping - $0.00</label>
+                                     <div class="col-md-4 col-4 col-sm-4">
+                                        <div class="card">
+                                            <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
+                                                <input type="radio" class="custom-control-input" id="free-delivery" name="shipping-method" value="" checked="checked">
+                                                <label class="custom-control-label" for="free-delivery">Free Shipping - $0.00</label>
+                                            </div>
                                         </div>
-                                        <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
-                                          <input type="radio" class="custom-control-input" id="express-delivery" name="shipping-method" value="">
-                                          <label class="custom-control-label" for="express-delivery">Express Shipping - $10.91</label>
+                                    </div>
+                                    <div class="col-md-4 col-4 col-sm-4">
+                                        <div class="card">
+                                            <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
+                                            <input type="radio" class="custom-control-input" id="express-delivery" name="shipping-method" value="">
+                                            <label class="custom-control-label" for="express-delivery">Express Shipping - $10.91</label>
+                                            </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>         
                             </div>     
@@ -1318,6 +1333,7 @@
                 _this.sendSTripeData(stripeData, function(token){
                 var fastData = _this.getData(token, shipping);
                 console.log(fastData);
+                console.log(JSON.stringify(fastData));
                 //return  _this.sendFastData(fastData);
 
                });
@@ -1328,6 +1344,7 @@
                     }
                 var fastData = _this.getData(card, shipping);
                 console.log(fastData);
+                console.log(JSON.stringify(fastData));
                 //return  _this.sendFastData(fastData);
             }
     
@@ -1335,27 +1352,39 @@
         
         addShippingAddress: function(){
             var _this = this;
-            var open_shipping_button = document.getElementById('add-shipping-address');
+            var open_shipping_button = document.getElementById('add-shipping-address'),
+            address_line1 = document.getElementById("address_line1"),
+            address_line = document.getElementById("address_line"),
+            country = document.getElementById("country"),
+            zip = document.getElementById("zip"),
+            state = document.getElementById("state"),
+            city = document.getElementById("city");
+
             open_shipping_button.addEventListener("click", function(){
                 document.getElementById("shippingDetails").setAttribute("checked", true);
-                
+                address_line1.setAttribute("required", true);
+                address_line.setAttribute("required", true)
+                country.setAttribute("required", true)
+                zip.setAttribute("required", true)
+                state.setAttribute("required", true)
+                city.setAttribute("required",true)              
                 var shippingRadios = document.forms["payment-form"].elements["shippingAddress"];
                 for(var i = 0, max = shippingRadios.length; i < max; i++) {
                     shippingRadios[i].onclick = function() {
                         if(this.value === "newshipping"){
-                            document.getElementById("address_line1").setAttribute("required", true);
-                            document.getElementById("address_line").setAttribute("required", true)
-                            document.getElementById("country").setAttribute("required", true)
-                            document.getElementById("zip").setAttribute("required", true)
-                            document.getElementById("state").setAttribute("required", true)
-                            document.getElementById("city").setAttribute("required",true)
+                            address_line1.setAttribute("required", true);
+                            address_line.setAttribute("required", true)
+                            country.setAttribute("required", true)
+                            zip.setAttribute("required", true)
+                            state.setAttribute("required", true)
+                            city.setAttribute("required",true)
                         }else{
-                            document.getElementById("address_line1").removeAttribute("required");
-                            document.getElementById("address_line").removeAttribute("required")
-                            document.getElementById("country").removeAttribute("required")
-                            document.getElementById("zip").removeAttribute("required")
-                            document.getElementById("state").removeAttribute("required")
-                            document.getElementById("city").removeAttribute("required")
+                            address_line1.removeAttribute("required");
+                            address_line.removeAttribute("required")
+                            country.removeAttribute("required")
+                            zip.removeAttribute("required")
+                            state.removeAttribute("required")
+                            city.removeAttribute("required")
                         }
                     }
                 }
@@ -1366,22 +1395,32 @@
 
         addCardDetials:function(){
             var _this = this;
-            var open_card_button = document.getElementById('add-card-details');
+            var open_card_button = document.getElementById('add-card-details'),
+            ccnumber = document.getElementById("ccnumber"),
+            month_expiry = document.getElementById("month_expiry"),
+            year_expiry = document.getElementById("year_expiry"),
+            cvv = document.getElementById("cvv");
+
              open_card_button.addEventListener("click", function(){
                 document.getElementById("express-card-details").setAttribute("checked", true);
+                ccnumber.setAttribute("required", true);
+                month_expiry.setAttribute("required", true)
+                year_expiry.setAttribute("required", true)
+                cvv.setAttribute("required", true)
+
                 var cardRadios = document.forms["payment-form"].elements["card-value"];
                 for(var i = 0, max = cardRadios.length; i < max; i++) {
                     cardRadios[i].onclick = function() {
                         if(this.value === "new-card"){
-                            document.getElementById("ccnumber").setAttribute("required", true);
-                            document.getElementById("month_expiry").setAttribute("required", true)
-                            document.getElementById("year_expiry").setAttribute("required", true)
-                            document.getElementById("cvv").setAttribute("required", true)
+                            ccnumber.setAttribute("required", true);
+                            month_expiry.setAttribute("required", true);
+                            year_expiry.setAttribute("required", true);
+                            cvv.setAttribute("required", true);
                         }else{
-                            document.getElementById("ccnumber").removeAttribute("required");
-                            document.getElementById("month_expiry").removeAttribute("required")
-                            document.getElementById("year_expiry").removeAttribute("required")
-                            document.getElementById("cvv").removeAttribute("required")
+                            ccnumber.removeAttribute("required");
+                            month_expiry.removeAttribute("required")
+                            month_expiry.removeAttribute("required")
+                            year_expiry.removeAttribute("required")
                         }
                     }
                 }
