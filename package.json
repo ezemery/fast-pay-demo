@@ -5,15 +5,34 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap-scss": "^4.4.1",
     "cookie-parser": "^1.4.4",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "payment-icons": "^1.2.1"
   },
   "engines": {
-    "node": "10.x.x"
+    "node": "13.x.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.3.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "file-loader": "^5.0.2",
+    "node-sass": "^4.13.0",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
   "scripts": {
-    "start": "nodemon server.js --watch *"
+    "start-server": "nodemon server.js --watch *",
+    "start-web": "nodemon src --watch *",
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production"
   },
   "keywords": [],
   "author": "",

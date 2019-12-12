@@ -1,0 +1,13 @@
+$white: #fff; 
+$ash: #363636;
+$fast-color-dark: #7CB342;
+$fast-color-light: #88D20F;
+
+body{
+    font-family: Helvetica, sans-serif;
+    background: transparent;
+    animation-duration: .4s;
+    min-height: 100vh;
+    animation-name: scales;
+    animation-iteration-count: 1;
+  }
