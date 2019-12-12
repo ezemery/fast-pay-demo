@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>   
+    <title>Fast checkout new user form</title>
+</head>
+<body>
+    <div class="fast-pay">
+        <div id="fast-close_form" class="fast-pay__form fast-close__form">&lt; Back</div>     
+        <form class="fast-pay__form form" id="payment-form">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <h4 class="fast-pay-title mt-0">Personal Info</h4>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <label for="email">Email</label>
+                                 <input id="email" type="email" name="email" class="form-control radius" title="enter your email address" tabindex="1" required>
+                                <div class="invalid-feedback">Please enter the correct email</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set hide-quick-fill" id="quick-code-fill">
+                  <p class="mt-3" style="font-size: 14px;">For quick fill, enter the 6-digit pin sent to your email address</p>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-email">
+                                <div class="email-code">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode1">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode2">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode3">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode4">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode5">
+                                    <input class="form-control email-code-input none-ipt-right" type="tel" placeholder="-"  maxlength="1" id="pincode6">
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <small class="resend-otp-code hide-resend-code">error validating code, resend code</small>
+                </div>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                <label for="first_name">First name</label>
+                                <input id="first_name" type="text" name="first_name" class="form-control radius" title="enter your first name" tabindex="2" required>
+                                <div class="invalid-feedback">Please enter your first name</div> 
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                <label for="last_name">Last name</label>
+                                <input id="last_name" type="text" name="last_name" class="form-control radius" title="enter your last name" tabindex="3" required>
+                                <div class="invalid-feedback">Please enter your Last name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <input id="phone_code" type="text" name="phone_code" class="form-control animate" placeholder="+1"  title="enter your phone code" maxlength="4" value="+1" title="enter phone number" required aria-label="phone code">
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <div class="input-group">
+                                <label for="mobile_no">Mobile number</label>
+                                <input id="mobile_no" type="tel" name="mobile_no"  class="form-control radius" title="enter your mobile number" tabindex="4" required>       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set shipping__section">
+                <h4 class="fast-pay-title">Shipping Details <span class="toggle-apartment">+ unit/building name</span></h4>
+                
+                <div class="new__form-set quick-fill">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <label for="address_line1">Street Address, P.O Box</label>
+                                <input id="address_line1" type="text" name="address_line1" class="form-control radius" title="enter your street address" placeholder="" tabindex="5" required>
+                                <div class="invalid-feedback">Please enter your street address</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set quick-fill apartment">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="input-group">
+                                <label for="address_line">Apartment, suite, unit, Company</label>
+                                <input id="address_line" type="text" name="address_line1" class="form-control radius" title="enter your street address"  placeholder="">
+                                <div class="invalid-feedback">Please enter your street address</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="new__form-set quick-fill">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <input id="country" type="text" name="country" class="form-control radius animate pad" placeholder="US" title="enter country" maxlength="" required>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                <label for="zip">Zip</label>
+                                <input id="zip" type="tel" name="zip" class="form-control radius" title="enter your Search Zip" placeholder="" tabindex="6" required>
+                                <div class="invalid-feedback">Please select country zip</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="new__form-set quick-fill">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                    <label for="state">State</label>
+                                    <input id="state" type="text" name="state" class="form-control radius" title="enter your Search State, or City" tabindex="7" placeholder="" required>
+                                    <div class="invalid-feedback">Please select country State</div>
+                             </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                <label for="city"> City</label>
+                                <input id="city" type="text" name="city" class="form-control radius" title="enter your Search City" placeholder="" tabindex="8" required>
+                                <div class="invalid-feedback">Please select country city</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="px-1 px-md-4 col-md-6 col-12">
+                
+                <div class="new__form-set">
+                    <div class="fast_shipping-method">
+                        <h4 class="fast-pay-title">Shipping Method</h4>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="checkbox">
+                                   <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
+                                      <input type="radio" class="custom-control-input" checked="true" id="customRadio" name="radio" tabindex="9" value="">
+                                      <label class="custom-control-label" for="customRadio">Free Shipping - $0.00</label>
+                                    </div>
+                                    <div class="custom-control custom-radio" style="    margin-bottom: .7rem;">
+                                      <input type="radio" class="custom-control-input" id="customRadio1" name="radio" tabindex="10" value="">
+                                      <label class="custom-control-label" for="customRadio1">Express Shipping - $10.91</label>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>         
+                        </div>     
+                    </div>
+                </div>
+                <div class="new__form-set card__section ">
+                    <h4 class="fast-pay-title">Card Details</h4>
+                    <div class="new__form-set quick-fill">
+                    <div class="row">
+                        <div class="col-md-6 co-6" style="margin-bottom: .6rem">
+                            <div class="input-group autotab">
+                                <input id="ccnumber" type="tel" name="ccnumber" placeholder="0000 0000 0000 0000" pattern="\d{4} \d{4} \d{4} \d{4}" class="form-control masked" tabindex="11" title="16-digit number" required>
+                                <div class="invalid-feedback">Please enter the correct number</div>
+                            </div>
+                        </div>
+                        <div class="card col-md-3 col-sm-3">
+                            <div class="input-group">
+                                <div class="expiry left autotab">
+                                    <input id="month_expiry" class="form-control masked" type="tel" placeholder="MM" pattern="(\d{2})" data-valid-example="11" maxlength="2" tabindex="12" title="2-digit month" required>
+                                </div>
+                                
+                                <div class="expiry right autotab">
+                                    <input id="year_expiry"  class="form-control masked" type="tel" placeholder="YY" pattern="(\d{2})" data-valid-example="22" maxlength="2" tabindex="13" title="2-digit year" required>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">Please enter the correct expiry month</div>
+                        </div>
+                        <div class="card col-md-3 col-sm-3 autotab">
+                            <input id="cvv" name="ccv" type="password" placeholder="1234" class="form-control masked" pattern="(\d{3})|(\d{4})" title="4-digit-number" tabindex="14" required>
+                            <div class="invalid-feedback">
+                                    Please enter the correct cvv
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="new__form-set">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                                 
+                            <p class="secure-text">
+                                <span class="bullet"></span>
+                            Another easy & secure payment by Fast <a href="https://fast.co/terms" target="_blank"><b class="color-fast">Terms and conditions</b></a>
+                        </p>
+                            <button id="send-button" type="button" class="btn btn-green">Pay <span class="data-amount">$120</span> Now</button>
+                        </div>   
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="assets/js/newUserForm.js"></script>
+</body>
+</html>

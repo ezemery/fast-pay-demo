@@ -1,0 +1,65 @@
+@import './base';
+  p,
+  .form-control,
+  .custom-select,
+  label {
+    font-weight: bold;
+    /* font-family: Graphik-Bold; */
+  }
+  .fast-pay-returning form .btn-pay-fast {
+    background: #363636;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 0px 4px 4px;
+    font-size: 17px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $white;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .fast-pay-returning form {
+    background: $white;
+    border: 1px solid #d1d1d1;
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .fast-pay-returning form .row {
+    /*margin: 19px 2rem;*/
+    padding: 9px 0px 1rem;
+    border-bottom: 1px solid #d1d1d9;
+  }
+  .fast-pay-returning form .row .card-type p {
+    font-size: 10px;
+    margin: 2px 16px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #363636;
+    font-weight: 900;
+  }
+
+  .fast-pay-returning form .row .card-type {
+    display: flex;
+  }
+  .fast-pay-returning .card-address p {
+    font-size: 16px;
+    line-height: 18px;
+    color: #696969;
+  }
+
+  .fast-pay-returning .card-address img {
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  .fast-pay-returning .card-address {
+    display: flex;
+  }
+
+  .card-number {
+    display: flex;
+    align-items: center;
+  }
