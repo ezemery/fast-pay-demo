@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: button.js
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: button.js
+  template: 
+    metadata:
+      labels:
+        app: fast-pay-chkt-button
+    spec:   
+      containers: 
+      - name: button.js
+        image: gcr.io/fast-gke/button.js:1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
