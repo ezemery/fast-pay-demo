@@ -15,4 +15,4 @@ deploy:
 profiles:
    - name: cloud-build
      build:
-       googleCloudBuild: {} % 
+       googleCloudBuild: {}  
