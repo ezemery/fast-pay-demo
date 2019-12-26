@@ -5,7 +5,7 @@ var payReturningUsersButton = {
     apiKey:"",
     buttonElement: document.getElementById("fast-pay"),
     editImageElement: document.getElementById("edit-details"),
-    origin: "https://fast-pay-server.herokuapp.com",
+    origin: "http://localhost:4000",
     init: function init() {
       this.editImageElement.addEventListener("click", function(e) {
         payReturningUsersButton.showReturningUserForm();
