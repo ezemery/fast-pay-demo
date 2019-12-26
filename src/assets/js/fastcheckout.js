@@ -18,7 +18,7 @@
    * server origin
    */
    // 
-  var origin = "http://localhost:4000";
+  var origin = "https://fast-pay-chkt.appspot.com/";
   /**
    * path to Fast Pay Form source
    */
