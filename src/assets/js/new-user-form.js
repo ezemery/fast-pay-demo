@@ -701,7 +701,7 @@ if (!Object.entries) {
         xhr.onload = function() {
           if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200) {
-              response = JSON.parse(xhr.responseText);
+              var response = JSON.parse(xhr.responseText);
               if (!response.error) {
                 var show = response.data.identifier_exists;
                 // show quick fill for if user already exist else do nothing
