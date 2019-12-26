@@ -1,5 +1,12 @@
 import "bootstrap-scss";
 import "../css/returning-user-form.scss";
+import visa from  "../img/visa.svg";
+import mastercard from "../img/mastercard.svg";
+import jcb from "../img/jcb.svg"
+import amex from "../img/amex.svg";
+import discover from "../img/discover.svg";
+import diners from "../img/diners.svg";
+import cc from  "../img/cc.svg"
 
  //Object entries polyfill
  if (!Object.entries) {
@@ -27,6 +34,7 @@ import "../css/returning-user-form.scss";
     domains: ["fast.co","yahoo.com", "gmail.com", "google.com", "hotmail.com", "me.com", "aol.com", "mac.com", "live.com", "comcast.com", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk", "facebook.com", "verizon.net", "att.net", "gmz.com", "mail.com"],
     init: function () {
         var _this = this;
+        console.log(cc);
         _this.setUpMasks(_this.maskedInputs);
         _this.maskedInputs = document.querySelectorAll('.masked');
         _this.activateMasking(_this.maskedInputs);
@@ -114,25 +122,25 @@ import "../css/returning-user-form.scss";
                 card = _this.ValidateCreditCardNumber();
                 switch(card){
                         case "Visa":
-                            icon.style.backgroundImage = "url('../img/visa.svg')";
+                            icon.style.backgroundImage = "url("+ visa +")";
                             break;
                         case "Mastercard":
-                            icon.style.backgroundImage = "url('../img/mastercard.svg')";
+                            icon.style.backgroundImage = "url("+ mastercard +")";
                             break;
                         case "JCB":
-                            icon.style.backgroundImage = "url('../img/jcb.svg')";
+                            icon.style.backgroundImage = "url("+ jcb +")";
                             break;
                         case "AMEX":
-                            icon.style.backgroundImage = "url('../img/amex.svg')";
+                            icon.style.backgroundImage = "url("+ amex +")";
                             break;
                         case "Discover":
-                            icon.style.backgroundImage = "url('../img/discover.svg')";
+                            icon.style.backgroundImage = "url("+ discover +")";
                             break;
                         case "Diners":
-                            icon.style.backgroundImage = "url('../img/diners.svg')"; 
+                            icon.style.backgroundImage = "url("+ diners +")";
                             break;
                         default:
-                         icon.style.backgroundImage = "url('../img/cc.svg')"
+                         icon.style.backgroundImage = "url("+ cc +")";
 
                     }                       
 

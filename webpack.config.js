@@ -29,7 +29,14 @@ const config = {
       },
       {
         test: /\.svg$/,
-        use: 'file-loader'
+        use: [
+          {
+            loader: 'url-loader',
+            // options: {
+            //   mimetype: 'image/png'
+            // }
+          }
+        ]
       },
       {
         test: /\.png$/,
