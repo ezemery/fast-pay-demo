@@ -3,7 +3,7 @@ const app = express()
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const secret = "test";
 const validity_days = 365;
 const expires = validity_days * 1000 * 60 * 60 * 24;
@@ -125,10 +125,10 @@ const COOKIE_VALUE = {
   ]
 };
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')))
+app.use('/assets', express.static(path.join(__dirname, '/dist/assets')))
 
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 })
 
 app.get('/fast-pay-button', function(req, res){
@@ -136,7 +136,7 @@ app.get('/fast-pay-button', function(req, res){
     
     if(key){
         //res.cookie("fast-pay", COOKIE_VALUE, {expires: new Date(Date.now() + 900000)});
-        res.sendFile(path.join(__dirname + '/new-user-button.html'));
+        res.sendFile(path.join(__dirname + '/dist/new-user-button.html'));
     }else{
         
         res.json({
@@ -149,7 +149,7 @@ app.get('/fast-pay-button', function(req, res){
 app.get('/fast-pay-form', function(req, res){
     const key = req.query.key;
     if(key){
-        res.sendFile(path.join(__dirname + '/new-user-form.html'));
+        res.sendFile(path.join(__dirname + '/dist/new-user-form.html'));
  
     }else{
         res.json({
@@ -163,7 +163,7 @@ app.get('/fast-pay-form', function(req, res){
 app.get('/fast-returning-form', function(req, res){
     const key = req.query.key;
     if(key){
-        res.sendFile(path.join(__dirname + '/returning-user-form.html'));
+        res.sendFile(path.join(__dirname + '/dist/returning-user-form.html'));
  
     }else{
         res.json({
@@ -177,7 +177,7 @@ app.get('/fast-returning-form', function(req, res){
 app.get('/fast-returning-button', function(req, res){
     const key = req.query.key;
     if(key){
-        res.sendFile(path.join(__dirname + '/returning-user-button.html'));
+        res.sendFile(path.join(__dirname + '/dist/returning-user-button.html'));
  
     }else{
         res.json({
@@ -194,19 +194,19 @@ app.post('/test', function(req, res){
   })
 
   app.post('/return-form-test', function(req, res){
-    res.send("return form submittedt")
+    res.send("return form submitted")
     
   })
 
 app.get('/init', function(req, res){
     const key = req.query.key;
-   res.sendFile(path.join(__dirname + '/init.html'));
+   res.sendFile(path.join(__dirname + '/dist/init.html'));
   
   })
 
 app.get('/fastpay.js', function(req, res){
 
-    res.sendFile(path.join(__dirname + '/fastpay.js'));
+    res.sendFile(path.join(__dirname + '/dist/fastpay.js'));
  
 })
 

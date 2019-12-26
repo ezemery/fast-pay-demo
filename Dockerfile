@@ -1,12 +1,19 @@
-FROM node:12.13.1-alpine3.10
-COPY ./ /var/www
+FROM node:12.13.1-alpine3.10 AS base
 WORKDIR /var/www
-EXPOSE 3000
-RUN npm install
-ENTRYPOINT ["npm","start"]
+COPY package.json /var/www
+COPY yarn.lock /var/www
+
+FROM base AS dependencies
+WORKDIR /var/www
+RUN apk update
+RUN apk add yarn
+RUN yarn install 
+
+FROM base AS release
+WORKDIR /var/www
+COPY --from=dependencies /var/www/node_modules ./node_modules
+COPY . .
+RUN yarn build-prod
+ENTRYPOINT [ "node", "server.js" ] 
 
 
-FROM nginx:1.16-alpine
-COPY index.html /usr/share/nginx/html/index.html
-COPY assets/js/fastpay.js /usr/share/nginx/html/assets/js/fastpay.js
-EXPOSE 8080 3001

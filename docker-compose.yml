@@ -3,17 +3,11 @@ version: "3.7"
 services:
   #view the frontend from localhost:3001
   web:
-    build:
-      context: ./docker
-      dockerfile: nginx.dockerfile
-    ports:
-      - 3001:80
-      - 8080:80
-  backend:
-    build:
-      context: ./docker
-      dockerfile: node.dockerfile
+    build: .
     working_dir: /var/www
+    volumes:
+      - .:/var/www
     ports:
-      - 3000:3000
+      - 4000:4000
+ 
 

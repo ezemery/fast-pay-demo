@@ -13,7 +13,7 @@ const config = {
     path: path.resolve(__dirname, 'dist/assets/js'),
     filename: '[name].js'
   },
-  watch: true,
+  //watch: true,
   watchOptions: {
     ignored: /node_modules/
   },
