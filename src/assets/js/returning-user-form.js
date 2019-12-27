@@ -2,7 +2,7 @@ import "bootstrap-scss";
 import "../css/returning-user-form.scss";
 import visa from  "../img/visa.svg";
 import mastercard from "../img/mastercard.svg";
-import jcb from "../img/jcb.svg"
+import jcb from "../img/jcb.svg";
 import amex from "../img/amex.svg";
 import discover from "../img/discover.svg";
 import diners from "../img/diners.svg";
@@ -34,7 +34,6 @@ import cc from  "../img/cc.svg"
     domains: ["fast.co","yahoo.com", "gmail.com", "google.com", "hotmail.com", "me.com", "aol.com", "mac.com", "live.com", "comcast.com", "googlemail.com", "msn.com", "hotmail.co.uk", "yahoo.co.uk", "facebook.com", "verizon.net", "att.net", "gmz.com", "mail.com"],
     init: function () {
         var _this = this;
-        console.log(cc);
         _this.setUpMasks(_this.maskedInputs);
         _this.maskedInputs = document.querySelectorAll('.masked');
         _this.activateMasking(_this.maskedInputs);
@@ -114,8 +113,8 @@ import cc from  "../img/cc.svg"
         var x = 
         isInt = !isNaN(parseInt(strippedValue[j]));
         isLetter = strippedValue[j] ? strippedValue[j].match(/[A-Z]/i) : false;
-        matchesNumber = _this.maskedNumber.indexOf(placeholder[i]) >= 0;
-        matchesLetter = _this.maskedLetter.indexOf(placeholder[i]) >= 0;
+        var matchesNumber = _this.maskedNumber.indexOf(placeholder[i]) >= 0;
+        var matchesLetter = _this.maskedLetter.indexOf(placeholder[i]) >= 0;
 
         if ((matchesNumber && isInt) || (isCharsetPresent && matchesLetter && isLetter)) {
                 newValue += strippedValue[j++];
@@ -324,13 +323,13 @@ import cc from  "../img/cc.svg"
         xhr.onload = function () {
            if (xhr.readyState === xhr.DONE) {
                if (xhr.status === 200) {
-                             response = xhr.responseText;
-                             button.innerText = "Done";
-                             button.style.backgroundColor = "green"; 
+                        var response = xhr.responseText;
+                        button.innerText = "Done";
+                        button.style.backgroundColor = "green"; 
                     return response;
                }else{
-                            button.innerText = "There was an error, try again";
-                            button.style.backgroundColor = "red"; 
+                        button.innerText = "There was an error, try again";
+                        button.style.backgroundColor = "red"; 
                       }
             }
         };
@@ -345,7 +344,7 @@ import cc from  "../img/cc.svg"
         phoneNumber = document.getElementById('mobile_no').value,
         phone = document.getElementById('phone_code').value;
 
-        _this = this;
+        var _this = this;
 
         var payload =   {
                         "buttonLoadId": "",

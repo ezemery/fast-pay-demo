@@ -2,7 +2,7 @@ import "bootstrap-scss";
 import "../css/new-user-form.scss";
 import visa from  "../img/visa.svg";
 import mastercard from "../img/mastercard.svg";
-import jcb from "../img/jcb.svg"
+import jcb from "../img/jcb.svg";
 import amex from "../img/amex.svg";
 import discover from "../img/discover.svg";
 import diners from "../img/diners.svg";
@@ -38,7 +38,6 @@ if (!Object.entries) {
         init: function () {
             var _this = this;
             //get the amount data from the iframe url
-            console.log("cc",cc);
             _this.setUpMasks(_this.maskedInputs);
             _this.maskedInputs = document.querySelectorAll('.masked'); // Repopulating. Needed b/c static node list was created above.
             _this.activateMasking(_this.maskedInputs);
@@ -403,11 +402,11 @@ if (!Object.entries) {
             xhr.onload = function () {
                if (xhr.readyState === xhr.DONE) {
                    if (xhr.status === 200) {
-                                 response = xhr.responseText;
-                                 button.innerText = "Done";
-                                 button.style.backgroundColor = "green";
-                                 _this.cleanData()
-                                 parent.postMessage({action: 'closeModal'}, "*");
+                            var response = xhr.responseText;
+                            button.innerText = "Done";
+                            button.style.backgroundColor = "green";
+                            _this.cleanData()
+                            parent.postMessage({action: 'closeModal'}, "*");
                                 //  parent.postMessage({action: 'reload'}, '*')
                         return response;
                    }else{
@@ -533,7 +532,7 @@ if (!Object.entries) {
     },
         submitForm: function (){
             
-            var form = document.getElementById("payment-form"), _this= this;
+            var form = document.getElementById("payment-form"), _this = this;
             if(form.addEventListener){
                 //Modern browsers
                 //add event listeners for form submit
@@ -668,7 +667,7 @@ if (!Object.entries) {
         xhr.onload = function() {
           if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200) {
-              response = JSON.parse(xhr.responseText);
+              var response = JSON.parse(xhr.responseText);
               if (response.error) {
                 // clear form and show again if the code submitted was wrong
                 _this.clearQuickFill();
@@ -888,7 +887,7 @@ if (!Object.entries) {
                     <div id="shipping_address_output" class="col-md-12 col-sm-12">\
                     ';
 
-        for(i in address){
+        for(var i in address){
             var checked= "";
             if(i === '0') {
                 checked = "checked=checked"
@@ -907,6 +906,7 @@ if (!Object.entries) {
         _this.addShippingAddress();
     },
     getCardDetials: function(card){
+        console.log(card)
         var _this = this;
         var output = '<div class="new__form-set">\
                     <h4 class="fast-pay-title">Card Details<small class="add__form" id="add-card-details">\
@@ -953,8 +953,11 @@ if (!Object.entries) {
                     <div class="new__form-set">\
                         <div class="row pay_card" id="card__select">';
 
-                    for(i in card){
+                    for(var i in card){
                             var checked= "";
+                            var card_brand = card[i].brand === "visa" ? visa : card[i].brand === "mastercard" ? mastercard : diners ;
+                            var img  = "<img src="+card_brand+" alt=\"cc_image\">";
+                            console.log(img)
                             if(i === '0') {
                                 checked = "checked=checked"
                             }
@@ -964,7 +967,7 @@ if (!Object.entries) {
                                     + "<input type=\"radio\" class=\"custom-control-input\" id=express-card-" + i
                                     + " name=\"card-value\" value=" + i  + " " + checked + ">"
                                     + "<label class=\"custom-control-label\" for=express-card-" + i + ">"
-                                    + "<span><img src=\"../img/visa.svg\" alt=\"\"></span><span>" +  card[i].last4 + "</span>"
+                                    + "<span>"+ img + "</span><span>" + card[i].last4 + "</span>";
                                     + "</label></div></div></div>"
                         };
 
