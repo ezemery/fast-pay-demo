@@ -1,0 +1,670 @@
+@import './base';
+
+@keyframes scales {
+  from{
+    opacity: 0.3;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+p,.form-control, .custom-select, label{
+font-weight: 400;
+}
+
+.fast-pay{
+  margin: 2rem auto;
+  width:70%;
+  padding: 2rem 20px;
+  background-color:$white;
+  border: 2px solid #EEEEEE;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.safari-toolbars-overlap{
+  padding-bottom: 100px;
+}
+
+.fast-close__form{
+  display: inline-block;
+  width: 100px;
+  color: $fast-color-dark;
+  line-height: 18px;
+  vertical-align: middle;
+  position: absolute;
+  cursor: pointer;
+  right: 0px;
+  z-index: 9999;
+  text-align: center;
+}
+
+.col-md-3{
+  max-width: calc(100% / 4);
+  flex: 0 0 25%;
+  -webkit-transition: width .5s; /* For Safari 3.1 to 6.0 */
+  transition: max-width .5s;
+}
+.none{
+  display: none;
+}
+.form-control{
+  padding: 25px 15px;
+  background: $white;
+  border: 1px solid #363636;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-top-right-radius: 3px !important;
+  border-bottom-right-radius: 3px !important;
+  
+}
+.row{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+.new__form-set {
+  margin: 0.8rem 0;
+}
+.new__form-set.apartment {
+  display: none;
+}
+.new__form-set .toggle-apartment {
+  font-size: 13px;
+  font-weight: 300;
+  text-transform: lowercase;
+  color: $fast-color-light;
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  cursor: pointer;
+}
+.form-control:focus{
+  background: $white;
+  box-shadow:none !important;
+  border: 1px solid #363636 !important;
+}
+.form-control.pad{
+ padding-left: 50px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+{
+  background: $white !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.radius{
+  border-top-left-radius: 3px !important;
+  border-bottom-left-radius: 3px !important;
+}
+.zip{
+  border-right: none !important;
+  border-top-left-radius: 3px !important;
+  border-bottom-left-radius: 3px !important;
+}
+.personal, .shipping{
+  border-left: none !important;
+}
+.col-md-12, .col-md-3, .col-md-5, .col-md-6, .col-md-7, .col-md-9, .col-sm-12 {
+      padding-right: 5px;
+      padding-left: 5px;
+  }
+
+.custom-select {
+  height: calc(1.5em + 0.75rem + 15px);
+  background-color: $white !important;
+  border: 0.5px solid #DADADA;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.custom-select:focus {
+  background:$white;
+  box-shadow:none !important;
+}
+
+.custom-select:focus::-ms-value {
+  color: #495057;
+  background-color:$white;
+}
+
+.mt-10{
+  margin-top: 10px;
+}
+.mt-12{
+  margin-top: 12px;
+}
+.input-group label{
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  left: 15px;
+  z-index: 5;
+  color: rgba(132, 140, 153, 0.8);
+  font-size: 15px;
+  transition: bottom .1s linear;
+}
+
+label.left-50{
+  left: 50px;
+}
+
+.placeholder-focus label {
+  bottom: 30px;
+  width: 10px;
+  display: table;
+  width: intrinsic; 
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2px;
+  background: $white;
+  transition: all .2s ease-in;
+}
+
+.suggest-p{
+  color: #969696;
+}
+.suggest-span{
+  color: $fast-color-light;
+}
+.invalid-feedback{
+  display:none !important;
+}
+
+.input-group-text{
+  background: $white !important;
+}
+.checkbox{
+  padding: 2px 0px;
+}
+.checkbox input[type=radio]:checked + label:before{
+  color: $fast-color-light;
+}
+.checkbox label{
+  font-weight: 400;;
+  /* font-family: Graphik !important; */
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 50% !important ;
+}
+.custom-control-input:checked~.custom-control-label::before {
+  color: $white;
+  border-color: $fast-color-light;
+  background-color:  $fast-color-light;
+
+}
+.fast-pay-title{
+  /* font-family: Graphik; */
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+  color: #363636;
+  margin-top: 1.2rem;
+  margin-bottom: .8rem;
+  font-weight: 900;
+}
+.input-email{
+  display: flex;
+}
+
+.input-group-text.prepend{
+  width: 43px;
+  height: calc(1.5em + .75rem + 15px);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: .37rem .6rem;
+  background: #F8F8F8 !important;
+}
+#card-form-button{
+  display: none;
+}
+.input-group-text.prepend.phone{
+ border:none;
+ padding-left:0px;
+}
+.input-group-text {
+border: 0.5px solid #DADADA;
+}
+
+.autocomplete-items{
+  position: absolute;
+  margin-top: 10px;
+  z-index: 10;
+  padding: 10px;
+  border: 1px solid rgba(25, 56, 31, 0.2);
+  box-sizing: border-box;
+  border-radius: 3px;
+  -webkit-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+  -moz-box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+  box-shadow: -14px 11px 55px -17px rgba(0,0,0,0.2);
+  width: 98%;
+  background: $white;
+  height: 100px;
+  overflow-y: scroll;
+  top: 50px;
+  font-size: 14px;
+}
+
+.input-email{
+  border: 1px solid #363636;
+  border-radius: 3px;
+}
+.email-code input:focus{
+  border:none !important;
+}
+.input-group-text.append{
+  width: 43px;
+  height: calc(1.5em + .75rem + 15px);
+  border-radius: 0;
+  border-left: 0px;
+  padding: .37rem .6rem;
+  border-top-right-radius: 3px !important;
+  border-bottom-right-radius: 3px !important;
+  background: #fafafa !important;
+}
+.expiry{
+  width:50%;
+  border: 1px solid #363636;
+}
+.expiry.right{
+  border-left: none;
+  border-top-right-radius: 3px !important;
+  border-bottom-right-radius: 3px !important;
+}
+.expiry.left{
+   position: relative;
+   border-right:none;
+   border-top-left-radius: 3px !important;
+   border-bottom-left-radius: 3px !important;
+}
+.expiry.left::after {
+  background: $white;
+  border-right: 1px solid #363636;
+  content: "";
+  height: 50px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  transform: skew(-20deg);
+}
+.expiry input{
+  border: none;
+}
+.expiry input:focus{
+  border: none !important;
+}
+.p-10{
+  padding: 10px;
+}
+.pr-0{
+  padding-right: 0;
+}
+.pl-0{
+  padding-left: 0;
+}
+.mt-0{
+  margin-top: 0;
+}
+.agreement{
+  color: #696969;
+}
+.color-fast{
+  color: $fast-color-light;
+}
+.is-invalid{
+  border-color:#dc3545 !important; 
+}
+.is-valid{
+  border-color:$fast-color-light !important;
+}
+#email{
+  background-repeat: no-repeat;
+  background-size: 25px 20px;
+  background-position: center right 10px;
+  transition: all .3s ease-in-out;
+}
+
+#country{
+  background-image: url("../img/flag.svg");
+  background-repeat: no-repeat;
+  background-size: 25px 20px;
+  background-position: center left 10px;
+  transition: all .3s ease-in-out;
+}
+
+#phone_code{
+  background-repeat: no-repeat;
+  background-size: 25px 20px;
+  background-position: center left 10px;
+  transition: all .3s ease-in-out;
+}
+
+.secure-text .bullet{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background-color:$fast-color-light;
+}
+
+#ccnumber {
+  background-repeat: no-repeat;
+  background-size: 25px 20px;
+  background-position: center right 10px;
+  transition: all .3s ease-in-out;
+}
+
+#shipping-form{
+  display: none;
+}
+
+.open-form{
+  display: block !important;
+  animation-name: fade;
+  animation-duration: .7s;
+}
+.rotate_3d{
+  transform: rotate(45deg);
+  transition: all .2s ease;
+}
+.add__form{
+  float: right;
+  cursor: pointer;
+}
+.email-code input:last-child {
+  border: none !important;
+}
+.email-code input {
+  max-width: calc(100% / 6);
+  flex: 0 0 16.67%;
+  background: #F9FAFC;
+  text-align: center;
+  border:none;
+  border-right: 1px solid #363636 !important;
+  border-radius: 1px !important;
+}
+
+.email-code input:last-child:focus{
+  border: none !important;
+}
+.email-code input:focus {
+  border:none;
+  border-right: 1px solid #363636 !important;
+  border-radius: 1px !important;
+}
+.email-code{
+  display: flex;
+  
+}
+@keyframes fade{
+  from{
+      opacity: 0.3;
+  }
+  to{
+      opacity: 1;
+  }
+}
+.btn-add {
+  padding: 7px 40px;
+  background: #363636;
+  color: $white;
+  margin-left: 4px;
+}
+#ccnumber{
+  background-image: url("../img/cc.svg");
+}
+.card{
+  border: none !important;
+}
+
+.card-icon{
+  display: block;
+  margin: auto;
+  width: 15px;
+  height: calc(1.5em + .75rem + 2px);
+}
+.secure-text{
+  margin-top: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+.secure-img{
+  display: inline-block;
+  width: 25px;
+}
+
+
+.pay_card .card {
+  padding: 7px;
+  border: 1px solid #363636;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+
+}
+.pay_card .card img {
+  width: 38px;
+  margin-left: -5px;
+  margin-right: 8px;
+
+}
+.pay_card span{
+  font-weight: 700;
+}
+.pay_card .custom-control {
+  position: relative;
+  display: block;
+  min-height: 1.5rem;
+}
+.btn.btn-green{
+  /* font-family: Graphik; */
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  background: #363636;
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  text-align: center;
+  color: $white;
+}
+.hide-quick-fill {
+    display: none;
+}
+
+.hide-resend-code {
+    visibility: hidden;
+}
+.resend-otp-code{
+  padding: 5px;
+  cursor: pointer;
+  display: block;
+  text-align: right;
+  color: red;
+  font-size: 11px;
+  text-decoration: underline;
+}
+@media( max-width : 920px ) {
+
+.fast-pay 
+{  
+margin: 0 auto !important;
+width: 100% !important;
+border: none;
+
+}
+.card__section .col-md-6{
+max-width: 100% !important;
+flex: 0 0 100%;
+}
+}
+@media( max-width : 1400px ) {
+body{
+  padding: 1rem;
+}
+
+.fast-pay 
+{  
+width: 100%;
+border: none;
+
+}
+
+}
+@media only screen 
+and (device-width: 375px) 
+and (device-height: 812px) 
+and (-webkit-device-pixel-ratio: 3) {
+  body{
+  padding: 0rem !important;
+}
+  .fast-pay{
+        margin: 0 auto !important;
+        min-height: 130vh !important;
+        width:100% !important;
+        -webkit-overflow-scrolling: touch;
+        overflow: scroll;
+        border: none;
+        position: relative;
+   }
+}
+
+@media( max-width : 220px ){
+body{
+  padding: 0rem !important;
+}
+.fast-pay 
+{  
+margin: 0 auto !important;
+width: 100%;
+-webkit-overflow-scrolling: touch;
+overflow: scroll;
+min-height: 100vh;
+border: none;
+position: relative;
+
+}
+}
+@media only screen and (max-width: 585px){
+  body{
+      padding: 0rem !important;
+  }
+  .fast-pay 
+  {    
+      margin: 0 auto !important;
+      width: 100%;
+      min-height: 100vh;
+      border: none;
+      -webkit-overflow-scrolling: touch;
+      overflow: scroll;
+      position: relative;
+  
+  }
+  .form-control{
+      font-size: 16px;   
+  }
+  .col-sm-9{
+      width: calc(100%  * ( 3/ 4));
+  }
+  .col-sm-7{
+      width: 58.3333%;
+  }
+  .col-sm-5{
+      width: 41.6667%;
+  }
+  .col-sm-6{
+      width: calc(100% / 2);
+  }
+  .col-sm-3{
+      max-width: calc(100% / 4);
+      -webkit-transition: max-width .5s; /* For Safari 3.1 to 6.0 */
+      transition: max-width .5s;
+      flex: 0 0 25%;
+  }
+  .card.col-sm-3{
+      max-width: calc(100% / 2);
+      -webkit-transition: max-width .5s; /* For Safari 3.1 to 6.0 */
+      transition: max-width .5s;
+      flex: 0 0 50%;
+  }
+
+  label{
+      font-size: 13px;
+  }
+  .sm-12{
+      width: 100%
+  }
+  .secure-img{
+      width: 30px;
+  }
+  .secure-text{
+      margin-top: 10px;
+      text-align: left;
+      font-size: 14px;
+  }
+  #country{
+      background-position: center left 5px;
+      background-size: 20px 15px;
+  }
+
+  label.left-50 {
+      left: 33px;
+  }
+  .form-control.pad{
+      padding-left: 33px;
+  }
+  .form-control.masked{
+      padding: 25px 7px;
+  }
+}
+  /*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40/71) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375/667) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9/16) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}

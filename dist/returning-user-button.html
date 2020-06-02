@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fast checkout returning user button</title>
+  </head>
+  <body>
+    <div class="fast-pay-returning">
+      <form action="https://dev.api.fast.co/api/m/pay">
+        <div class="row m-3">
+          <div class="col-md-6 card-type pb-3 pb-md-0 col-sm-6 col-12">
+            <img src="assets/img/visa.svg" alt="" id="card-type" />
+            <p id="card-number" class="card-number"> * 4242</p>
+          </div>
+
+          <div class="col-md-6 card-address col-sm-6 col-6">
+            <p style="font-size: 16px; line-height: 18px;color: #696969;"
+              id="address"> San Francisco, San Francisco 94107</p>
+            <img src="assets/img/edit.svg" alt="" id="edit-details" />
+          </div>
+        </div>
+        <input type="submit" class="btn btn-pay-fast" id="fast-pay"></button>
+      </form>
+    </div>
+    <script type="text/javascript" src="assets/js/returningUserButton.js"></script>
+  </body>
+</html>
